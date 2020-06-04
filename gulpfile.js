@@ -7,8 +7,8 @@ const prettier = require("gulp-prettier");
 gulp.task("default", () => {
     return gulp
         .src([
-			"./src/**/*.js",
-			"./public/**/*.js",
+            "./src/**/*.js",
+            "./public/**/*.js",
             "./package.json",
             "./gulpfile.js",
         ])
