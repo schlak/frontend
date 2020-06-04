@@ -6,8 +6,6 @@ test:
       - node_modules/
   
   before_script:
-    - unset CI
-    - cd app
     - npm install
 
   script:
