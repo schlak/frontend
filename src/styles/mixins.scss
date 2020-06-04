@@ -1,0 +1,26 @@
+
+@mixin transition($which, $duration, $curve) {
+    -webkit-transition: $which $duration $curve;
+    -khtml-transition: $which $duration $curve;
+    -moz-transition: $which $duration $curve;
+    -ms-transition: $which $duration $curve;
+    transition: $which $duration $curve;
+}
+
+
+@mixin flex() {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+
+@mixin user-select($value) {
+    -webkit-touch-callout: $value;
+    -webkit-user-select: $value;
+    -khtml-user-select: $value;
+    -moz-user-select: $value;
+    -ms-user-select: $value;
+    user-select: $value;
+}
+// @include user-select(none);
