@@ -21,10 +21,36 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+
+            @media (max-width: 1200px) {
+                width: 33%;
+            }
+            @media (max-width: 1000px) {
+                width: 50%;
+            }
+            @media (max-width: 700px) {
+                width: 100%;
+            }
         }
 
         p.track-length {
             width: 5%;
+
+            @media (max-width: 1200px) {
+                display: none;
+            }
+        }
+
+        p.track-album {
+            @media (max-width: 1000px) {
+                display: none;
+            }
+        }
+
+        p.track-artist {
+            @media (max-width: 700px) {
+                display: none;
+            }
         }
     }
 }
