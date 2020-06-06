@@ -16,7 +16,7 @@ h2,
 h3,
 h4,
 h5 {
-    @include user-select(none);
+    cursor: default;
     font-size: 2.5rem;
     font-weight: 700;
 }
