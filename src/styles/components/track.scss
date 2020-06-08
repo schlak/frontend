@@ -1,6 +1,8 @@
 .track {
     @include user-select(none);
     padding: 5px 7px;
+    cursor: pointer;
+    color: #222;
 
     &:nth-child(even) {
         background-color: #fcfcfc;
@@ -10,11 +12,15 @@
         background-color: #fafafa;
     }
 
+    &.playing {
+        color: #fff;
+        background-color: #111;
+    }
+
     .track-info {
         @include flex();
 
         p {
-            color: #222;
             font-size: 1.3em;
             width: 31.6%;
             margin-right: 20px;

@@ -1,7 +1,7 @@
 import React from "react";
 import Track from "./track";
 
-function Album({ album }) {
+function Album({ album, audio, setAudio }) {
     return (
         <div className="album">
             <div className="album-info">
@@ -10,11 +10,16 @@ function Album({ album }) {
                 </h2>
             </div>
             <div className="album-tracks">
-                {
-                    album.tracks.map((track, key) => {
-                        return <Track track={track} key={key} />
-                    })
-                }
+                {album.tracks.map((track, key) => {
+                    return (
+                        <Track
+                            track={track}
+                            audio={audio}
+                            setAudio={setAudio}
+                            key={key}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
