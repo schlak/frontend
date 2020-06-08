@@ -1,7 +1,13 @@
 import React from "react";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
-function Track({ track, audio, setAudio }) {
+function Track({ albumIndex, trackIndex, audio, setAudio }) {
+    // Get track from store
+    const track = useSelector(
+        state => state.music.albums.items[albumIndex].tracks[trackIndex]
+    );
+
     const selectTrack = (e) => {
         setAudio({
             ...audio,
