@@ -20,6 +20,26 @@ function Audio({ audio }) {
         }
     });
 
+    useEffect(() => {
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new window.MediaMetadata({
+                title: audio.playing.metadata.title,
+                artist: audio.playing.metadata.artist,
+                album: audio.playing.metadata.album,
+                artwork: [
+                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/96`, sizes: '96x96', type: 'image/jpeg' },
+                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/192`, sizes: '192x192', type: 'image/jpeg' },
+                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/256`, sizes: '256x256', type: 'image/jpeg' },
+                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/512`, sizes: '512x512', type: 'image/jpeg' },
+                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/1024`, sizes: '1024x1024', type: 'image/jpeg' },
+                ]
+            });
+
+            navigator.mediaSession.setActionHandler('pause', setPlaying(false));
+            navigator.mediaSession.setActionHandler('play', setPlaying(true));
+        }
+    }, [audio.playing.metadata.title, audio.playing.metadata.artist, audio.playing.metadata.album, audio.playing.id]);
+
     return (
         <div className="audio">
             {typeof audio.playing.id === "string" &&
