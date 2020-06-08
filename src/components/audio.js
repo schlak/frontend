@@ -27,11 +27,11 @@ function Audio({ audio }) {
                 artist: audio.playing.metadata.artist,
                 album: audio.playing.metadata.album,
                 artwork: [
-                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/96`, sizes: '96x96', type: 'image/jpeg' },
-                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/192`, sizes: '192x192', type: 'image/jpeg' },
-                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/256`, sizes: '256x256', type: 'image/jpeg' },
-                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/512`, sizes: '512x512', type: 'image/jpeg' },
-                    { src: `https://music.merritt.es/api/tracks/${audio.playing.id}/cover/1024`, sizes: '1024x1024', type: 'image/jpeg' },
+                    { src: `${process.env.REACT_APP_API}/tracks/${audio.playing.id}/cover/96`, sizes: '96x96', type: 'image/jpeg' },
+                    { src: `${process.env.REACT_APP_API}/tracks/${audio.playing.id}/cover/192`, sizes: '192x192', type: 'image/jpeg' },
+                    { src: `${process.env.REACT_APP_API}/tracks/${audio.playing.id}/cover/256`, sizes: '256x256', type: 'image/jpeg' },
+                    { src: `${process.env.REACT_APP_API}/tracks/${audio.playing.id}/cover/512`, sizes: '512x512', type: 'image/jpeg' },
+                    { src: `${process.env.REACT_APP_API}/tracks/${audio.playing.id}/cover/1024`, sizes: '1024x1024', type: 'image/jpeg' },
                 ]
             });
 
@@ -44,7 +44,7 @@ function Audio({ audio }) {
         <div className="audio">
             {typeof audio.playing.id === "string" &&
                 <Sound
-                    url={`https://music.merritt.es/api/tracks/${audio.playing.id}/audio`}
+                    url={`${process.env.REACT_APP_API}/tracks/${audio.playing.id}/audio`}
                     playStatus={playing ? Sound.status.PLAYING : Sound.status.PAUSED}
                     volume={25}
                 />
