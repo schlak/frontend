@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from "react-redux";
-import musicApp from './reducers';
+import musicApp from './store/reducer';
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 

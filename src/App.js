@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import "./styles/index.scss";
 
@@ -7,29 +8,22 @@ import TrackList from "./components/trackList/trackList";
 import Users from "./components/users";
 
 function App() {
-    // Audio object
-    // stores currently playing and selected tracks
-    const [audio, setAudio] = useState({
-        playing: {
-            id: null,
-            metadata: {}
-        },
-        selected: {},
-    });
+    // Get session state from store
+    const session = useSelector(state => state.session);
 
     // Update title with currently playing track
     useEffect(() => {
-        if (audio.playing.id) {
-            document.title = `${audio.playing.metadata.artist} - ${audio.playing.metadata.title} | Music Library`
+        if (session.playing.track.id) {
+            document.title = `${session.playing.track.metadata.artist} - ${session.playing.track.metadata.title} | Music Library`
         }
-    }, [audio.playing.id, audio.playing.metadata.artist, audio.playing.metadata.title]);
+    }, [session.playing.track.id, session.playing.track.metadata.artist, session.playing.track.metadata.title]);
 
     return (
         <div className="App">
             <div className="container" style={{ margin: "50px auto" }}>
-                <Audio audio={audio} />
+                <Audio />
                 <Users />
-                <TrackList audio={audio} setAudio={setAudio} />
+                <TrackList />
             </div>
         </div>
     );

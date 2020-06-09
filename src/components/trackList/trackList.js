@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchAlbums } from "../../actions/music";
+import { fetchAlbums } from "../../store/actionCreators";
 
 import Album from "./album";
 
-function TrackList({ audio, setAudio }) {
+function TrackList() {
     const dispatch = useDispatch();
 
     // Get album list from store
@@ -22,8 +22,6 @@ function TrackList({ audio, setAudio }) {
                 return (
                     <Album
                         albumIndex={key}
-                        audio={audio}
-                        setAudio={setAudio}
                         key={key}
                     />
                 );

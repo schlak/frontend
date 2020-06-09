@@ -2,7 +2,9 @@ import {
     FETCH_ALBUMS_START,
     FETCH_ALBUMS_SUCCESS,
     FETCH_ALBUMS_FAILURE,
-} from "../actions/music";
+    SESSION_PLAY_TRACK,
+    SESSION_PLAYING_TOGGLE
+} from "./actionTypes";
 
 // Initial state of app
 const initialState = {
@@ -15,11 +17,14 @@ const initialState = {
     },
     session: {
         playing: {
-            isPlaying: false,
-            isPaused: false,
+            isPaused: true,
             index: {
-                album: 0,
-                track: 0
+                album: null,
+                track: null
+            },
+            track: {
+                id: null,
+                metadata: {}
             }
         },
         selected: {},
@@ -73,6 +78,31 @@ function musicApp(state = initialState, action) {
                         ...state.music.albums,
                         didError: true,
                         isFetching: false
+                    }
+                }
+            }
+
+        case SESSION_PLAY_TRACK:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        index: action.payload,
+                        track: state.music.albums.items[action.payload.album].tracks[action.payload.track]
+                    }
+                }
+            }
+
+        case SESSION_PLAYING_TOGGLE:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        isPaused: action.payload,
                     }
                 }
             }

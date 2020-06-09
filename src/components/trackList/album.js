@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Track from "./track";
 
-function Album({ albumIndex, audio, setAudio }) {
+function Album({ albumIndex }) {
     // Get album list from store
     const album = useSelector(state => state.music.albums.items[albumIndex]);
 
@@ -20,8 +20,6 @@ function Album({ albumIndex, audio, setAudio }) {
                         <Track
                             trackIndex={key}
                             albumIndex={albumIndex}
-                            audio={audio}
-                            setAudio={setAudio}
                             key={key}
                         />
                     );

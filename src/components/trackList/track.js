@@ -1,24 +1,33 @@
 import React from "react";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-function Track({ albumIndex, trackIndex, audio, setAudio }) {
+import { playTrack } from "../../store/actionCreators";
+
+function Track({ albumIndex, trackIndex }) {
+    const dispatch = useDispatch();
+
+    // Get session state from store
+    const session = useSelector(state => state.session);
+
     // Get track from store
     const track = useSelector(
         state => state.music.albums.items[albumIndex].tracks[trackIndex]
     );
 
-    const selectTrack = (e) => {
-        setAudio({
-            ...audio,
-            playing: track,
-        });
+    // Is this track currently playing?
+    const isTrackPlaying = track.id === session.playing.track.id;
+
+    // Play track in session
+    const playInSession = (e) => {
+        dispatch(playTrack({
+            album: albumIndex,
+            track: trackIndex
+        }));
     };
 
-    const isPlaying = track.id === audio.playing.id ? "playing" : "";
-
     return (
-        <div className={`track ${isPlaying}`} onClick={selectTrack}>
+        <div className={`track ${isTrackPlaying ? "playing" : ""}`} onClick={playInSession}>
             <div className="track-info">
                 <p className="track-length">
                     {moment.utc(track.metadata.duration * 1000).format("mm:ss")}
