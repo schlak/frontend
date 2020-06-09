@@ -16,8 +16,11 @@ function Audio() {
     // Pause audio on 'space' or 'k'
     useEffect(() => {
         const onKeyUp = ({ code }) => {
-            if (code === "Space" || code === "KeyK") {
-                dispatch(playingTrackIsPaused(!session.playing.isPaused));
+            if (code === "KeyP" || code === "KeyK") {
+                // Check if there is a track playing
+                if (session.playing.track.id) {
+                    dispatch(playingTrackIsPaused(!session.playing.isPaused));
+                }
             }
         };
 
@@ -27,6 +30,7 @@ function Audio() {
         };
     });
 
+    // MediaMetadata audio API
     useEffect(() => {
         if ("mediaSession" in navigator) {
             navigator.mediaSession.metadata = new window.MediaMetadata({

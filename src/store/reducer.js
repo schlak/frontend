@@ -98,6 +98,10 @@ function musicApp(state = initialState, action) {
             };
 
         case SESSION_PLAYING_TOGGLE:
+            // Check if there is a track playing
+            if (!state.session.playing.track.id)
+                return state;
+
             return {
                 ...state,
                 session: {
