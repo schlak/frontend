@@ -9,14 +9,18 @@ import TrackList from "./components/trackList/trackList";
 
 function App() {
     // Get session state from store
-    const session = useSelector(state => state.session);
+    const session = useSelector((state) => state.session);
 
     // Update title with currently playing track
     useEffect(() => {
         if (session.playing.track.id) {
-            document.title = `${session.playing.track.metadata.artist} - ${session.playing.track.metadata.title} | Music Library`
+            document.title = `${session.playing.track.metadata.artist} - ${session.playing.track.metadata.title} | Music Library`;
         }
-    }, [session.playing.track.id, session.playing.track.metadata.artist, session.playing.track.metadata.title]);
+    }, [
+        session.playing.track.id,
+        session.playing.track.metadata.artist,
+        session.playing.track.metadata.title,
+    ]);
 
     return (
         <div className="App">

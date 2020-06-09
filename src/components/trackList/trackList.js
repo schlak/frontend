@@ -9,8 +9,8 @@ function TrackList() {
     const dispatch = useDispatch();
 
     // Get album list from store
-    const albums = useSelector(state => state.music.albums.items);
-    const isLoading = useSelector(state => state.music.albums.isFetching);
+    const albums = useSelector((state) => state.music.albums.items);
+    const isLoading = useSelector((state) => state.music.albums.isFetching);
 
     // Fetch albums from api
     useEffect(() => {
@@ -19,19 +19,10 @@ function TrackList() {
 
     return (
         <div className="track-list">
-            {isLoading &&
-                <div className="loading offset">
-                    Loading...
-                </div>
-            }
+            {isLoading && <div className="loading offset">Loading...</div>}
 
             {albums.map((album, key) => {
-                return (
-                    <Album
-                        albumIndex={key}
-                        key={key}
-                    />
-                );
+                return <Album albumIndex={key} key={key} />;
             })}
         </div>
     );

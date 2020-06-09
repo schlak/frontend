@@ -3,7 +3,7 @@ import {
     FETCH_ALBUMS_SUCCESS,
     FETCH_ALBUMS_FAILURE,
     SESSION_PLAY_TRACK,
-    SESSION_PLAYING_TOGGLE
+    SESSION_PLAYING_TOGGLE,
 } from "./actionTypes";
 
 // Initial state of app
@@ -12,20 +12,20 @@ const initialState = {
         albums: {
             didError: false,
             isFetching: true,
-            items: []
-        }
+            items: [],
+        },
     },
     session: {
         playing: {
             isPaused: true,
             index: {
                 album: null,
-                track: null
+                track: null,
             },
             track: {
                 id: null,
-                metadata: {}
-            }
+                metadata: {},
+            },
         },
         selected: {},
     },
@@ -33,12 +33,12 @@ const initialState = {
         global: {
             connectedUsers: 0,
             session: {
-                playing: []
+                playing: [],
             },
             messages: [],
-        }
-    }
-}
+        },
+    },
+};
 
 function musicApp(state = initialState, action) {
     switch (action.type) {
@@ -51,10 +51,10 @@ function musicApp(state = initialState, action) {
                         ...state.music.albums,
                         didError: false,
                         isFetching: true,
-                        items: []
-                    }
-                }
-            }
+                        items: [],
+                    },
+                },
+            };
 
         case FETCH_ALBUMS_SUCCESS:
             return {
@@ -64,10 +64,10 @@ function musicApp(state = initialState, action) {
                     albums: {
                         ...state.music.albums,
                         isFetching: false,
-                        items: action.payload
-                    }
-                }
-            }
+                        items: action.payload,
+                    },
+                },
+            };
 
         case FETCH_ALBUMS_FAILURE:
             return {
@@ -77,10 +77,10 @@ function musicApp(state = initialState, action) {
                     albums: {
                         ...state.music.albums,
                         didError: true,
-                        isFetching: false
-                    }
-                }
-            }
+                        isFetching: false,
+                    },
+                },
+            };
 
         case SESSION_PLAY_TRACK:
             return {
@@ -90,10 +90,12 @@ function musicApp(state = initialState, action) {
                     playing: {
                         ...state.session.playing,
                         index: action.payload,
-                        track: state.music.albums.items[action.payload.album].tracks[action.payload.track]
-                    }
-                }
-            }
+                        track:
+                            state.music.albums.items[action.payload.album]
+                                .tracks[action.payload.track],
+                    },
+                },
+            };
 
         case SESSION_PLAYING_TOGGLE:
             return {
@@ -103,9 +105,9 @@ function musicApp(state = initialState, action) {
                     playing: {
                         ...state.session.playing,
                         isPaused: action.payload,
-                    }
-                }
-            }
+                    },
+                },
+            };
 
         default:
             return state;

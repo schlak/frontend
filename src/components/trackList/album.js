@@ -5,7 +5,7 @@ import Track from "./track";
 
 function Album({ albumIndex }) {
     // Get album list from store
-    const album = useSelector(state => state.music.albums.items[albumIndex]);
+    const album = useSelector((state) => state.music.albums.items[albumIndex]);
 
     return (
         <div className="album">

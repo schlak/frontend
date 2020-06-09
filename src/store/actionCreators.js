@@ -10,7 +10,7 @@ import {
 /*
  * Fetch albums index from api
  */
-export const fetchAlbums = () => dispatch => {
+export const fetchAlbums = () => (dispatch) => {
     dispatch({ type: FETCH_ALBUMS_START, payload: [] });
 
     api()
@@ -19,21 +19,21 @@ export const fetchAlbums = () => dispatch => {
             console.log("Albums:", res.data);
             dispatch({ type: FETCH_ALBUMS_SUCCESS, payload: res.data });
         })
-        .catch(error => {
+        .catch((error) => {
             dispatch({ type: FETCH_ALBUMS_FAILURE, payload: error });
         });
-}
+};
 
 /*
  * Play a new track (adds to current session)
  */
-export const playTrack = (trackIndex) => dispatch => {
-    dispatch({ type: SESSION_PLAY_TRACK, payload: trackIndex});
-}
+export const playTrack = (trackIndex) => (dispatch) => {
+    dispatch({ type: SESSION_PLAY_TRACK, payload: trackIndex });
+};
 
 /*
  * Pause currently playing track
  */
-export const playingTrackIsPaused = (isPaused) => dispatch => {
-    dispatch({ type: SESSION_PLAYING_TOGGLE, payload: isPaused});
-}
+export const playingTrackIsPaused = (isPaused) => (dispatch) => {
+    dispatch({ type: SESSION_PLAYING_TOGGLE, payload: isPaused });
+};
