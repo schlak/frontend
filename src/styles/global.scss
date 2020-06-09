@@ -43,10 +43,11 @@ p {
 }
 
 
-.loader {
+.loading {
     @include transition(all, 280ms, ease);
     @include flex();
     justify-content: center;
+    font-size: 1.4em;
 
     &.offset {
         margin-top: 125px;

@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { mdiLoading } from '@mdi/js';
 
 import { fetchAlbums } from "../../store/actionCreators";
 
-import Icon from '@mdi/react';
 import Album from "./album";
 
 function TrackList() {
@@ -22,8 +20,8 @@ function TrackList() {
     return (
         <div className="track-list">
             {isLoading &&
-                <div className="loader offset">
-                    <Icon path={mdiLoading} color="#222222" spin={1} />
+                <div className="loading offset">
+                    Loading...
                 </div>
             }
 

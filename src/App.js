@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import "./styles/index.scss";
 
 import Audio from "./components/audio";
-import TrackList from "./components/trackList/trackList";
 import Users from "./components/users";
+import TrackList from "./components/trackList/trackList";
 
 function App() {
     // Get session state from store
