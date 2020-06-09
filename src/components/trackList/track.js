@@ -17,6 +17,7 @@ function Track({ albumIndex, trackIndex }) {
 
     // Is this track currently playing?
     const isTrackPlaying = track.id === session.playing.track.id;
+    const isTrackPaused = isTrackPlaying && session.playing.isPaused;
 
     // Play track in session
     const playInSession = (e) => {
@@ -30,7 +31,7 @@ function Track({ albumIndex, trackIndex }) {
 
     return (
         <div
-            className={`track ${isTrackPlaying ? "playing" : ""}`}
+            className={`track${isTrackPlaying ? " playing" : ""}${isTrackPaused ? " paused" : ""}`}
             onClick={playInSession}
         >
             <div className="track-info">

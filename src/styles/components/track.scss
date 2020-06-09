@@ -14,7 +14,11 @@
 
     &.playing {
         color: #fff;
-        background-color: #111;
+        background-color: #222;
+
+        &.paused {
+            background-color: #777;
+        }
     }
 
     .track-info {
