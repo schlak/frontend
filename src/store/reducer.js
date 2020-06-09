@@ -11,7 +11,7 @@ const initialState = {
     music: {
         albums: {
             didError: false,
-            isFetching: false,
+            isFetching: true,
             items: []
         }
     },

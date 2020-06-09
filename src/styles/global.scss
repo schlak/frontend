@@ -41,3 +41,19 @@ p {
         padding: 20px;
     }
 }
+
+
+.loader {
+    @include transition(all, 280ms, ease);
+    @include flex();
+    justify-content: center;
+
+    &.offset {
+        margin-top: 125px;
+    }
+
+    svg {
+        width: 125px;
+        height: 125px;
+    }
+}
