@@ -102,7 +102,7 @@ function Audio() {
                             ? Sound.status.PAUSED
                             : Sound.status.PLAYING
                     }
-                    volume={25}
+                    volume={50}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
                 />
