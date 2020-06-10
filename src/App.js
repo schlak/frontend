@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import "./styles/index.scss";
 
 import Audio from "./components/audio";
-import Users from "./components/users";
+// import Users from "./components/users";
+import SideBar from "./components/sideBar/sideBar";
 import TrackList from "./components/trackList/trackList";
 
 function App() {
@@ -24,9 +25,9 @@ function App() {
 
     return (
         <div className="App">
-            <div className="container" style={{ margin: "50px auto" }}>
+            <div className="container">
                 <Audio />
-                <Users />
+                <SideBar />
                 <TrackList />
             </div>
         </div>

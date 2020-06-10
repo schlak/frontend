@@ -31,8 +31,11 @@ p {
     @include transition(all, 280ms, ease);
     width: 1100px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 700px;
 
+    @media (max-width: 1850px) {
+        margin-right: auto;
+    }
     @media (max-width: 1500px) {
         width: 100%;
         padding: 0 100px;

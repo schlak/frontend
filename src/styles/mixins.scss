@@ -23,4 +23,13 @@
     -ms-user-select: $value;
     user-select: $value;
 }
+
+
+@mixin text-overflow-ellipsis() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
 // @include user-select(none);
