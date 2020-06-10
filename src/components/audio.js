@@ -12,6 +12,14 @@ function Audio() {
     const session = useSelector((state) => state.session);
     const track = session.playing.track;
 
+    const handlePlayNextTrack = () => {
+        dispatch(playNextTrack(session.playing.index));
+    };
+
+    const handlePlaying = (audio) => {
+        // console.log(audio);
+    }
+
     // Listen for keypress
     // Pause audio on 'space' or 'k'
     useEffect(() => {
@@ -76,18 +84,13 @@ function Audio() {
             );
         }
     }, [
-        track.metadata.title,
-        track.metadata.artist,
-        track.metadata.album,
-        track.id,
         dispatch,
+        session.playing.index,
+        track.id,
+        track.metadata.album,
+        track.metadata.artist,
+        track.metadata.title,
     ]);
-
-    const nextTrack = () => {
-        dispatch(
-            playNextTrack(session.playing.index)
-        );
-    }
 
     return (
         <div className="audio">
@@ -100,7 +103,8 @@ function Audio() {
                             : Sound.status.PLAYING
                     }
                     volume={25}
-                    onFinishedPlaying={nextTrack}
+                    onPlaying={handlePlaying}
+                    onFinishedPlaying={handlePlayNextTrack}
                 />
             )}
         </div>

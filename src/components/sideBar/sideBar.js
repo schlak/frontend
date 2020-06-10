@@ -1,0 +1,54 @@
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import Oscilloscope from "oscilloscope";
+
+function SideBar() {
+    // Get session state from store
+    const session = useSelector((state) => state.session);
+    const track = session.playing.track;
+    let coverURL = `${process.env.REACT_APP_API}/tracks/${track.id}/cover/600`;
+
+    if (!track.id) {
+        coverURL = `${process.env.REACT_APP_API}/tracks/example/cover/600`;
+    }
+
+    useEffect(() => {
+        if (track.id) {
+            const audioContext = new window.AudioContext();
+            const audioElement = window.soundManager.sounds[window.soundManager.soundIDs[0]]._a;
+            audioElement.crossOrigin = "anonymous";
+
+            // create source from html5 audio element
+            const source = audioContext.createMediaElementSource(audioElement);
+
+            // attach oscilloscope
+            const scope = new Oscilloscope(source, { fftSize: 1024 });
+
+            // start default animation loop
+            const canvas = document.getElementById("canvas");
+            scope.animate(canvas.getContext("2d"));
+
+            //  reconnect audio output to speakers
+            source.connect(audioContext.destination);
+        }
+    }, [track.id]);
+
+    return (
+        <div className="side-bar">
+            <div className="wrapper">
+                <div className="album-cover">
+                    <img src={coverURL} alt="album cover" width="100%" draggable="false" />
+                </div>
+                <div className="oscilloscope">
+                    <canvas id="canvas" width="1200px" height="300"></canvas>
+                </div>
+                <div className="track-info">
+                    <p className="track-title">{track.metadata.title}</p>
+                    <p className="track-artist">{track.metadata.artist}</p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default SideBar;

@@ -31,7 +31,9 @@ function Track({ albumIndex, trackIndex }) {
 
     return (
         <div
-            className={`track${isTrackPlaying ? " playing" : ""}${isTrackPaused ? " paused" : ""}`}
+            className={`track${isTrackPlaying ? " playing" : ""}${
+                isTrackPaused ? " paused" : ""
+            }`}
             onClick={playInSession}
         >
             <div className="track-info">
