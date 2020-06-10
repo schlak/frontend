@@ -22,11 +22,14 @@ function SideBar() {
             const source = audioContext.createMediaElementSource(audioElement);
 
             // attach oscilloscope
-            const scope = new Oscilloscope(source, { fftSize: 1024 });
+            const scope = new Oscilloscope(source, { fftSize: 2048 });
 
             // start default animation loop
             const canvas = document.getElementById("canvas");
-            scope.animate(canvas.getContext("2d"));
+            const ctx = canvas.getContext("2d");
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#222222";
+            scope.animate(ctx);
 
             //  reconnect audio output to speakers
             source.connect(audioContext.destination);
@@ -40,7 +43,7 @@ function SideBar() {
                     <img src={coverURL} alt="album cover" width="100%" draggable="false" />
                 </div>
                 <div className="oscilloscope">
-                    <canvas id="canvas" width="1200px" height="300"></canvas>
+                    <canvas id="canvas" width="1200px" height="300px"></canvas>
                 </div>
                 <div className="track-info">
                     <p className="track-title">{track.metadata.title}</p>
