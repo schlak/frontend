@@ -10,7 +10,16 @@ import logger from "redux-logger";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-const store = createStore(musicApp, applyMiddleware(thunk, logger));
+// Array of middleware to use with redux-store
+const middlewares = [thunk];
+
+// Add logger middleware during development
+if (process.env.NODE_ENV === "development") {
+    middlewares.push(logger);
+}
+
+// Create redux store
+const store = createStore(musicApp, applyMiddleware(...middlewares));
 
 ReactDOM.render(
     <React.StrictMode>
