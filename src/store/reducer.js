@@ -83,6 +83,10 @@ function musicApp(state = initialState, action) {
             };
 
         case SESSION_PLAY_TRACK:
+            // Do nothing if still fetching album index
+            if (state.music.albums.isFetching || state.music.albums.didError)
+                return state;
+
             return {
                 ...state,
                 session: {
@@ -99,8 +103,7 @@ function musicApp(state = initialState, action) {
 
         case SESSION_PLAYING_TOGGLE:
             // Check if there is a track playing
-            if (!state.session.playing.track.id)
-                return state;
+            if (!state.session.playing.track.id) return state;
 
             return {
                 ...state,
