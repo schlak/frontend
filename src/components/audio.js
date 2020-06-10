@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playingTrackIsPaused } from "../store/actionCreators";
+import { playNextTrack, playingTrackIsPaused } from "../store/actionCreators";
 
 import Sound from "react-sound";
 
@@ -10,7 +10,7 @@ function Audio() {
 
     // Get session state from store
     const session = useSelector((state) => state.session);
-    const track = useSelector((state) => state.session.playing.track);
+    const track = session.playing.track;
 
     // Listen for keypress
     // Pause audio on 'space' or 'k'
@@ -18,7 +18,7 @@ function Audio() {
         const onKeyUp = ({ code }) => {
             if (code === "KeyP" || code === "KeyK") {
                 // Check if there is a track playing
-                if (session.playing.track.id) {
+                if (track.id) {
                     dispatch(playingTrackIsPaused(!session.playing.isPaused));
                 }
             }
@@ -83,6 +83,12 @@ function Audio() {
         dispatch,
     ]);
 
+    const nextTrack = () => {
+        dispatch(
+            playNextTrack(session.playing.index)
+        );
+    }
+
     return (
         <div className="audio">
             {typeof track.id === "string" && (
@@ -94,6 +100,7 @@ function Audio() {
                             : Sound.status.PLAYING
                     }
                     volume={25}
+                    onFinishedPlaying={nextTrack}
                 />
             )}
         </div>
