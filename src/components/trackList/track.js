@@ -31,6 +31,7 @@ function Track({ albumIndex, trackIndex }) {
 
     return (
         <div
+            id={track.id}
             className={`track${isTrackPlaying ? " playing" : ""}${
                 isTrackPaused ? " paused" : ""
             }`}

@@ -12,6 +12,14 @@ function SideBar() {
         coverURL = `${process.env.REACT_APP_API}/tracks/example/cover/600`;
     }
 
+    // Scroll to playing track
+    const handleScrollToTrack = () => {
+        if (track.id) {
+            const $track = document.getElementById(track.id);
+            $track.scrollIntoView();
+        }
+    }
+
     useEffect(() => {
         if (track.id) {
             const audioContext = new window.AudioContext();
@@ -45,7 +53,7 @@ function SideBar() {
                 <div className="oscilloscope">
                     <canvas id="canvas" width="1200px" height="300px"></canvas>
                 </div>
-                <div className="track-info">
+                <div className="track-info" onClick={handleScrollToTrack}>
                     <p className="track-title">{track.metadata.title}</p>
                     <p className="track-artist">{track.metadata.artist}</p>
                 </div>
