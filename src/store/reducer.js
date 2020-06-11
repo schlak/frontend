@@ -6,6 +6,7 @@ import {
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
+    WINDOW_ISDESKTOP,
 } from "./actionTypes";
 
 // Initial state of app
@@ -44,6 +45,9 @@ const initialState = {
             },
             messages: [],
         },
+    },
+    window: {
+        isDesktop: true
     },
 };
 
@@ -150,6 +154,15 @@ function musicApp(state = initialState, action) {
                             volume: action.payload
                         },
                     },
+                },
+            };
+
+        case WINDOW_ISDESKTOP:
+            return {
+                ...state,
+                window: {
+                    ...state.window,
+                    isDesktop: action.payload
                 },
             };
 

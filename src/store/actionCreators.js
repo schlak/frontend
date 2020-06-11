@@ -7,6 +7,7 @@ import {
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
+    WINDOW_ISDESKTOP,
 } from "./actionTypes";
 
 /*
@@ -97,4 +98,12 @@ export const sessionUpdatePlayingStatus = (status) => (dispatch) => {
  */
 export const changeVolume = (newVolume) => (dispatch) => {
     dispatch({ type: SESSION_VOLUME, payload: newVolume });
+};
+
+
+/*
+ * isDesktop
+ */
+export const isDesktop = (bool) => (dispatch) => {
+    dispatch({ type: WINDOW_ISDESKTOP, payload: bool });
 };
