@@ -96,7 +96,7 @@ function Audio() {
     ]);
 
     return (
-        <div className="audio">
+        <>
             {typeof track.id === "string" && (
                 <Sound
                     url={`${process.env.REACT_APP_API}/tracks/${track.id}/audio`}
@@ -110,7 +110,7 @@ function Audio() {
                     onFinishedPlaying={handlePlayNextTrack}
                 />
             )}
-        </div>
+        </>
     );
 
     // <Sound
