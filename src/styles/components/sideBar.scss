@@ -1,22 +1,28 @@
 .side-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 600px;
+    position: relative;
+    width: $side-bar--width;
     height: 100%;
     background-color: #ffffff;
     @include user-select(none);
 
-    @media (max-width: 1850px) {
+    @media (max-width: 1500px) {
+        width: #{$side-bar--width - 150};
+    }
+    @media (max-width: 1300px) {
         display: none;
     }
 
     .wrapper {
-        position: relative;
-        width: 100%;
+        position: fixed;
+        width: $side-bar--width;
         height: 100%;
         @include flex();
+        justify-content: flex-end;
         flex-direction: column-reverse;
+
+        @media (max-width: 1500px) {
+            width: #{$side-bar--width - 150};
+        }
 
         .album-cover {
             height: 64%;
@@ -39,36 +45,8 @@
             }
         }
 
-        .track-info {
-            position: relative;
-            @include flex();
-            align-items: center;
-            flex-wrap: wrap;
-            height: 16%;
+        .track-status-info {
             padding: 50px;
-            cursor: pointer;
-            border-bottom: 1px solid #ededed;
-
-            p {
-                width: 100%;
-                margin-bottom: 6px;
-                font-size: 2em;
-                @include text-overflow-ellipsis();
-
-                &.track-artist {
-                    font-size: 1.4em;
-                }
-            }
-
-            .track-status-completion {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                height: 2px;
-                z-index: -1;
-                background-color: #888;
-                @include transition(all, 150ms, ease);
-            }
         }
     }
 }
