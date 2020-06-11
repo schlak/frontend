@@ -5,6 +5,7 @@ import {
     FETCH_ALBUMS_FAILURE,
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
+    SESSION_VOLUME,
 } from "./actionTypes";
 
 /*
@@ -80,4 +81,11 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
  */
 export const playingTrackIsPaused = (isPaused) => (dispatch) => {
     dispatch({ type: SESSION_PLAYING_TOGGLE, payload: isPaused });
+};
+
+/*
+ * Change volume to an exact ammount (0/100)
+ */
+export const changeVolume = (newVolume) => (dispatch) => {
+    dispatch({ type: SESSION_VOLUME, payload: newVolume });
 };

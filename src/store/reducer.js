@@ -4,6 +4,7 @@ import {
     FETCH_ALBUMS_FAILURE,
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
+    SESSION_VOLUME,
 } from "./actionTypes";
 
 // Initial state of app
@@ -18,6 +19,11 @@ const initialState = {
     session: {
         playing: {
             isPaused: true,
+            status: {
+                duration: null,
+                position: null,
+                volume: 50
+            },
             index: {
                 album: null,
                 track: null,
@@ -112,6 +118,21 @@ function musicApp(state = initialState, action) {
                     playing: {
                         ...state.session.playing,
                         isPaused: action.payload,
+                    },
+                },
+            };
+
+        case SESSION_VOLUME:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        status: {
+                            ...state.session.playing.status,
+                            volume: action.payload
+                        },
                     },
                 },
             };
