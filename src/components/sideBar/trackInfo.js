@@ -1,8 +1,7 @@
 import React from "react";
-import moment from "moment";
 import { useSelector } from "react-redux";
 
-function TrackInfo() {
+function TrackInfo({ isFixedToTop }) {
     // Get session state from store
     const session = useSelector((state) => state.session);
     const track = session.playing.track;
@@ -22,7 +21,7 @@ function TrackInfo() {
     }
 
     return (
-        <div className="track-info" onClick={handleScrollToTrack}>
+        <div className={`track-status-info${isFixedToTop ? " fixed--top" : ""}`} onClick={handleScrollToTrack}>
             <p className="track-title">{track.metadata.title}</p>
             <p className="track-artist">{track.metadata.artist}</p>
             <div className="track-status-completion" style={{width: `${statusCompletedPercentage}%`}}></div>

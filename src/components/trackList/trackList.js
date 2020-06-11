@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAlbums } from "../../store/actionCreators";
 
 import Album from "./album";
+import TrackInfo from "../sideBar/trackInfo";
 
 function TrackList() {
     const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function TrackList() {
     // Get album list from store
     const albums = useSelector((state) => state.music.albums.items);
     const isLoading = useSelector((state) => state.music.albums.isFetching);
+    const isDesktop = useSelector((state) => state.window.isDesktop);
 
     // Fetch albums from api
     useEffect(() => {
@@ -19,6 +21,8 @@ function TrackList() {
 
     return (
         <div className="track-list">
+            {!isDesktop && <TrackInfo isFixedToTop={false} />}
+
             {isLoading && <div className="loading offset">Loading...</div>}
 
             {albums.map((album, key) => {

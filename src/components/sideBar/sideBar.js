@@ -10,7 +10,7 @@ function SideBar() {
             <div className="wrapper">
                 <AlbumCover />
                 <Oscilloscope />
-                <TrackInfo />
+                <TrackInfo isFixedToTop={false} />
             </div>
         </div>
     );
