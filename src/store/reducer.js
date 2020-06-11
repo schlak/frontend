@@ -5,6 +5,7 @@ import {
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
+    SESSION_PLAYING_UPDATE_STATUS,
 } from "./actionTypes";
 
 // Initial state of app
@@ -118,6 +119,21 @@ function musicApp(state = initialState, action) {
                     playing: {
                         ...state.session.playing,
                         isPaused: action.payload,
+                    },
+                },
+            };
+
+        case SESSION_PLAYING_UPDATE_STATUS:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        status: {
+                            ...state.session.playing.status,
+                            ...action.payload
+                        },
                     },
                 },
             };

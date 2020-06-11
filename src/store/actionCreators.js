@@ -6,6 +6,7 @@ import {
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
+    SESSION_PLAYING_UPDATE_STATUS,
 } from "./actionTypes";
 
 /*
@@ -82,6 +83,14 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
 export const playingTrackIsPaused = (isPaused) => (dispatch) => {
     dispatch({ type: SESSION_PLAYING_TOGGLE, payload: isPaused });
 };
+
+/*
+ * Update status of playing track
+ */
+export const sessionUpdatePlayingStatus = (status) => (dispatch) => {
+    dispatch({ type: SESSION_PLAYING_UPDATE_STATUS, payload: status });
+};
+
 
 /*
  * Change volume to an exact ammount (0/100)

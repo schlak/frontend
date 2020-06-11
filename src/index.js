@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import musicApp from "./store/reducer";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
+import {createLogger} from "redux-logger";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -15,7 +15,11 @@ const middlewares = [thunk];
 
 // Add logger middleware during development
 if (process.env.NODE_ENV === "development") {
-    middlewares.push(logger);
+    middlewares.push(
+        createLogger({
+            predicate: (getState, action) => action.type !== "SESSION_PLAYING_UPDATE_STATUS"
+        })
+    );
 }
 
 // Create redux store
