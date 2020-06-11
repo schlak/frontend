@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playNextTrack, playingTrackIsPaused } from "../store/actionCreators";
+import { playNextTrack, playingTrackIsPaused, sessionUpdatePlayingStatus } from "../store/actionCreators";
 
 import Sound from "react-sound";
 
@@ -17,7 +17,10 @@ function Audio() {
     };
 
     const handlePlaying = (audio) => {
-        // console.log(audio);
+        dispatch(sessionUpdatePlayingStatus({
+            duration: audio.duration,
+            position: audio.position,
+        }));
     }
 
     // Listen for keypress
@@ -102,7 +105,7 @@ function Audio() {
                             ? Sound.status.PAUSED
                             : Sound.status.PLAYING
                     }
-                    volume={50}
+                    volume={session.playing.status.volume}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
                 />

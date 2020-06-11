@@ -1,10 +1,17 @@
 import React from "react";
+import moment from "moment";
 import { useSelector } from "react-redux";
 
 function TrackInfo() {
     // Get session state from store
     const session = useSelector((state) => state.session);
     const track = session.playing.track;
+    const trackStatus = session.playing.status;
+    let statusCompletedPercentage = 0;
+
+    if (track.id && typeof trackStatus.duration === "number") {
+        statusCompletedPercentage = (trackStatus.position / trackStatus.duration) * 100;
+    }
 
     // Scroll to playing track
     const handleScrollToTrack = () => {
@@ -18,6 +25,7 @@ function TrackInfo() {
         <div className="track-info" onClick={handleScrollToTrack}>
             <p className="track-title">{track.metadata.title}</p>
             <p className="track-artist">{track.metadata.artist}</p>
+            <div className="track-status-completion" style={{width: `${statusCompletedPercentage}%`}}></div>
         </div>
     );
 }
