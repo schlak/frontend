@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { isDesktop } from "./store/actionCreators";
@@ -14,13 +14,14 @@ function App() {
 
     // Get session state from store
     const session = useSelector((state) => state.session);
+    const windowIsDesktop = useSelector((state) => state.window.isDesktop);
 
     // Is desktop screen size
     const handleIsDesktop = () => {
         dispatch(isDesktop(window.innerWidth > 1300));
     };
 
-    //
+    // Handle window re-size
     useEffect(() => {
         handleIsDesktop();
         window.addEventListener("resize", handleIsDesktop);
@@ -28,7 +29,7 @@ function App() {
         return () => {
             window.removeEventListener("resize", handleIsDesktop);
         }
-    });
+    }, []);
 
     // Update title with currently playing track
     useEffect(() => {
@@ -47,7 +48,10 @@ function App() {
                 <div className="app-wrapper">
                     <Audio />
                     <TrackList />
-                    <SideBar />
+                    {
+                        windowIsDesktop &&
+                        <SideBar />
+                    }
                 </div>
             </div>
         </div>
