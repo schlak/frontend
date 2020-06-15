@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { isMobile } from "react-device-detect";
 
-import { isDesktop } from "./store/actionCreators";
 import "./styles/index.scss";
 
 import Audio from "./components/audio";
@@ -10,26 +10,8 @@ import SideBar from "./components/sideBar/sideBar";
 import TrackList from "./components/trackList/trackList";
 
 function App() {
-    const dispatch = useDispatch();
-
     // Get session state from store
     const session = useSelector((state) => state.session);
-    const windowIsDesktop = useSelector((state) => state.window.isDesktop);
-
-    // Is desktop screen size
-    const handleIsDesktop = () => {
-        dispatch(isDesktop(window.innerWidth > 1300));
-    };
-
-    // Handle window re-size
-    useEffect(() => {
-        handleIsDesktop();
-        window.addEventListener("resize", handleIsDesktop);
-
-        return () => {
-            window.removeEventListener("resize", handleIsDesktop);
-        }
-    }, []);
 
     // Update title with currently playing track
     useEffect(() => {
@@ -49,7 +31,7 @@ function App() {
                     <Audio />
                     <TrackList />
                     {
-                        windowIsDesktop &&
+                        !isMobile &&
                         <SideBar />
                     }
                 </div>
