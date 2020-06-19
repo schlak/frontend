@@ -49,7 +49,7 @@ p {
 }
 
 
-.loading {
+.isLoading {
     @include transition(all, 280ms, ease);
     @include flex();
     justify-content: center;

@@ -1,6 +1,26 @@
 .album {
     margin: 40px 0;
 
+    &.loading {
+        .album-info {
+            h2 {
+                width: 40%;
+                font-size: 1.8em;
+            }
+        }
+
+        .track {
+            width: 80%;
+            cursor: default;
+            background-color: #fff;
+
+            &:hover,
+            &:nth-child(even) {
+                background-color: inherit;
+            }
+        }
+    }
+
     .album-info {
         h2 {
             font-size: 1.4em;

@@ -23,7 +23,11 @@ function TrackList() {
         <div className="track-list">
             {isMobile && <TrackInfo isFixedToTop={false} />}
 
-            {isLoading && <div className="loading offset">Loading...</div>}
+            {isLoading &&
+                [...Array(4)].map((x, key) =>
+                    <Album albumIndex={-1} key={key} />
+                )
+            }
 
             {albums.map((album, key) => {
                 return <Album albumIndex={key} key={key} />;
