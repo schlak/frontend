@@ -11,8 +11,9 @@ function TrackList() {
     const dispatch = useDispatch();
 
     // Get album list from store
-    const albums = useSelector((state) => state.music.albums.items);
-    const isLoading = useSelector((state) => state.music.albums.isFetching);
+    const albumStore = useSelector((state) => state.music.albums);
+    const albums = albumStore.items;
+    const isLoading = albumStore.isFetching || albumStore.didError;
 
     // Fetch albums from api
     useEffect(() => {

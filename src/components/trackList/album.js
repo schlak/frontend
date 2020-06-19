@@ -7,6 +7,7 @@ import Track from "./track";
 function Album({ albumIndex }) {
     // Get album list from store
     const album = useSelector((state) => state.music.albums.items[albumIndex]);
+    const didError = useSelector((state) => state.music.albums.didError);
 
     // Assume loading state
     let isLoading = true;
@@ -38,7 +39,7 @@ function Album({ albumIndex }) {
     }
 
     return (
-        <div className={`album${isLoading ? " loading" : ""}`}>
+        <div className={`album${isLoading ? " loading" : ""}${didError ? " error" : ""}`}>
             <div className="album-info">
                 <h2>
                     {$title}
