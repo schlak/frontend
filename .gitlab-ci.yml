@@ -22,20 +22,6 @@ test:
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 
-build:
-  image: docker:19.03.1
-  stage: build
-
-  services:
-    - name: docker:19.03.1-dind
-      command: ["--experimental"]
-
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/music-library-player/client:latest .
-    - docker push $CI_REGISTRY/music-library-player/client:latest
-
-
 release:
   image: docker:19.03.1
   stage: build
@@ -64,5 +50,7 @@ release:
     - apk update && apk add bash && apk add git
     - git clone --recurse-submodules https://gitlab.merritt.es/music-library-player/release.git
     - cd release
+    - git submodule update --remote backend
+    - git submodule update --remote client
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - docker buildx build --platform $BUILDX_PLATFORM -t hmerritt/music-library-player:latest --push "."
