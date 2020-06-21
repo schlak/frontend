@@ -10,9 +10,10 @@ function Album({ albumIndex }) {
     const didError = useSelector((state) => state.music.albums.didError);
 
     // Assume loading state
+    let loadingKey = Math.floor(Math.random() * (8 - 2)) + 2;
     let isLoading = true;
     let $title = <Skeleton />;
-    let $tracks = [1, 2, 3].map((value, key) => {
+    let $tracks = [...Array(loadingKey)].map((value, key) => {
         return (
             <div className="track" key={key}>
                 <p>

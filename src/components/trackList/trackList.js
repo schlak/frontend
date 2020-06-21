@@ -12,8 +12,11 @@ function TrackList() {
 
     // Get album list from store
     const albumStore = useSelector((state) => state.music.albums);
-    const albums = albumStore.data;
+    let albums = albumStore.data;
     const isLoading = albumStore.isFetching || albumStore.didError;
+
+    //// TODO: Implement albums.filter
+    ////       -> filters through albums given a search input
 
     // Fetch albums from api
     useEffect(() => {
@@ -25,7 +28,7 @@ function TrackList() {
             {isMobile && <TrackInfo isFixedToTop={false} />}
 
             {isLoading &&
-                [...Array(4)].map((x, key) =>
+                [...Array(8)].map((x, key) =>
                     <Album albumIndex={-1} key={key} />
                 )
             }
