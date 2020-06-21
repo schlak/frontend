@@ -12,7 +12,7 @@ function TrackList() {
 
     // Get album list from store
     const albumStore = useSelector((state) => state.music.albums);
-    const albums = albumStore.items;
+    const albums = albumStore.data;
     const isLoading = albumStore.isFetching || albumStore.didError;
 
     // Fetch albums from api

@@ -14,7 +14,7 @@ const initialState = {
         albums: {
             didError: false,
             isFetching: true,
-            items: [],
+            data: [],
         },
     },
     session: {
@@ -58,7 +58,7 @@ function musicApp(state = initialState, action) {
                         ...state.music.albums,
                         didError: false,
                         isFetching: true,
-                        items: [],
+                        data: [],
                     },
                 },
             };
@@ -71,7 +71,7 @@ function musicApp(state = initialState, action) {
                     albums: {
                         ...state.music.albums,
                         isFetching: false,
-                        items: action.payload,
+                        data: action.payload,
                     },
                 },
             };
@@ -102,7 +102,7 @@ function musicApp(state = initialState, action) {
                         ...state.session.playing,
                         index: action.payload,
                         track:
-                            state.music.albums.items[action.payload.album]
+                            state.music.albums.data[action.payload.album]
                                 .tracks[action.payload.track],
                     },
                 },

@@ -42,7 +42,7 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
 
     // If a track is currently playing
     if (typeof newIndex.track === "number") {
-        const albums = state.music.albums.items;
+        const albums = state.music.albums.data;
         const currentAlbum = albums[trackIndex.album];
 
         // #1 next track in album

@@ -12,7 +12,7 @@ function Track({ albumIndex, trackIndex }) {
 
     // Get track from store
     const track = useSelector(
-        (state) => state.music.albums.items[albumIndex].tracks[trackIndex]
+        (state) => state.music.albums.data[albumIndex].tracks[trackIndex]
     );
 
     // Is this track currently playing?

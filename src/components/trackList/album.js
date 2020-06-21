@@ -6,7 +6,7 @@ import Track from "./track";
 
 function Album({ albumIndex }) {
     // Get album list from store
-    const album = useSelector((state) => state.music.albums.items[albumIndex]);
+    const album = useSelector((state) => state.music.albums.data[albumIndex]);
     const didError = useSelector((state) => state.music.albums.didError);
 
     // Assume loading state
