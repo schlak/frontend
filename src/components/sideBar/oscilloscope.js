@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { isIE } from "react-device-detect";
 import oscilloscope from "oscilloscope";
 
 function Oscilloscope() {
@@ -8,7 +9,7 @@ function Oscilloscope() {
     const track = session.playing.track;
 
     useEffect(() => {
-        if (track.id) {
+        if (track.id && document.getElementById("canvas")) {
             const audioContext = new window.AudioContext();
             const audioElement = window.soundManager.sounds[window.soundManager.soundIDs[0]]._a;
             audioElement.crossOrigin = "anonymous";
@@ -33,7 +34,10 @@ function Oscilloscope() {
 
     return (
         <div className="oscilloscope">
-            <canvas id="canvas" width="1200px" height="300px"></canvas>
+            {
+                !isIE &&
+                <canvas id="canvas" width="1200px" height="300px"></canvas>
+            }
         </div>
     );
 }
