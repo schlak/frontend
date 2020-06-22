@@ -12,11 +12,32 @@ function TrackList() {
 
     // Get album list from store
     const albumStore = useSelector((state) => state.music.albums);
-    let albums = albumStore.data;
+    const filter = albumStore.filter;
     const isLoading = albumStore.isFetching || albumStore.didError;
 
-    //// TODO: Implement albums.filter
+    //// TODO: fusejs search on filter.search input
     ////       -> filters through albums given a search input
+
+    // Filter albums from selected tags or user input
+    let albums = albumStore.data.reduce(function(filtered, album, key) {
+        // RegExp filter (case-insensitive)
+        // #1: search input
+        // #2: tags
+        const regexSearch = new RegExp( filter.search.split(" ").join("|"), "i");
+        const regexTags = new RegExp( filter.tags.join("|"), "i");
+
+        // If no filter applyed: add all all albums
+        // Or if album tag matches filter in RegExp
+        if ((filter.tags.length === 0 && filter.search.length === 0) ||
+            (filter.tags.length > 0 && regexTags.test(album.genre)) ||
+            (filter.search.length > 0 && regexSearch.test(album.album)) ||
+            (filter.search.length > 0 && regexSearch.test(album.album_artist)) ||
+            (filter.search.length > 0 && regexSearch.test(album.year))) {
+            filtered.push(<Album albumIndex={key} key={key} />);
+        }
+
+        return filtered;
+    }, []);
 
     // Fetch albums from api
     useEffect(() => {
@@ -33,9 +54,7 @@ function TrackList() {
                 )
             }
 
-            {albums.map((album, key) => {
-                return <Album albumIndex={key} key={key} />;
-            })}
+            {albums}
         </div>
     );
 }

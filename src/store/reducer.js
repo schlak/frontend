@@ -14,6 +14,10 @@ const initialState = {
         albums: {
             didError: false,
             isFetching: true,
+            filter: {
+                tags: [],
+                search: ""
+            },
             data: [],
         },
     },
