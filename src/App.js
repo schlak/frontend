@@ -34,8 +34,8 @@ function App() {
                     <Audio />
 
                     <div className="main">
-                        {isMobile && <TrackInfo isFixedToTop={false} />}
-                        <div className="filter-options">
+                        {isMobile && <TrackInfo isFixedToTop={true} />}
+                        <div className={`filter-options${isMobile ? " offset" : ""}`}>
                             <SearchBar />
                             <Tags />
                         </div>
