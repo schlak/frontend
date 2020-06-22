@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { isMobile } from "react-device-detect";
 
 import { fetchAlbums } from "../../store/actionCreators";
 
 import Album from "./album";
-import TrackInfo from "../sideBar/trackInfo";
 
 function TrackList() {
     const dispatch = useDispatch();
@@ -46,8 +44,6 @@ function TrackList() {
 
     return (
         <div className="track-list">
-            {isMobile && <TrackInfo isFixedToTop={false} />}
-
             {isLoading &&
                 [...Array(8)].map((x, key) =>
                     <Album albumIndex={-1} key={key} />

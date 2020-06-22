@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { isMobile } from "react-device-detect";
 
 import "./styles/index.scss";
@@ -8,6 +8,7 @@ import Audio from "./components/audio";
 // import Users from "./components/users";
 import SideBar from "./components/sideBar/sideBar";
 import TrackList from "./components/trackList/trackList";
+import TrackInfo from "./components/sideBar/trackInfo";
 
 function App() {
     // Get session state from store
@@ -29,7 +30,12 @@ function App() {
             <div className="container">
                 <div className="app-wrapper">
                     <Audio />
-                    <TrackList />
+
+                    <div className="main">
+                        {isMobile && <TrackInfo isFixedToTop={false} />}
+                        <TrackList />
+                    </div>
+
                     {
                         !isMobile &&
                         <SideBar />
