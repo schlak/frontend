@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+import Tag from "./tag";
+
 function Tags() {
     // Get selected tags from store
     const albumStore = useSelector((state) => state.music.albums);
-    const selectedTags = albumStore.filter.tags;
-    const [tags, setTags] = useState(selectedTags);
+    const [tags, setTags] = useState([]);
 
     // Populate genre tags
     useEffect(() => {
@@ -23,17 +24,11 @@ function Tags() {
         );
     }, [albumStore.data]);
 
-    const handleToggleTag = (e) => {}
-
     return (
         <div className="tags">
             {
                 tags.map((tag, key) => {
-                    return (
-                        <div className="tag" key={key} onClick={handleToggleTag}>
-                            <button>{tag}</button>
-                        </div>
-                    )
+                    return <Tag tag={tag} key={key} />
                 })
             }
         </div>

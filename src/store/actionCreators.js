@@ -8,6 +8,7 @@ import {
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
     UPDATE_USER_SEARCH,
+    FILTER_TOGGLE_TAG,
 } from "./actionTypes";
 
 /*
@@ -106,4 +107,26 @@ export const changeVolume = (newVolume) => (dispatch) => {
  */
 export const updateUserSearch = (search) => (dispatch) => {
     dispatch({ type: UPDATE_USER_SEARCH, payload: search });
+};
+
+
+/*
+ * Toggle filter tags array value
+ */
+export const filterToggleTag = (tag) => (dispatch, getState) => {
+    const state = getState();
+    const tags = [...state.music.albums.filter.tags];
+
+    // If tag already exists in tags array
+    // -> remove it
+    if (tags.includes(tag)) {
+        const index = tags.indexOf(tag);
+        if (index !== -1) tags.splice(index, 1);
+    } else {
+        // -> add tag
+        tags.push(tag);
+    }
+
+    // Update tags array
+    dispatch({ type: FILTER_TOGGLE_TAG, payload: tags });
 };
