@@ -27,7 +27,8 @@ function TrackList() {
         // Loop each track
         if (filter.search.length > 0) {
             const fuse = new Fuse(album.tracks, {
-                keys: ["metadata.album", "metadata.artist", "metadata.album_artist", "metadata.year", "metadata.title"]
+                threshold: 0.2,
+                keys: ["metadata.title", "metadata.album", "metadata.artist", "metadata.album_artist", "metadata.year"]
             });
 
             const found = fuse.search(filter.search);
