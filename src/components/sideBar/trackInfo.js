@@ -23,7 +23,9 @@ function TrackInfo({ isFixedToTop }) {
     const handleScrollToTrack = () => {
         if (track.id) {
             const $track = document.getElementById(track.id);
-            $track.scrollIntoView();
+            const y = $track.getBoundingClientRect().top + window.pageYOffset - 150;
+            window.scrollTo({ top: y });
+            // $track.scrollIntoView();
         }
     }
 
