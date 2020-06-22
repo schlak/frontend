@@ -17,5 +17,10 @@
         background-color: #f8f8f8;
         font-size: 1.3em;
         text-indent: 20px;
+
+        &:hover,
+        &:focus {
+            background-color: darken(#f8f8f8, 2%);
+        }
     }
 }

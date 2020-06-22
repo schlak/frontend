@@ -1,0 +1,32 @@
+.tags {
+    @include flex();
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .tag {
+        margin-right: 10px;
+        margin-bottom: 5px;
+
+        &:hover,
+        &:active {
+            button {
+                background-color: darken(#f4f4f4, 4%);
+            }
+        }
+
+        &.selected {
+            button {
+                background-color: darken(#f4f4f4, 10%);
+            }
+        }
+
+        button {
+            border: 1px solid #eee;
+            background-color: #f4f4f4;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            text-transform: capitalize;
+        }
+    }
+}
