@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { filterToggleTag } from "../../store/actionCreators";
 
@@ -17,6 +18,15 @@ function Tag({ tag }) {
     // Toggle tag in filter array
     const handleToggleTag = (e) => {
         dispatch(filterToggleTag(tag));
+    }
+
+    // Return Skeleton tag if value is falsy
+    if (!tag) {
+        return (
+            <div className="tag">
+                <Skeleton width="50px" height="25px" />
+            </div>
+        );
     }
 
     return (

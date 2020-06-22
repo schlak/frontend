@@ -6,6 +6,7 @@ import Tag from "./tag";
 function Tags() {
     // Get selected tags from store
     const albumStore = useSelector((state) => state.music.albums);
+    const isLoading = albumStore.isFetching || albumStore.didError;
     const [tags, setTags] = useState([]);
 
     // Populate genre tags
@@ -26,6 +27,12 @@ function Tags() {
 
     return (
         <div className="tags">
+            {isLoading &&
+                [...Array(7)].map((x, key) =>
+                    <Tag tag={null} key={key} />
+                )
+            }
+
             {
                 tags.map((tag, key) => {
                     return <Tag tag={tag} key={key} />
