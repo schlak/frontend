@@ -9,6 +9,8 @@ import Audio from "./components/audio";
 import SideBar from "./components/sideBar/sideBar";
 import TrackList from "./components/trackList/trackList";
 import TrackInfo from "./components/sideBar/trackInfo";
+import SearchBar from "./components/search/searchBar";
+// import Tags from "./components/search/tags";
 
 function App() {
     // Get session state from store
@@ -33,6 +35,9 @@ function App() {
 
                     <div className="main">
                         {isMobile && <TrackInfo isFixedToTop={false} />}
+                        <div className="filter-options">
+                            <SearchBar />
+                        </div>
                         <TrackList />
                     </div>
 
