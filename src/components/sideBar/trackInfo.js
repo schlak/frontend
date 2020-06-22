@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { isMobile } from "react-device-detect";
 
 function TrackInfo({ isFixedToTop }) {
     // Get session state from store
@@ -10,6 +11,12 @@ function TrackInfo({ isFixedToTop }) {
 
     if (track.id && typeof trackStatus.duration === "number") {
         statusCompletedPercentage = (trackStatus.position / trackStatus.duration) * 100;
+
+        // Reduce # of DOM changes on mobile/tablet by
+        // flooring result to an integer
+        if (isMobile) {
+            statusCompletedPercentage = Math.floor(statusCompletedPercentage);
+        }
     }
 
     // Scroll to playing track
