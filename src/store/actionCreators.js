@@ -7,6 +7,7 @@ import {
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
+    UPDATE_USER_SEARCH,
 } from "./actionTypes";
 
 /*
@@ -97,4 +98,12 @@ export const sessionUpdatePlayingStatus = (status) => (dispatch) => {
  */
 export const changeVolume = (newVolume) => (dispatch) => {
     dispatch({ type: SESSION_VOLUME, payload: newVolume });
+};
+
+
+/*
+ * Update search input value
+ */
+export const updateUserSearch = (search) => (dispatch) => {
+    dispatch({ type: UPDATE_USER_SEARCH, payload: search });
 };

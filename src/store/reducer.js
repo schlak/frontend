@@ -6,6 +6,7 @@ import {
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
+    UPDATE_USER_SEARCH,
 } from "./actionTypes";
 
 // Initial state of app
@@ -153,6 +154,21 @@ function musicApp(state = initialState, action) {
                             ...state.session.playing.status,
                             volume: action.payload
                         },
+                    },
+                },
+            };
+
+        case UPDATE_USER_SEARCH:
+            return {
+                ...state,
+                music: {
+                    ...state.music,
+                    albums: {
+                        ...state.music.albums,
+                        filter: {
+                            ...state.music.albums.filter,
+                            search: action.payload
+                        }
                     },
                 },
             };
