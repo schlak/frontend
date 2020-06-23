@@ -15,7 +15,7 @@ function TrackList() {
 
     // Filter albums from selected tags or user input
     // -> is array of album components to render
-    let albumsBeingRendered = filterAlbumsIntoComponents(albumStore.data, albumStore.filter);
+    let albumsBeingRendered = filterAlbumsIntoComponents(albumStore.data, albumStore.filter, true);
 
     // Fetch albums from api
     useEffect(() => {

@@ -1,4 +1,5 @@
 import { api } from "../utils/api";
+import { filterAlbums, doesTrackExistInAlbumsArray } from "../utils/filter";
 import {
     FETCH_ALBUMS_START,
     FETCH_ALBUMS_SUCCESS,
@@ -116,6 +117,7 @@ export const updateUserSearch = (search) => (dispatch) => {
 export const filterToggleTag = (tag) => (dispatch, getState) => {
     const state = getState();
     const tags = [...state.music.albums.filter.tags];
+    let filteredData = [];
 
     // If tag already exists in tags array
     // -> remove it
@@ -127,6 +129,15 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
         tags.push(tag);
     }
 
+    // Filter albums array to match new tags
+    if (tags.length > 0) {
+        filteredData = filterAlbums(
+            state.music.albums.data, { tags:tags, search:"" }
+        ).map((key) => {
+            return key;
+        });
+    }
+
     // Update tags array
-    dispatch({ type: FILTER_TOGGLE_TAG, payload: tags });
+    dispatch({ type: FILTER_TOGGLE_TAG, payload: {tags:tags, filteredData:filteredData} });
 };
