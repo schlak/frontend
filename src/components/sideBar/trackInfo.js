@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import { useSelector } from "react-redux";
 import { isMobile } from "react-device-detect";
 
@@ -9,6 +10,17 @@ function TrackInfo({ isFixedToTop }) {
     const trackStatus = session.playing.status;
     let statusCompletedPercentage = 0;
 
+    // Track
+    let title = track.metadata.title;
+    let artist = track.metadata.artist;
+
+    // Skeleton placeholder if no track playing
+    if (!title && !artist) {
+        title = <Skeleton width="60%" />;
+        artist = <Skeleton width="28%" />;
+    }
+
+    // Calculate progress bar percentage
     if (track.id && typeof trackStatus.duration === "number") {
         statusCompletedPercentage = (trackStatus.position / trackStatus.duration) * 100;
 
@@ -33,8 +45,8 @@ function TrackInfo({ isFixedToTop }) {
 
     return (
         <div className={`track-status-info${isFixedToTop ? " fixed--top" : ""}`} onClick={handleScrollToTrack}>
-            <p className="track-title">{track.metadata.title}</p>
-            <p className="track-artist">{track.metadata.artist}</p>
+            <p className="track-title">{title}</p>
+            <p className="track-artist">{artist}</p>
             <div className="track-status-completion" style={{width: `${statusCompletedPercentage}%`}}></div>
         </div>
     );

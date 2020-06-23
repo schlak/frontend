@@ -28,6 +28,12 @@
         background-color: #777;
         @include transition(all, 150ms, ease);
     }
+
+    .react-loading-skeleton {
+        opacity: .5;
+        background-color: #eee;
+        background-image: linear-gradient(90deg, #eee, #eee, #eee);
+    }
 }
 
 .track-status-info.fixed--top {
