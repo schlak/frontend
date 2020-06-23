@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchAlbums } from "../../store/actionCreators";
-import { filterAlbums } from "../../utils/filter";
+import { filterAlbumsIntoComponents } from "../../utils/filter";
 
 import Album from "./album";
 
@@ -13,11 +13,9 @@ function TrackList() {
     const albumStore = useSelector((state) => state.music.albums);
     const isLoading = albumStore.isFetching || albumStore.didError;
 
-    //// TODO: FIX track play order when filtering
-
     // Filter albums from selected tags or user input
     // -> is array of album components to render
-    let albumsBeingRendered = filterAlbums(albumStore.data, albumStore.filter);
+    let albumsBeingRendered = filterAlbumsIntoComponents(albumStore.data, albumStore.filter);
 
     // Fetch albums from api
     useEffect(() => {

@@ -8,6 +8,7 @@ import Album from "../components/trackList/album";
  *
  * @param {data}    albums array
  * @param {filter}  filter options
+ * @return          array of index keys for state.music.albums.data
  */
 export const filterAlbums = (data, filter) => {
     return data.reduce(function(filtered, album, key) {
@@ -33,9 +34,18 @@ export const filterAlbums = (data, filter) => {
         // Or if album tag matches filter in RegExp
         if (filter.tags.length === 0  ||
             (filter.tags.length > 0 && regexTags.test(album.genre))) {
-            filtered.push(<Album albumIndex={key} key={key} />);
+            filtered.push(key);
         }
 
         return filtered;
     }, []);
+};
+
+/*
+ * Filter albums into components to render
+ */
+export const filterAlbumsIntoComponents = (data, filter) => {
+    return filterAlbums(data, filter).map((key) => {
+        return <Album albumIndex={key} key={key} />;
+    });
 };
