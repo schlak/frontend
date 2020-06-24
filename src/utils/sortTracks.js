@@ -62,3 +62,62 @@ export const groupTracksIntoAlbumComponents = (tracksStore, tracksToGroup) => {
         return <Album album={data} key={key} />;
     });
 };
+
+
+/*
+ * Fuzzy-search for a track in tracks array
+ *
+ * @param {album}   album object
+ * @param {filter}  filter options
+ * @return          bool: if match found
+ */
+export const fuzzySearchForTrack = (tracks, filter) => {
+    // Run search on all tracks
+    const fuse = new Fuse(tracks, {
+        threshold: 0.2,
+        keys: [
+            "metadata.title",
+            "metadata.album",
+            "metadata.artist",
+            "metadata.album_artist",
+            "metadata.year"
+        ]
+    });
+
+    // List of matches
+    const found = fuse.search(filter.search);
+
+    if (found.length > 0) return true;
+    return false;
+};
+
+
+/*
+ * Filter tracks from selected tags or user input
+ *
+ * @param {data}    tracks array
+ * @param {filter}  filter options
+ * @return          array of index keys for state.music.albums.data
+ */
+export const filterTracks = (tracksStore, tracksToFilter, filter, includeSearch = false) => {
+    return tracksToFilter.reduce(function(filtered, track, key) {
+        // RegExp filter tags (case-insensitive)
+        const regexTags = new RegExp(filter.tags.join("|"), "i");
+
+        // Run search on each track
+        if (filter.search.length > 0 && includeSearch) {
+            const trackFound = fuzzySearchForTrack(track, filter);
+            if (!trackFound)
+                return filtered;
+        }
+
+        // If no filter applyed: add all all tracks
+        // Or if track tag matches filter in RegExp
+        if (filter.tags.length === 0  ||
+            (filter.tags.length > 0 && regexTags.test(track.metadata.genre))) {
+            filtered.push(track);
+        }
+
+        return filtered;
+    }, []);
+};
