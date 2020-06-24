@@ -10,6 +10,7 @@ function Audio() {
 
     // Get session state from store
     const session = useSelector((state) => state.session);
+    const filter = useSelector((state) => state.music.tracks.filter);
     const track = session.playing.track;
 
     const handlePlayNextTrack = () => {
@@ -29,7 +30,7 @@ function Audio() {
         const onKeyUp = ({ code }) => {
             if (code === "KeyP" || code === "KeyK") {
                 // Check if there is a track playing
-                if (track.id) {
+                if (track.id && filter.search.length === 0) {
                     dispatch(playingTrackIsPaused(!session.playing.isPaused));
                 }
             }
