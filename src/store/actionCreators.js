@@ -1,5 +1,5 @@
 import { api } from "../utils/api";
-import { filterAlbums, doesTrackExistInAlbumsArray } from "../utils/filter";
+import { filterTracks, doesTrackExist } from "../utils/sortTracks";
 import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,
@@ -46,6 +46,24 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
     // If a track is currently playing
     if (typeof newIndex === "number") {
         const tracks = state.music.tracks.data;
+        const filter = state.music.tracks.filter;
+
+        // Check if filter is applied
+        if (filter.tags.length > 0) {
+            // #1 Re-create filter
+            // #2 Is current track in filter
+            const tracksFiltered = filterTracks(tracks, tracks, filter);
+            const [trackExists, trackIndexFiltered] = doesTrackExist(tracksFiltered, tracks[trackIndex]);
+
+            if (trackExists) {
+                newIndex = trackIndexFiltered + 1;
+                if (tracksFiltered.length <= newIndex) newIndex = 0;
+
+                newIndex = tracks.findIndex(storeTrack => storeTrack.id === tracksFiltered[newIndex].id);
+
+                return dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
+            }
+        }
 
         // #1 attempt to play next track
         newIndex = trackIndex + 1;
@@ -99,7 +117,6 @@ export const updateUserSearch = (search) => (dispatch) => {
 export const filterToggleTag = (tag) => (dispatch, getState) => {
     const state = getState();
     const tags = [...state.music.tracks.filter.tags];
-    let filteredData = [];
 
     // If tag already exists in tags array
     // -> remove it
@@ -111,15 +128,6 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
         tags.push(tag);
     }
 
-    // Filter albums array to match new tags
-    if (tags.length > 0) {
-        filteredData = filterAlbums(
-            state.music.tracks.data, { tags:tags, search:"" }
-        ).map((key) => {
-            return key;
-        });
-    }
-
     // Update tags array
-    dispatch({ type: FILTER_TOGGLE_TAG, payload: {tags:tags, filteredData:filteredData} });
+    dispatch({ type: FILTER_TOGGLE_TAG, payload: tags });
 };

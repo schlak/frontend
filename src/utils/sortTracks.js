@@ -121,3 +121,29 @@ export const filterTracks = (tracksStore, tracksToFilter, filter, includeSearch 
         return filtered;
     }, []);
 };
+
+
+/*
+ * Deturmines if a track exists
+ *
+ * @param  {data}    tracks array
+ * @param  {filter}  filter options
+ * @return {object}  index of album and track
+ */
+export const doesTrackExist = (data, track) => {
+    const res = [false, -1];
+
+    // Loop all tracks
+    data.some((trackLoop, index) => {
+        if (track.id === trackLoop.id) {
+            res[0] = true;
+            res[1] = index;
+            return true;
+        }
+
+        if (res[0]) return true;
+        return false;
+    });
+
+    return res;
+};

@@ -16,10 +16,8 @@ function TrackList() {
     // #1 Filter tracks using tags or search input
     let tracksFiltered = filterTracks(trackStore.data, trackStore.data, trackStore.filter, true);
 
-    // #2 Soft-filter search results (does not effect next-track decision)
-
-    // #3 Populate albums from filtered array
-    // #4 Create array of Album components to render
+    // #2 Populate albums from filtered array
+    // #3 Create array of Album components to render
     let albumsBeingRendered = groupTracksIntoAlbumComponents(trackStore.data, tracksFiltered);
 
     // Fetch albums from api
