@@ -14,13 +14,13 @@ function TrackList() {
     const isLoading = trackStore.isFetching || trackStore.didError;
 
     // #1 Filter tracks using tags or search input
-    // let tracksFiltered = filterTracks(trackStore.data, trackStore.filter, true);
+    let tracksFiltered = filterTracks(trackStore.data, trackStore.data, trackStore.filter, true);
 
     // #2 Soft-filter search results (does not effect next-track decision)
 
     // #3 Populate albums from filtered array
     // #4 Create array of Album components to render
-    let albumsBeingRendered = groupTracksIntoAlbumComponents(trackStore.data, trackStore.data);
+    let albumsBeingRendered = groupTracksIntoAlbumComponents(trackStore.data, tracksFiltered);
 
     // Fetch albums from api
     useEffect(() => {
