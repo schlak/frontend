@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchAlbums } from "../../store/actionCreators";
-import { filterAlbumsIntoComponents } from "../../utils/filter";
+import { filterTracks, groupTracksIntoAlbumComponents } from "../../utils/sortTracks";
 
 import Album from "./album";
 
@@ -10,12 +10,17 @@ function TrackList() {
     const dispatch = useDispatch();
 
     // Get album list from store
-    const albumStore = useSelector((state) => state.music.albums);
-    const isLoading = albumStore.isFetching || albumStore.didError;
+    const trackStore = useSelector((state) => state.music.tracks);
+    const isLoading = trackStore.isFetching || trackStore.didError;
 
-    // Filter albums from selected tags or user input
-    // -> is array of album components to render
-    let albumsBeingRendered = filterAlbumsIntoComponents(albumStore.data, albumStore.filter, true);
+    // #1 Filter tracks using tags or search input
+    // let tracksFiltered = filterTracks(trackStore.data, trackStore.filter, true);
+
+    // #2 Soft-filter search results (does not effect next-track decision)
+
+    // #3 Populate albums from filtered array
+    // #4 Create array of Album components to render
+    let albumsBeingRendered = groupTracksIntoAlbumComponents(trackStore.data, trackStore.data);
 
     // Fetch albums from api
     useEffect(() => {
@@ -26,7 +31,7 @@ function TrackList() {
         <div className="track-list">
             {isLoading &&
                 [...Array(8)].map((x, key) =>
-                    <Album albumIndex={-1} key={key} />
+                    <Album album={false} key={key} />
                 )
             }
 
