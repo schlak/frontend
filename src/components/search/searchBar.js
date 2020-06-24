@@ -6,7 +6,7 @@ function SearchBar() {
     const dispatch = useDispatch();
 
     // Search input value in store
-    const search = useSelector((state) => state.music.albums.filter.search);
+    const search = useSelector((state) => state.music.tracks.filter.search);
 
     const updateSearch = (evt) => {
         evt.preventDefault();

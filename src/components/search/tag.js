@@ -7,7 +7,7 @@ function Tag({ tag }) {
     const dispatch = useDispatch();
 
     // Get selected tags from store
-    const selectedTags = useSelector((state) => state.music.albums.filter.tags);
+    const selectedTags = useSelector((state) => state.music.tracks.filter.tags);
     let isSelected = false;
 
     // If tag is active
