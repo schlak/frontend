@@ -4,26 +4,15 @@ import { useSelector } from "react-redux";
 
 import Track from "./track";
 
-function Album({ albumIndex }) {
-    // Get album list from store
-    const album = useSelector((state) => state.music.albums.data[albumIndex]);
-    const didError = useSelector((state) => state.music.albums.didError);
+function Album({ album }) {
+    // If api call failed
+    const didError = useSelector((state) => state.music.tracks.didError);
 
-    // Assume loading state
-    let loadingKey = Math.floor(Math.random() * (8 - 2)) + 2;
-    let isLoading = true;
-    let $title = <Skeleton />;
-    let $tracks = [...Array(loadingKey)].map((value, key) => {
-        return (
-            <div className="track" key={key}>
-                <p>
-                    <Skeleton />
-                </p>
-            </div>
-        );
-    })
+    let isLoading;
+    let $title;
+    let $tracks;
 
-    // If album index exists
+    // If album exists
     // Render full album
     if (album) {
         isLoading = false;
@@ -31,12 +20,26 @@ function Album({ albumIndex }) {
         $tracks = album.tracks.map((track, key) => {
             return (
                 <Track
-                    trackIndex={key}
-                    albumIndex={albumIndex}
+                    index={track}
                     key={key}
                 />
             );
         });
+    } else {
+        // Album falsy - render skeleton
+        // Loading state
+        let loadingKey = Math.floor(Math.random() * (8 - 2)) + 2;
+        isLoading = true;
+        $title = <Skeleton />;
+        $tracks = [...Array(loadingKey)].map((value, key) => {
+            return (
+                <div className="track" key={key}>
+                    <p>
+                        <Skeleton />
+                    </p>
+                </div>
+            );
+        })
     }
 
     return (
