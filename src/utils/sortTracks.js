@@ -106,7 +106,7 @@ export const filterTracks = (tracksStore, tracksToFilter, filter, includeSearch 
 
         // Run search on each track
         if (filter.search.length > 0 && includeSearch) {
-            const trackFound = fuzzySearchForTrack(track, filter);
+            const trackFound = fuzzySearchForTrack([track], filter);
             if (!trackFound)
                 return filtered;
         }
