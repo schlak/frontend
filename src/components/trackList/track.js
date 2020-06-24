@@ -4,16 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { playTrack } from "../../store/actionCreators";
 
-function Track({ albumIndex, trackIndex }) {
+function Track({ index }) {
     const dispatch = useDispatch();
 
-    // Get session state from store
+    // Track and session data from store
+    const track = useSelector((state) => state.music.tracks.data[index]);
     const session = useSelector((state) => state.session);
-
-    // Get track from store
-    const track = useSelector(
-        (state) => state.music.albums.data[albumIndex].tracks[trackIndex]
-    );
 
     // Is this track currently playing?
     const isTrackPlaying = track.id === session.playing.track.id;
@@ -22,10 +18,7 @@ function Track({ albumIndex, trackIndex }) {
     // Play track in session
     const playInSession = (e) => {
         dispatch(
-            playTrack({
-                album: albumIndex,
-                track: trackIndex,
-            })
+            playTrack(index)
         );
     };
 

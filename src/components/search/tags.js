@@ -5,15 +5,15 @@ import Tag from "./tag";
 
 function Tags() {
     // Get selected tags from store
-    const albumStore = useSelector((state) => state.music.albums);
-    const isLoading = albumStore.isFetching || albumStore.didError;
+    const trackStore = useSelector((state) => state.music.tracks);
+    const isLoading = trackStore.isFetching || trackStore.didError;
     const [tags, setTags] = useState([]);
 
     // Populate genre tags
     useEffect(() => {
         setTags(
-            albumStore.data.reduce(function(filtered, album, key) {
-                const genre = album.genre.toLowerCase();
+            trackStore.data.reduce(function(filtered, track, key) {
+                const genre = track.metadata.genre.toLowerCase();
 
                 // Only add unique genre tags
                 if (!filtered.includes(genre)) {
@@ -23,7 +23,7 @@ function Tags() {
                 return filtered;
             }, []).sort()
         );
-    }, [albumStore.data]);
+    }, [trackStore.data]);
 
     return (
         <div className="tags">

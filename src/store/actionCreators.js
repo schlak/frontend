@@ -1,9 +1,9 @@
 import { api } from "../utils/api";
 import { filterAlbums, doesTrackExistInAlbumsArray } from "../utils/filter";
 import {
-    FETCH_ALBUMS_START,
-    FETCH_ALBUMS_SUCCESS,
-    FETCH_ALBUMS_FAILURE,
+    FETCH_TRACKS_START,
+    FETCH_TRACKS_SUCCESS,
+    FETCH_TRACKS_FAILURE,
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
@@ -16,16 +16,16 @@ import {
  * Fetch albums index from api
  */
 export const fetchAlbums = () => (dispatch) => {
-    dispatch({ type: FETCH_ALBUMS_START, payload: [] });
+    dispatch({ type: FETCH_TRACKS_START, payload: [] });
 
     api()
-        .get("/albums")
+        .get("/tracks")
         .then((res) => {
-            console.log("Albums:", res.data);
-            dispatch({ type: FETCH_ALBUMS_SUCCESS, payload: res.data });
+            console.log("Tracks:", res.data);
+            dispatch({ type: FETCH_TRACKS_SUCCESS, payload: res.data });
         })
         .catch((error) => {
-            dispatch({ type: FETCH_ALBUMS_FAILURE, payload: error });
+            dispatch({ type: FETCH_TRACKS_FAILURE, payload: error });
         });
 };
 
@@ -41,39 +41,21 @@ export const playTrack = (trackIndex) => (dispatch) => {
  */
 export const playNextTrack = (trackIndex) => (dispatch, getState) => {
     const state = getState();
-    const newIndex = { ...trackIndex };
+    let newIndex = 0;
 
     // If a track is currently playing
-    if (typeof newIndex.track === "number") {
-        const albums = state.music.albums.data;
-        const currentAlbum = albums[trackIndex.album];
+    if (typeof newIndex === "number") {
+        const tracks = state.music.tracks.data;
 
-        // #1 next track in album
-        newIndex.track += 1;
+        // #1 attempt to play next track
+        newIndex = trackIndex + 1;
 
-        // If end of current album
-        // move onto next album
-        if (newIndex.track + 1 > currentAlbum.tracks.length) {
-            // If end of all albums
-            // loop to first album
-            if (albums.length === trackIndex.album + 1) {
-                // #3 loop entire playlist to first album
-                newIndex.album = 0;
-                newIndex.track = 0;
-
-                // Next album
-            } else {
-                // #2 next album first track
-                newIndex.album += 1;
-                newIndex.track = 0;
-            }
+        // If end of all tracks
+        // loop to first track
+        if (tracks.length <= newIndex) {
+            // #3 loop entire playlist to first track
+            newIndex = 0;
         }
-
-        // No track is currently playing
-        // Play first track
-    } else {
-        newIndex.album = 0;
-        newIndex.track = 0;
     }
 
     // Select next track
@@ -116,7 +98,7 @@ export const updateUserSearch = (search) => (dispatch) => {
  */
 export const filterToggleTag = (tag) => (dispatch, getState) => {
     const state = getState();
-    const tags = [...state.music.albums.filter.tags];
+    const tags = [...state.music.tracks.filter.tags];
     let filteredData = [];
 
     // If tag already exists in tags array
@@ -132,7 +114,7 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
     // Filter albums array to match new tags
     if (tags.length > 0) {
         filteredData = filterAlbums(
-            state.music.albums.data, { tags:tags, search:"" }
+            state.music.tracks.data, { tags:tags, search:"" }
         ).map((key) => {
             return key;
         });
