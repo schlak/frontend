@@ -1,7 +1,7 @@
 import {
-    FETCH_ALBUMS_START,
-    FETCH_ALBUMS_SUCCESS,
-    FETCH_ALBUMS_FAILURE,
+    FETCH_TRACKS_START,
+    FETCH_TRACKS_SUCCESS,
+    FETCH_TRACKS_FAILURE,
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
@@ -13,7 +13,7 @@ import {
 // Initial state of app
 const initialState = {
     music: {
-        albums: {
+        tracks: {
             didError: false,
             isFetching: true,
             filter: {
@@ -32,10 +32,7 @@ const initialState = {
                 position: null,
                 volume: 50
             },
-            index: {
-                album: null,
-                track: null,
-            },
+            index: null,
             track: {
                 id: null,
                 metadata: {},
@@ -56,13 +53,13 @@ const initialState = {
 
 function musicApp(state = initialState, action) {
     switch (action.type) {
-        case FETCH_ALBUMS_START:
+        case FETCH_TRACKS_START:
             return {
                 ...state,
                 music: {
                     ...state.music,
-                    albums: {
-                        ...state.music.albums,
+                    tracks: {
+                        ...state.music.tracks,
                         didError: false,
                         isFetching: true,
                         data: [],
@@ -70,26 +67,26 @@ function musicApp(state = initialState, action) {
                 },
             };
 
-        case FETCH_ALBUMS_SUCCESS:
+        case FETCH_TRACKS_SUCCESS:
             return {
                 ...state,
                 music: {
                     ...state.music,
-                    albums: {
-                        ...state.music.albums,
+                    tracks: {
+                        ...state.music.tracks,
                         isFetching: false,
                         data: action.payload,
                     },
                 },
             };
 
-        case FETCH_ALBUMS_FAILURE:
+        case FETCH_TRACKS_FAILURE:
             return {
                 ...state,
                 music: {
                     ...state.music,
-                    albums: {
-                        ...state.music.albums,
+                    tracks: {
+                        ...state.music.tracks,
                         didError: true,
                         isFetching: false,
                     },
@@ -98,7 +95,7 @@ function musicApp(state = initialState, action) {
 
         case SESSION_PLAY_TRACK:
             // Do nothing if still fetching album index
-            if (state.music.albums.isFetching || state.music.albums.didError)
+            if (state.music.tracks.isFetching || state.music.tracks.didError)
                 return state;
 
             return {
@@ -108,9 +105,7 @@ function musicApp(state = initialState, action) {
                     playing: {
                         ...state.session.playing,
                         index: action.payload,
-                        track:
-                            state.music.albums.data[action.payload.album]
-                                .tracks[action.payload.track],
+                        track: state.music.tracks.data[action.payload],
                     },
                 },
             };
@@ -165,10 +160,10 @@ function musicApp(state = initialState, action) {
                 ...state,
                 music: {
                     ...state.music,
-                    albums: {
-                        ...state.music.albums,
+                    tracks: {
+                        ...state.music.tracks,
                         filter: {
-                            ...state.music.albums.filter,
+                            ...state.music.tracks.filter,
                             search: action.payload
                         }
                     },
@@ -180,10 +175,10 @@ function musicApp(state = initialState, action) {
                 ...state,
                 music: {
                     ...state.music,
-                    albums: {
-                        ...state.music.albums,
+                    tracks: {
+                        ...state.music.tracks,
                         filter: {
-                            ...state.music.albums.filter,
+                            ...state.music.tracks.filter,
                             tags: action.payload.tags
                         },
                         filteredData: action.payload.filteredData
