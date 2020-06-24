@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchAlbums } from "../../store/actionCreators";
@@ -13,6 +13,9 @@ function TrackList() {
     const trackStore = useSelector((state) => state.music.tracks);
     const isLoading = trackStore.isFetching || trackStore.didError;
 
+    // # of rendered albums
+    const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(15);
+
     // #1 Filter tracks using tags or search input
     let tracksFiltered = filterTracks(trackStore.data, trackStore.data, trackStore.filter, true);
 
@@ -25,6 +28,19 @@ function TrackList() {
         dispatch(fetchAlbums());
     }, [dispatch]);
 
+    // Adds more characters as user scrolls to bottom of page
+    window.onscroll = function(ev)
+    {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+        {
+            if (renderedAlbumsCount < albumsBeingRendered.length) {
+                setRenderedAlbumsCount(
+                    renderedAlbumsCount + 1
+                );
+            }
+        }
+    };
+
     return (
         <div className="track-list">
             {isLoading &&
@@ -33,7 +49,7 @@ function TrackList() {
                 )
             }
 
-            {albumsBeingRendered}
+            {albumsBeingRendered.slice(0, renderedAlbumsCount)}
         </div>
     );
 }
