@@ -80,6 +80,51 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
     dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
 };
 
+
+/*
+ * Play previous track
+ */
+export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
+    const state = getState();
+    let newIndex = 0;
+
+    // If a track is currently playing
+    if (typeof newIndex === "number") {
+        const tracks = state.music.tracks.data;
+        const filter = state.music.tracks.filter;
+
+        // Check if filter is applied
+        if (filter.tags.length > 0) {
+            // #1 Re-create filter
+            // #2 Is current track in filter
+            const tracksFiltered = filterTracks(tracks, tracks, filter);
+            const [trackExists, trackIndexFiltered] = doesTrackExist(tracksFiltered, tracks[trackIndex]);
+
+            if (trackExists) {
+                newIndex = trackIndexFiltered - 1;
+                if (newIndex < 0) newIndex = tracks.length - 1;
+
+                newIndex = tracks.findIndex(storeTrack => storeTrack.id === tracksFiltered[newIndex].id);
+
+                return dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
+            }
+        }
+
+        // #1 attempt to play previous track
+        newIndex = trackIndex - 1;
+
+        // If end of all tracks
+        // loop to end track
+        if (newIndex < 0) {
+            // #3 loop entire playlist to end track
+            newIndex = tracks.length - 1;
+        }
+    }
+
+    // Select next track
+    dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
+};
+
 /*
  * Pause currently playing track
  */
