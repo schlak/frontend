@@ -31,7 +31,7 @@ function TrackList() {
     // Adds more characters as user scrolls to bottom of page
     window.onscroll = function(ev)
     {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 580)
         {
             if (renderedAlbumsCount < albumsBeingRendered.length) {
                 setRenderedAlbumsCount(
