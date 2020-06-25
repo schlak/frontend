@@ -102,7 +102,7 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
 
             if (trackExists) {
                 newIndex = trackIndexFiltered - 1;
-                if (newIndex < 0) newIndex = tracks.length - 1;
+                if (newIndex < 0) newIndex = tracksFiltered.length - 1;
 
                 newIndex = tracks.findIndex(storeTrack => storeTrack.id === tracksFiltered[newIndex].id);
 
