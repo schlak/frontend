@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { isIE } from "react-device-detect";
+import { isChrome, isChromium, isEdgeChromium } from "react-device-detect";
 import oscilloscope from "oscilloscope";
 
 function Oscilloscope() {
@@ -35,7 +35,7 @@ function Oscilloscope() {
     return (
         <div className="oscilloscope">
             {
-                !isIE &&
+                (isChrome || isChromium || isEdgeChromium) &&
                 <canvas id="canvas" width="1200px" height="300px"></canvas>
             }
         </div>
