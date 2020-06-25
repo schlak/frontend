@@ -14,7 +14,7 @@ function TrackList() {
     const isLoading = trackStore.isFetching || trackStore.didError;
 
     // # of rendered albums
-    const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(15);
+    const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(14);
 
     // #1 Filter tracks using tags or search input
     let tracksFiltered = filterTracks(trackStore.data, trackStore.data, trackStore.filter, true);
@@ -28,10 +28,10 @@ function TrackList() {
         dispatch(fetchAlbums());
     }, [dispatch]);
 
-    // Adds more characters as user scrolls to bottom of page
+    // Adds more albums as user scrolls to bottom of page
     window.onscroll = function(ev)
     {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 580)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800)
         {
             if (renderedAlbumsCount < albumsBeingRendered.length) {
                 setRenderedAlbumsCount(
