@@ -12,7 +12,7 @@
         display: none;
     }
 
-    .wrapper {
+    & > .wrapper {
         position: fixed;
         width: $side-bar--width;
         height: 100%;

@@ -45,8 +45,10 @@ function TrackInfo({ isFixedToTop }) {
 
     return (
         <div className={`track-status-info${isFixedToTop ? " fixed--top" : ""}`} onClick={handleScrollToTrack}>
-            <p className="track-title">{title}</p>
-            <p className="track-artist">{artist}</p>
+            <div className="track-info-wrapper">
+                <p className="track-title">{title}</p>
+                <p className="track-artist">{artist}</p>
+            </div>
             <div className="track-status-completion" style={{width: `${statusCompletedPercentage}%`}}></div>
         </div>
     );
