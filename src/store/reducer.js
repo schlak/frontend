@@ -103,6 +103,7 @@ function musicApp(state = initialState, action) {
                     ...state.session,
                     playing: {
                         ...state.session.playing,
+                        isPaused: false,
                         index: action.payload,
                         track: state.music.tracks.data[action.payload],
                     },
