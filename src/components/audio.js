@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playNextTrack, playingTrackIsPaused, sessionUpdatePlayingStatus } from "../store/actionCreators";
+import {
+    playNextTrack,
+    playPreviousTrack,
+    playingTrackIsPaused,
+    sessionUpdatePlayingStatus
+} from "../store/actionCreators";
 
 import Sound from "react-sound";
 
@@ -17,11 +22,19 @@ function Audio() {
         dispatch(playNextTrack(session.playing.index));
     };
 
+    const handlePlayPreviousTrack = () => {
+        dispatch(playPreviousTrack(session.playing.index));
+    };
+
     const handlePlaying = (audio) => {
         dispatch(sessionUpdatePlayingStatus({
             duration: audio.duration,
             position: audio.position,
         }));
+    }
+
+    const handlePause = (isPaused) => {
+        dispatch(playingTrackIsPaused(isPaused));
     }
 
     // Listen for keypress
@@ -31,7 +44,7 @@ function Audio() {
             if (code === "KeyP" || code === "KeyK") {
                 // Check if there is a track playing
                 if (track.id && filter.search.length === 0) {
-                    dispatch(playingTrackIsPaused(!session.playing.isPaused));
+                    handlePause(!session.playing.isPaused);
                 }
             }
         };
@@ -79,12 +92,19 @@ function Audio() {
             });
 
             navigator.mediaSession.setActionHandler(
+                "nexttrack", handlePlayNextTrack
+            );
+            navigator.mediaSession.setActionHandler(
+                "previoustrack", handlePlayPreviousTrack
+            );
+
+            navigator.mediaSession.setActionHandler(
                 "pause",
-                dispatch(playingTrackIsPaused(true))
+                handlePause(true)
             );
             navigator.mediaSession.setActionHandler(
                 "play",
-                dispatch(playingTrackIsPaused(false))
+                handlePause(false)
             );
         }
     }, [
