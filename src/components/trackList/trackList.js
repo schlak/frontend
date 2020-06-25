@@ -14,7 +14,8 @@ function TrackList() {
     const isLoading = trackStore.isFetching || trackStore.didError;
 
     // # of rendered albums
-    const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(14);
+    const defaultRenderAmmount = 14;
+    const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(defaultRenderAmmount);
 
     // #1 Filter tracks using tags or search input
     let tracksFiltered = filterTracks(trackStore.data, trackStore.data, trackStore.filter, true);
@@ -34,10 +35,12 @@ function TrackList() {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800)
         {
             if (renderedAlbumsCount < albumsBeingRendered.length) {
-                setRenderedAlbumsCount(
-                    renderedAlbumsCount + 1
-                );
+                // Add album to render
+                setRenderedAlbumsCount(renderedAlbumsCount + 1);
             }
+        } else if (window.scrollY <= 100) {
+            // Reset render count
+            setRenderedAlbumsCount(defaultRenderAmmount);
         }
     };
 
