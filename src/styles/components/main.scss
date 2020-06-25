@@ -3,7 +3,7 @@
     width: 58%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 
     @media (max-width: 1650px) {
         width: 55%;
@@ -19,5 +19,21 @@
 
     @media (max-width: 800px) {
         width: 100%;
+    }
+}
+
+.track-list {
+    position: relative;
+    margin-bottom: 200px;
+
+    &::after {
+        position: absolute;
+        bottom: -125px;
+        left: 15%;
+        width: 70%;
+        height: 1px;
+        content: "";
+        z-index: -1;
+        background-color: #f2f2f2;
     }
 }
