@@ -4,6 +4,7 @@ import {
     FETCH_TRACKS_FAILURE,
     SESSION_PLAY_TRACK,
     SESSION_PLAYING_TOGGLE,
+    SESSION_TRACK_ERROR,
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
     UPDATE_USER_SEARCH,
@@ -25,6 +26,7 @@ const initialState = {
     },
     session: {
         playing: {
+            didError: false,
             isPaused: true,
             status: {
                 duration: null,
@@ -103,6 +105,7 @@ function musicApp(state = initialState, action) {
                     ...state.session,
                     playing: {
                         ...state.session.playing,
+                        didError: false,
                         isPaused: false,
                         index: action.payload,
                         track: state.music.tracks.data[action.payload],
@@ -121,6 +124,23 @@ function musicApp(state = initialState, action) {
                     playing: {
                         ...state.session.playing,
                         isPaused: action.payload,
+                    },
+                },
+            };
+
+        case SESSION_TRACK_ERROR:
+            // Do nothing if still fetching album index
+            if (state.music.tracks.isFetching || state.music.tracks.didError)
+                return state;
+
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        didError: true,
+                        isPaused: true,
                     },
                 },
             };

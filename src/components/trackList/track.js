@@ -15,6 +15,9 @@ function Track({ index }) {
     const isTrackPlaying = track.id === session.playing.track.id;
     const isTrackPaused = isTrackPlaying && session.playing.isPaused;
 
+    const didPlayingTrackError = session.playing.didError;
+    const didError = isTrackPlaying && didPlayingTrackError;
+
     // Play track in session
     const playInSession = (e) => {
         dispatch(
@@ -27,7 +30,7 @@ function Track({ index }) {
             id={track.id}
             className={`track${isTrackPlaying ? " playing" : ""}${
                 isTrackPaused ? " paused" : ""
-            }`}
+            }${didError ? " error" : ""}`}
             onClick={playInSession}
         >
             <div className="track-info">

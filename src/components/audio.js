@@ -5,6 +5,7 @@ import {
     playNextTrack,
     playPreviousTrack,
     playingTrackIsPaused,
+    playingTrackDidError,
     sessionUpdatePlayingStatus
 } from "../store/actionCreators";
 
@@ -35,6 +36,10 @@ function Audio() {
 
     const handlePause = (isPaused) => {
         dispatch(playingTrackIsPaused(isPaused));
+    }
+
+    const handleDidError = () => {
+        dispatch(playingTrackDidError());
     }
 
     // Listen for keypress
@@ -121,6 +126,7 @@ function Audio() {
             {typeof track.id === "string" && (
                 <Sound
                     url={`${process.env.REACT_APP_API}/tracks/${track.id}/audio`}
+                    autoLoad={true}
                     playStatus={
                         session.playing.isPaused
                             ? Sound.status.PAUSED
@@ -129,6 +135,7 @@ function Audio() {
                     volume={session.playing.status.volume}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
+                    onError={handleDidError}
                 />
             )}
         </>

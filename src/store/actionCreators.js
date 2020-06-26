@@ -5,6 +5,7 @@ import {
     FETCH_TRACKS_SUCCESS,
     FETCH_TRACKS_FAILURE,
     SESSION_PLAY_TRACK,
+    SESSION_TRACK_ERROR,
     SESSION_PLAYING_TOGGLE,
     SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
@@ -130,6 +131,13 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
  */
 export const playingTrackIsPaused = (isPaused) => (dispatch) => {
     dispatch({ type: SESSION_PLAYING_TOGGLE, payload: isPaused });
+};
+
+/*
+ * Track unable to play; error
+ */
+export const playingTrackDidError = () => (dispatch) => {
+    dispatch({ type: SESSION_TRACK_ERROR, payload: true });
 };
 
 /*

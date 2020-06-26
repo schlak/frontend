@@ -19,6 +19,9 @@
         &.paused {
             background-color: #777;
         }
+        &.error {
+            background-color: red;
+        }
     }
 
     .track-info {
