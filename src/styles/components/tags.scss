@@ -7,16 +7,16 @@
         margin-right: 10px;
         margin-bottom: 10px;
 
-        &:hover,
-        &:active {
+        &:hover {
             button {
-                background-color: darken(#f4f4f4, 4%);
+                background-color: darken(#f4f4f4, 8%);
             }
         }
 
         &.selected {
             button {
-                background-color: darken(#f4f4f4, 10%);
+                color: #fff;
+                background-color: #333;
             }
         }
 
