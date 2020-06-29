@@ -7,7 +7,10 @@ function SearchBar() {
 
     // Search input value in store
     const search = useSelector((state) => state.music.tracks.filter.search);
-    let tracksLength = useSelector((state) => state.music.tracks.data.length);
+    const tracks = useSelector((state) => state.music.tracks);
+
+    let tracksLength = tracks.data.length;
+    if (tracks.filter.tags.length > 0) tracksLength = `${tracks.filteredData.length} / ${tracks.data.length}`;
     if (tracksLength === 0) tracksLength = "loading";
 
     const updateSearch = (evt) => {
