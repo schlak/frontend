@@ -53,7 +53,7 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
         if (filter.tags.length > 0) {
             // #1 Re-create filter
             // #2 Is current track in filter
-            const tracksFiltered = filterTracks(tracks, tracks, filter);
+            const tracksFiltered = state.music.tracks.filteredData;
             const [trackExists, trackIndexFiltered] = doesTrackExist(tracksFiltered, tracks[trackIndex]);
 
             if (trackExists) {
@@ -98,7 +98,7 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
         if (filter.tags.length > 0) {
             // #1 Re-create filter
             // #2 Is current track in filter
-            const tracksFiltered = filterTracks(tracks, tracks, filter);
+            const tracksFiltered = state.music.tracks.filteredData;
             const [trackExists, trackIndexFiltered] = doesTrackExist(tracksFiltered, tracks[trackIndex]);
 
             if (trackExists) {
@@ -169,7 +169,10 @@ export const updateUserSearch = (search) => (dispatch) => {
  */
 export const filterToggleTag = (tag) => (dispatch, getState) => {
     const state = getState();
-    const tags = [...state.music.tracks.filter.tags];
+    const tracks = state.music.tracks;
+    const filter = tracks.filter;
+    const tags = [...filter.tags];
+    let tracksFiltered = [];
 
     // If tag already exists in tags array
     // -> remove it
@@ -181,6 +184,20 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
         tags.push(tag);
     }
 
+    // Filter tracks
+    if (tags.length > 0) {
+        tracksFiltered = filterTracks(
+            tracks.data, tracks.data,
+            {
+                ...filter,
+                tags
+            }
+        );
+    }
+
     // Update tags array
-    dispatch({ type: FILTER_TOGGLE_TAG, payload: tags });
+    dispatch({ type: FILTER_TOGGLE_TAG, payload: {
+        tags: tags,
+        filteredData: tracksFiltered
+    } });
 };

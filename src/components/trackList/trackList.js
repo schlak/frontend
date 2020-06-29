@@ -17,8 +17,12 @@ function TrackList() {
     const defaultRenderAmmount = 14;
     const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(defaultRenderAmmount);
 
+    // Use pre-filtered tracks.data if tags applied
+    let tracksData = trackStore.data;
+    if (trackStore.filter.length > 0) tracksData = trackStore.filteredData;
+
     // #1 Filter tracks using tags or search input
-    let tracksFiltered = filterTracks(trackStore.data, trackStore.data, trackStore.filter, true);
+    let tracksFiltered = filterTracks(trackStore.data, tracksData, trackStore.filter, true);
 
     // #2 Populate albums from filtered array
     // #3 Create array of Album components to render

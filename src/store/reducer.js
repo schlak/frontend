@@ -21,6 +21,7 @@ const initialState = {
                 tags: [],
                 search: ""
             },
+            filteredData: [],
             data: [],
         },
     },
@@ -199,8 +200,9 @@ function musicApp(state = initialState, action) {
                         ...state.music.tracks,
                         filter: {
                             ...state.music.tracks.filter,
-                            tags: action.payload
+                            tags: action.payload.tags
                         },
+                        filteredData: action.payload.filteredData
                     },
                 },
             };
