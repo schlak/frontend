@@ -11,6 +11,7 @@ import TrackList from "./components/trackList/trackList";
 import TrackInfo from "./components/sideBar/trackInfo";
 import SearchBar from "./components/search/searchBar";
 import Tags from "./components/search/tags";
+import Controls from "./components/controls/controls";
 
 function App() {
     // Get session state from store
@@ -38,6 +39,7 @@ function App() {
                         <div className={`filter-options${isMobile ? " offset" : ""}`}>
                             <SearchBar />
                             <Tags />
+                            <Controls />
                         </div>
                         <TrackList />
                     </div>

@@ -1,6 +1,6 @@
 {
     "name": "music-library-player",
-    "version": "0.3.8",
+    "version": "0.3.9",
     "private": true,
     "dependencies": {
         "axios": "^0.19.2",

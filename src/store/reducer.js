@@ -3,10 +3,11 @@ import {
     FETCH_TRACKS_SUCCESS,
     FETCH_TRACKS_FAILURE,
     SESSION_PLAY_TRACK,
-    SESSION_PLAYING_TOGGLE,
     SESSION_TRACK_ERROR,
-    SESSION_VOLUME,
+    SESSION_PLAYING_TOGGLE,
     SESSION_PLAYING_UPDATE_STATUS,
+    SESSION_VOLUME,
+    SESSION_SHUFFLE_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
 } from "./actionTypes";
@@ -26,6 +27,9 @@ const initialState = {
         },
     },
     session: {
+        actions: {
+            shuffle: false
+        },
         playing: {
             didError: false,
             isPaused: true,
@@ -172,6 +176,18 @@ function musicApp(state = initialState, action) {
                             ...state.session.playing.status,
                             volume: action.payload
                         },
+                    },
+                },
+            };
+
+        case SESSION_SHUFFLE_TOGGLE:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    actions: {
+                        ...state.session.actions,
+                        shuffle: !state.session.actions.shuffle
                     },
                 },
             };

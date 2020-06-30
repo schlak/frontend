@@ -7,8 +7,9 @@ import {
     SESSION_PLAY_TRACK,
     SESSION_TRACK_ERROR,
     SESSION_PLAYING_TOGGLE,
-    SESSION_VOLUME,
     SESSION_PLAYING_UPDATE_STATUS,
+    SESSION_VOLUME,
+    SESSION_SHUFFLE_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
 } from "./actionTypes";
@@ -175,6 +176,14 @@ export const sessionUpdatePlayingStatus = (status) => (dispatch) => {
  */
 export const changeVolume = (newVolume) => (dispatch) => {
     dispatch({ type: SESSION_VOLUME, payload: newVolume });
+};
+
+
+/*
+ * Toggle shuffle
+ */
+export const shuffleToggle = () => (dispatch) => {
+    dispatch({ type: SESSION_SHUFFLE_TOGGLE });
 };
 
 
