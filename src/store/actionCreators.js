@@ -38,6 +38,28 @@ export const playTrack = (trackIndex) => (dispatch) => {
 };
 
 /*
+ * Play a random track (uses current filter)
+ */
+export const playRandomTrack = () => (dispatch, getState) => {
+    const state = getState();
+    const tracks = state.music.tracks.data;
+    let trackList = state.music.tracks.data;
+    const tags = state.music.tracks.filter.tags;
+
+    // If filter applied: use filtered tracks
+    if (tags.length > 0) trackList = state.music.tracks.filteredData;
+
+    // Select random track
+    const ranIndex = Math.floor(Math.random() * trackList.length);
+    const ranTrack = trackList[ranIndex];
+
+    // Get actual index of track in data
+    const trackIndex = tracks.findIndex(storeTrack => storeTrack.id === ranTrack.id);
+
+    dispatch({ type: SESSION_PLAY_TRACK, payload: trackIndex });
+};
+
+/*
  * Play next track
  */
 export const playNextTrack = (trackIndex) => (dispatch, getState) => {
