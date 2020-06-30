@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-    playRandomTrack,
-    playNextTrack,
-    playPreviousTrack,
+    playNextTrackBasedOnSession,
     playingTrackIsPaused,
     playingTrackDidError,
     sessionUpdatePlayingStatus
@@ -21,19 +19,11 @@ function Audio() {
     const track = session.playing.track;
 
     const handlePlayNextTrack = () => {
-        if (!session.actions.shuffle) {
-            dispatch(playNextTrack(session.playing.index));
-        } else {
-            dispatch(playRandomTrack());
-        }
+        dispatch(playNextTrackBasedOnSession(true));
     };
 
     const handlePlayPreviousTrack = () => {
-        if (!session.actions.shuffle) {
-            dispatch(playPreviousTrack(session.playing.index));
-        } else {
-            dispatch(playRandomTrack());
-        }
+        dispatch(playNextTrackBasedOnSession(false));
     };
 
     const handlePlaying = (audio) => {

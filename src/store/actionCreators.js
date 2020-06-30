@@ -149,6 +149,24 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
     dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
 };
 
+
+/*
+ * Decide what to play based on current session
+ */
+export const playNextTrackBasedOnSession = (playNext = true) => (dispatch, getState) => {
+    const state = getState();
+
+    if (state.session.actions.shuffle)
+        return dispatch(playRandomTrack());
+
+    if (playNext) {
+        dispatch(playNextTrack(state.session.playing.index));
+    } else {
+        dispatch(playPreviousTrack(state.session.playing.index));
+    }
+};
+
+
 /*
  * Pause currently playing track
  */
