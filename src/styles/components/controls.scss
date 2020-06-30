@@ -1,12 +1,20 @@
 .controls {
-    position: relative;
+    @include flex();
     margin: 15px 0;
+
+    .control-group {
+        @include flex();
+        padding-right: 10px;
+        margin-right: 20px;
+        border-right: 1px solid #eee;
+    }
 
     .control-button {
         @include flex();
         @include user-select(none);
         justify-content: center;
         align-items: center;
+        margin-right: 10px;
         width: 40px;
         height: 40px;
         overflow: hidden;
