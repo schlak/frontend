@@ -24,7 +24,7 @@ function Tag({ tag }) {
     if (!tag) {
         return (
             <div className="tag">
-                <Skeleton width="50px" height="25px" />
+                <Skeleton width="50px" height="27px" />
             </div>
         );
     }

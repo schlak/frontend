@@ -37,8 +37,21 @@ function Audio() {
         dispatch(playingTrackIsPaused(isPaused));
     }
 
-    const handleDidError = () => {
-        dispatch(playingTrackDidError());
+    const handleDidError = (error) => {
+        // Attempt to re-play
+        const audioElement = window.soundManager.sounds[window.soundManager.soundIDs[0]]._a;
+        const promise = audioElement.play();
+
+        if (promise !== undefined) {
+            promise.catch(error => {
+                dispatch(playingTrackDidError());
+                dispatch(playingTrackIsPaused(true));
+            }).then(() => {
+                dispatch(playingTrackIsPaused(false));
+            });
+        } else {
+            dispatch(playingTrackDidError());
+        }
     }
 
     // Listen for keypress
@@ -125,7 +138,6 @@ function Audio() {
             {typeof track.id === "string" && (
                 <Sound
                     url={`${process.env.REACT_APP_API}/tracks/${track.id}/audio`}
-                    autoLoad={true}
                     playStatus={
                         session.playing.isPaused
                             ? Sound.status.PAUSED
