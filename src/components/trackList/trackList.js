@@ -36,7 +36,7 @@ function TrackList() {
     // Adds more albums as user scrolls to bottom of page
     window.onscroll = function(ev)
     {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - (window.innerHeight + 600))
         {
             if (renderedAlbumsCount < albumsBeingRendered.length) {
                 // Add album to render
