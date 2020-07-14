@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {useSpring, animated} from "react-spring";
 
 import Icon from "./Icon";
 import SearchBar from "./SearchBar";
 
-function NavBar({ content }) {
+function NavBar() {
     const [onScroll, setOnScroll] = useState(false);
-    const showTitle = content === "title";
+
+    // Show title or search-bar
+    const [showTitle, setShowTitle] = useState(true);
+    const location = useLocation();
+
+    // Show main title ("Music Library") if path is "/"
+    // else show search-bar
+    useEffect(() => {
+        if (location.pathname === "/") {
+            setShowTitle(true);
+        } else {
+            setShowTitle(false);
+        }
+    }, [location]);
 
     const handleScroll = () => {
         if (window.pageYOffset > 100) {
@@ -39,9 +53,9 @@ function NavBar({ content }) {
         <div className={`navbar${onScroll ? " --scroll" : ""}`}>
             <div className="navbar-content">
                 <span className="navbar-logo">
-                    <a href="/">
+                    <Link to="/">
                         <Icon name="logo" isRounded={true} />
-                    </a>
+                    </Link>
                 </span>
                 <div className="navbar-var">
                     <animated.div style={animateTitle}>
