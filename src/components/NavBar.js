@@ -15,27 +15,29 @@ function NavBar({ content }) {
             $content = <h1 className="navbar-title">Music Library</h1>;
     }
 
-    const handleScroll = () => {
-        if (window.pageYOffset > 100) {
-            setOnScroll(true);
-        } else {
-            setOnScroll(false);
-        }
-    }
-
     useEffect(() => {
+        const handleScroll = () => {
+            if (window.pageYOffset > 100) {
+                setOnScroll(true);
+            } else {
+                setOnScroll(false);
+            }
+        }
+
         window.addEventListener("scroll", handleScroll);
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
         }
-    }, [handleScroll]);
+    }, []);
 
     return (
         <div className={`navbar${onScroll ? " --scroll" : ""}`}>
             <div className="navbar-content">
                 <span className="navbar-logo">
-                    <Icon name="logo" isRounded={true} />
+                    <a href="/">
+                        <Icon name="logo" isRounded={true} />
+                    </a>
                 </span>
                 <div className="navbar-var">
                     {$content}
