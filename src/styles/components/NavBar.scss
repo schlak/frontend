@@ -1,0 +1,53 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 100;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    background: none;
+    // @include transition(all, 80ms, ease);
+
+    &.--scroll {
+        height: 60px;
+        background: #fff;
+
+        .navbar-logo {
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .navbar-title {
+            font-size: 1.9em;
+        }
+    }
+
+    .navbar-content {
+        @include container(1500px);
+        @include flex();
+        align-items: center;
+        height: 100%;
+    }
+
+    .navbar-logo {
+        margin-right: 120px;
+
+        svg {
+            width: 50px;
+            height: 50px;
+
+            path {
+                fill: #333333;
+            }
+        }
+    }
+
+    .navbar-title {
+        font-size: 2.1em;
+        letter-spacing: 0.5px;
+    }
+}

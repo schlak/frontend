@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import Audio from "./components/Audio";
+import NavBar from "./components/NavBar";
 
 import "./styles/index.scss";
 
@@ -26,7 +27,7 @@ function App() {
             <div className="App">
                 <div className="container">
                     <div className="app-wrapper">
-
+                        <NavBar content="title" />
                     </div>
                 </div>
             </div>

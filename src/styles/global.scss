@@ -4,6 +4,7 @@
 
 html {
     font-size: 62.5%;
+    height: 2000px;
 }
 
 body,
@@ -26,41 +27,27 @@ p {
     font-weight: normal;
 }
 
+svg {
+    width: 24px;
+    height: 24px;
+    // @include transition(all, 80ms, ease);
+}
+
 
 .container {
-    @include transition(all, 280ms, ease);
-    max-width: 1920px;
-    margin-left: auto;
-    margin-right: auto;
+    @include container(1920px);
 }
 
 
-.app-wrapper {
-    @include flex();
-    justify-content: space-between;
-
-    @media (max-width: 1300px) {
-        width: 100%;
-        padding: 0 100px;
-    }
-    @media (max-width: 1200px) {
-        padding: 20px;
-    }
+::-webkit-scrollbar {
+    width: 10px;
 }
-
-
-.isLoading {
-    @include transition(all, 280ms, ease);
-    @include flex();
-    justify-content: center;
-    font-size: 1.4em;
-
-    &.offset {
-        margin-top: 125px;
-    }
-
-    svg {
-        width: 125px;
-        height: 125px;
-    }
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
 }
