@@ -8,17 +8,15 @@
     overflow: hidden;
     border-bottom: 1px solid #eee;
     background: none;
-    // @include transition(all, 80ms, ease);
+    @include transition(all, 180ms, ease);
 
     &.--scroll {
         height: 60px;
         background: #fff;
 
         .navbar-logo {
-            svg {
-                width: 40px;
-                height: 40px;
-            }
+            -webkit-transform: scale(0.8);
+                    transform: scale(0.8);
         }
 
         .navbar-title {
@@ -35,6 +33,9 @@
 
     .navbar-logo {
         margin-right: 120px;
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        @include transition(transform, 180ms, ease);
 
         svg {
             width: 50px;
@@ -49,5 +50,6 @@
     .navbar-title {
         font-size: 2.1em;
         letter-spacing: 0.5px;
+        @include transition(all, 180ms, ease);
     }
 }
