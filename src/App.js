@@ -11,6 +11,11 @@ import Audio from "./components/Audio";
 import NavBar from "./components/NavBar";
 import NavLinks from "./components/NavLinks";
 
+import Home from "./routes/Home";
+import Albums from "./routes/Albums";
+import Artists from "./routes/Artists";
+import Tracks from "./routes/Tracks";
+
 import "./styles/index.scss";
 
 function App() {
@@ -55,16 +60,19 @@ function App() {
             <Audio />
             <div className="App">
                 <div className="app-wrapper">
+                    {/* Navbar + Navlinks */}
                     <NavBar content="title" />
                     <div style={{marginTop: "100px"}}></div>
                     <NavLinks />
-                    {afcbackgrounds}
 
                     {/* Routes */}
-                    {/*
-                        <Route path="/" exact render={props => <NavBar content="search-bar" />} />
-                        <Route path="/albums" render={props => <NavBar content="search-bar" />} />
-                    */}
+                    <Route path="/" exact render={props => <Home />} />
+                    <Route path="/albums" render={props => <Albums />} />
+                    <Route path="/artists" render={props => <Artists />} />
+                    <Route path="/tracks" render={props => <Tracks />} />
+
+                    {/* AFCBackground */}
+                    {afcbackgrounds}
                 </div>
             </div>
         </>
