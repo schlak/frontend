@@ -51,7 +51,7 @@ function NavBar() {
 
     return (
         <div className={`navbar${onScroll ? " --scroll" : ""}`}>
-            <div className="navbar-content">
+            <div className="navbar-content container">
                 <span className="navbar-logo">
                     <Link to="/">
                         <Icon name="logo" isRounded={true} />
