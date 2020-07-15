@@ -12,6 +12,10 @@ html {
     font-family: 'Tahoma', 'Raleway', 'Roboto', sans-serif;
 }
 
+strong {
+    font-weight: bold;
+}
+
 h1,
 h2,
 h3,
@@ -34,6 +38,10 @@ p {
 svg {
     width: 24px;
     height: 24px;
+}
+
+section {
+    margin-bottom: 80px;
 }
 
 
