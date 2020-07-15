@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { isMobileOnly } from "react-device-detect";
 import { useInterval } from "./hooks/useInterval";
 
 import Audio from "./components/Audio";
@@ -36,18 +38,23 @@ function App() {
     }
 
     useInterval(() => {
-        spawnAFCBackground();
+        if (!isMobileOnly)
+            spawnAFCBackground();
     }, 20000);
 
     return (
         <>
             <Audio />
             <div className="App">
-                <div className="container">
-                    <div className="app-wrapper">
-                        <NavBar content="title" />
-                        {afcbackgrounds}
-                    </div>
+                <div className="app-wrapper">
+                    <NavBar content="title" />
+                    {afcbackgrounds}
+
+                    {/* Routes */}
+                    {/*
+                        <Route path="/" exact render={props => <NavBar content="search-bar" />} />
+                        <Route path="/albums" render={props => <NavBar content="search-bar" />} />
+                    */}
                 </div>
             </div>
         </>
