@@ -15,9 +15,9 @@ import {
 } from "./actionTypes";
 
 /*
- * Fetch albums index from api
+ * Fetch tracks index from api
  */
-export const fetchAlbums = () => (dispatch) => {
+export const fetchTracks = () => (dispatch) => {
     dispatch({ type: FETCH_TRACKS_START, payload: [] });
 
     api()

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { isMobileOnly } from "react-device-detect";
 import { useInterval } from "./hooks/useInterval";
+
+import { fetchTracks } from "./store/actionCreators";
 
 import AFCBackground from "./components/AFCBackground";
 import Audio from "./components/Audio";
@@ -12,8 +14,13 @@ import NavLinks from "./components/NavLinks";
 import "./styles/index.scss";
 
 function App() {
-    // Get session state from store
+    const dispatch = useDispatch();
     const session = useSelector((state) => state.session);
+
+    // Fetch tracks index from api
+    useEffect(() => {
+        dispatch(fetchTracks());
+    }, [dispatch]);
 
     // Update title with currently playing track
     useEffect(() => {
