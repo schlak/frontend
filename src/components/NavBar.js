@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {useSpring, animated} from "react-spring";
+import { useSpring, animated } from "react-spring";
 
 import Icon from "./Icon";
 import SearchBar from "./SearchBar";
@@ -23,7 +23,7 @@ function NavBar() {
     }, [location]);
 
     const handleScroll = () => {
-        if (window.pageYOffset > 100) {
+        if (window.pageYOffset > 50) {
             setOnScroll(true);
         } else {
             setOnScroll(false);

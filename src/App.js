@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { isMobileOnly } from "react-device-detect";
 import { useInterval } from "./hooks/useInterval";
 
+import AFCBackground from "./components/AFCBackground";
 import Audio from "./components/Audio";
 import NavBar from "./components/NavBar";
-import AFCBackground from "./components/AFCBackground";
+import NavLinks from "./components/NavLinks";
 
 import "./styles/index.scss";
 
@@ -48,6 +49,8 @@ function App() {
             <div className="App">
                 <div className="app-wrapper">
                     <NavBar content="title" />
+                    <div style={{marginTop: "100px"}}></div>
+                    <NavLinks />
                     {afcbackgrounds}
 
                     {/* Routes */}

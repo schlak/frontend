@@ -88,7 +88,8 @@ video {
 }
 /* make sure to set some focus styles for accessibility */
 :focus {
-	outline: 0;
+	outline: 0 !important;
+	border-color: transparent;
 }
 /* HTML5 display-role reset for older browsers */
 
@@ -195,16 +196,11 @@ html {
 	/* 2 */
 }
 /**
- * Address `outline` inconsistency between Chrome and other browsers.
- */
-a:focus {
-	outline: thin dotted;
-}
-/**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
 a:active,
-a:hover {
+a:hover,
+a:focus {
 	outline: 0;
 }
 /**

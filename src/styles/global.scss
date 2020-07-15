@@ -52,6 +52,9 @@ svg {
         @include container(900px);
         padding: 0 40px;
     }
+    @media (max-width: 550px) {
+        padding: 0 20px;
+    }
 }
 
 
