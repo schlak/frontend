@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 
 import { playTrack } from "../../store/actionCreators";
@@ -14,6 +15,20 @@ function TrackMini({ index }) {
     let isPlaying = false;
     if (playingIndex === index) isPlaying = true;
 
+    // Assume loading state
+    let isLoading = true;
+    let trackTitle = <Skeleton />;
+    let trackArtist = <Skeleton />;
+    let albumCoverId = "example";
+
+    // Album exists
+    if (track) {
+        isLoading = false;
+        trackTitle = track.metadata.title;
+        trackArtist = track.metadata.artist;
+        albumCoverId = track.id;
+    }
+
     // Play track handler
     const handlePlayTrack = (e) => {
         if (!isPlaying) {
@@ -27,17 +42,17 @@ function TrackMini({ index }) {
         <div className={`track-mini ${isPlaying ? " playing" : ""}`} onClick={handlePlayTrack}>
             <div className="album-cover">
                 <img
-                    src={`${process.env.REACT_APP_API}/tracks/${track.id}/cover/600`}
+                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
                     alt="album-cover"
                     draggable="false"
                 />
             </div>
             <div className="album-metadata">
                 <div className="album-metadata-track">
-                    <p>{track.metadata.title}</p>
+                    <p>{trackTitle}</p>
                 </div>
                 <div className="album-metadata-artist">
-                    <p>{track.metadata.artist}</p>
+                    <p>{trackArtist}</p>
                 </div>
             </div>
         </div>

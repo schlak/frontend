@@ -7,20 +7,8 @@ import TrackMini from "./Tracks/TrackMini";
 function ActiveUsers(props) {
     // Connected users
     const socket = useSelector((state) => state.socket.connection);
-    const [users, setUsers] = useState(0);
-    const [globalPlaying, setGlobalPlaying] = useState([]);
-
-    useEffect(() => {
-        // Live connected user count
-        socket.on("connected_count", (payload) => {
-            setUsers(payload);
-        });
-
-        // Live global playing tracks
-        socket.on("global_tracks_playing", (payload) => {
-            setGlobalPlaying(payload);
-        });
-    }, [socket]);
+    const users = useSelector((state) => state.socket.global.connectedUsers);
+    const globalPlaying = useSelector((state) => state.socket.global.playing);
 
     return (
         <div className="active-users">
