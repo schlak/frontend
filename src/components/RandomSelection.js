@@ -5,11 +5,14 @@ import Chance from "chance";
 
 import { groupTracksIntoAlbums } from "../utils/sortTracks";
 
+import Album from "./Tracks/Album";
+
 function RandomSelection(props) {
-    // Get album list from store
+    // Get track list from store
     const trackStore = useSelector((state) => state.music.tracks);
     const [albums, setAlbums] = useState([]);
 
+    // Generate 4 - unique - random numbers (used as album indexes)
     const chance = new Chance();
     let albumsMaxIndex = 4;
     if (albums.length > 0) albumsMaxIndex = albums.length - 1;
@@ -27,37 +30,10 @@ function RandomSelection(props) {
                 {
                     albumsToRender.map((albumIndex, index) => {
                         if (typeof albums[albumIndex] !== 'undefined') {
-                            const album = albums[albumIndex];
-                            const trackId = trackStore.data[album.tracks[0]].id;
-
-                            return (
-                                <div className="album" key={index}>
-                                    <div className="album-cover" style={{backgroundImage: `url('${process.env.REACT_APP_API}/tracks/${trackId}/cover/600')`}}></div>
-                                    <div className="album-metadata">
-                                        <div className="album-metadata-album">
-                                            <p>{album.album}</p>
-                                        </div>
-                                        <div className="album-metadata-artist">
-                                            <p>{album.album_artist}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
+                            return <Album album={albums[albumIndex]} key={index} />;
                         }
 
-                        return (
-                            <div className="album" key={index}>
-                                <div className="album-cover" style={{backgroundImage: `url('${process.env.REACT_APP_API}/tracks/example/cover/600')`}}></div>
-                                <div className="album-metadata">
-                                    <div className="album-metadata-album">
-                                        <p><Skeleton /></p>
-                                    </div>
-                                    <div className="album-metadata-artist">
-                                        <p><Skeleton /></p>
-                                    </div>
-                                </div>
-                            </div>
-                        );
+                        return <Album album={false} key={index} />;
                     })
                 }
             </div>
