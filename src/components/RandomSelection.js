@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector } from "react-redux";
+import Chance from "chance";
 
 import { groupTracksIntoAlbums } from "../utils/sortTracks";
 
@@ -8,7 +9,12 @@ function RandomSelection(props) {
     // Get album list from store
     const trackStore = useSelector((state) => state.music.tracks);
     const [albums, setAlbums] = useState([]);
-    const albumsToRender = Array.from({length: 4}, () => Math.floor(Math.random() * albums.length));
+
+    const chance = new Chance();
+    let albumsMaxIndex = 4;
+    if (albums.length > 0) albumsMaxIndex = albums.length - 1;
+
+    const albumsToRender = chance.unique(chance.integer, 4, {min: 0, max: albumsMaxIndex});
 
     useEffect(() => {
         setAlbums(groupTracksIntoAlbums(trackStore.data, trackStore.data));
@@ -20,7 +26,7 @@ function RandomSelection(props) {
             <div className="track-container">
                 {
                     albumsToRender.map((albumIndex, index) => {
-                        if (albums.length > 0) {
+                        if (typeof albums[albumIndex] !== 'undefined') {
                             const album = albums[albumIndex];
                             const trackId = trackStore.data[album.tracks[0]].id;
 
