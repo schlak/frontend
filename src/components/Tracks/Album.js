@@ -1,14 +1,21 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useLazyBackgroundImage } from "../../hooks/useLazyBackgroundImage";
+import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
+
+import Icon from "../Icon";
 
 function Album({ album }) {
+    const dispatch = useDispatch();
+    const playing = useSelector((state) => state.session.playing);
     const trackStore = useSelector((state) => state.music.tracks.data);
 
     // If api call failed
     const didError = useSelector((state) => state.music.tracks.didError);
+
+    // Is album playing
+    let isAlbumPlaying = false;
 
     // Assume loading state
     let isLoading = true;
@@ -22,18 +29,32 @@ function Album({ album }) {
         albumName = album.album;
         albumArtist = album.album_artist;
         albumCoverId = trackStore[album.tracks[0]].id;
+        if (album.tracks.includes(playing.index)) isAlbumPlaying = true;
     }
 
-    // Lazy-load cover image
-    const imageLoaded = useLazyBackgroundImage(`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`);
+    // Action button handler
+    const handleActionButton = (e) => {
+        if (!isAlbumPlaying) {
+            // Play first track in album
+            dispatch(
+                playTrack(album.tracks[0])
+            );
+        } else {
+            // Pause track
+            dispatch(
+                playingTrackIsPaused(!playing.isPaused)
+            );
+        }
+    };
 
     return (
         <div className={`album${isLoading ? " loading" : ""}${didError ? " error" : ""}`}>
             <div className="album-cover">
-                {
-                    imageLoaded &&
-                    <img src={imageLoaded} alt="album-cover" draggable="false" />
-                }
+                <img
+                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
+                    alt="album-cover"
+                    draggable="false"
+                />
             </div>
             <div className="album-metadata">
                 <div className="album-metadata-album">
@@ -41,6 +62,15 @@ function Album({ album }) {
                 </div>
                 <div className="album-metadata-artist">
                     <p>{albumArtist}</p>
+                </div>
+            </div>
+            <div className="album-action" onClick={handleActionButton}>
+                <div className="album-action-button">
+                    {
+                        !isAlbumPlaying || playing.isPaused ?
+                        <Icon name="play" isRounded={true} /> :
+                        <Icon name="pause" isRounded={true} />
+                    }
                 </div>
             </div>
         </div>
