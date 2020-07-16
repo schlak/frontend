@@ -8,6 +8,7 @@ import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
 import Audio from "./components/Audio";
 import NavBar from "./components/NavBar";
 import NavLinks from "./components/NavLinks";
+import SocketGlobal from "./components/SocketGlobal";
 
 import Home from "./routes/Home";
 import Albums from "./routes/Albums";
@@ -18,7 +19,7 @@ import "./styles/index.scss";
 
 function App() {
     const dispatch = useDispatch();
-    const session = useSelector((state) => state.session);
+    const sessionTrack = useSelector((state) => state.session.playing.track);
 
     // Fetch tracks index from api
     useEffect(() => {
@@ -27,18 +28,15 @@ function App() {
 
     // Update title with currently playing track
     useEffect(() => {
-        if (session.playing.track.id) {
-            document.title = `${session.playing.track.metadata.artist} - ${session.playing.track.metadata.title} | Music Library`;
+        if (sessionTrack.id) {
+            document.title = `${sessionTrack.metadata.artist} - ${sessionTrack.metadata.title} | Music Library`;
         }
-    }, [
-        session.playing.track.id,
-        session.playing.track.metadata.artist,
-        session.playing.track.metadata.title,
-    ]);
+    }, [sessionTrack]);
 
     return (
         <>
             <Audio />
+            <SocketGlobal />
             <div className="App">
                 <div className="app-wrapper">
                     {/* Navbar + Navlinks */}
@@ -56,6 +54,9 @@ function App() {
 
                     {/* AFCBackground */}
                     <AFCBackgroundMulti />
+
+                    {/* Footer */}
+                    <div style={{marginTop: "250px"}}></div>
                 </div>
             </div>
         </>
