@@ -1,11 +1,17 @@
 import React from "react";
+import { useSpring, animated } from "react-spring";
 
 function Tracks() {
+    const styles = useSpring({
+        from: {opacity: 0},
+        to: {opacity: 1}
+    });
+
     return (
         <>
-            <div className="Tracks container">
+            <animated.div className="Tracks container" style={styles}>
                 <h2>Tracks</h2>
-            </div>
+            </animated.div>
         </>
     );
 }

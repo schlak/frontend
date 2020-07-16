@@ -1,11 +1,17 @@
 import React from "react";
+import { useSpring, animated } from "react-spring";
 
 function Artists() {
+    const styles = useSpring({
+        from: {opacity: 0},
+        to: {opacity: 1}
+    });
+
     return (
         <>
-            <div className="Artists container">
+            <animated.div className="Artists container" style={styles}>
                 <h2>Artists</h2>
-            </div>
+            </animated.div>
         </>
     );
 }
