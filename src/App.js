@@ -66,10 +66,12 @@ function App() {
                     <NavLinks />
 
                     {/* Routes */}
-                    <Route path="/" exact render={props => <Home />} />
-                    <Route path="/albums" render={props => <Albums />} />
-                    <Route path="/artists" render={props => <Artists />} />
-                    <Route path="/tracks" render={props => <Tracks />} />
+                    <div className="app-page">
+                        <Route path="/" exact render={props => <Home />} />
+                        <Route path="/albums" render={props => <Albums />} />
+                        <Route path="/artists" render={props => <Artists />} />
+                        <Route path="/tracks" render={props => <Tracks />} />
+                    </div>
 
                     {/* AFCBackground */}
                     {afcbackgrounds}
