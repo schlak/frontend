@@ -1,4 +1,5 @@
 import Fuse from "fuse.js";
+import sha1 from 'crypto-js/sha1';
 
 /*
  * Group tracks into albums
@@ -32,6 +33,7 @@ export const groupTracksIntoAlbums = (tracksStore, tracksToGroup) => {
         // create new album
         if (!found) {
             return albums.push({
+                id: sha1(track.metadata.album + track.metadata.album_artist).toString(),
                 album: track.metadata.album,
                 album_artist: track.metadata.album_artist,
                 genre: track.metadata.genre,
