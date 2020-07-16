@@ -1,3 +1,5 @@
+import socketIOClient from "socket.io-client";
+
 import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,
@@ -38,7 +40,7 @@ const initialState = {
                 position: null,
                 volume: 50
             },
-            index: null,
+            index: -1,
             track: {
                 id: null,
                 metadata: {},
@@ -47,6 +49,7 @@ const initialState = {
         selected: {},
     },
     socket: {
+        connection: socketIOClient(`${process.env.REACT_APP_API}`),
         global: {
             connectedUsers: 0,
             session: {
