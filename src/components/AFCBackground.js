@@ -1,5 +1,5 @@
 import React from "react";
-import {useSpring, animated} from "react-spring";
+import { useSpring, animated } from "react-spring";
 
 function AFCBackground(props) {
     const colors = ["#D5F1FF", "#FFE1FA", "#E9FFFA", "#FFFFE1"];

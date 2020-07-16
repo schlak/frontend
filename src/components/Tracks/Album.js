@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector } from "react-redux";
 
@@ -32,7 +32,7 @@ function Album({ album }) {
             <div className="album-cover">
                 {
                     imageLoaded &&
-                    <img src={imageLoaded} draggable="false" />
+                    <img src={imageLoaded} alt="album-cover" draggable="false" />
                 }
             </div>
             <div className="album-metadata">
