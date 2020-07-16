@@ -48,7 +48,7 @@ function Album({ album }) {
     };
 
     return (
-        <div className={`album${isLoading ? " loading" : ""}${didError ? " error" : ""}`}>
+        <div className={`album${isAlbumPlaying ? " playing" : ""}${isLoading ? " loading" : ""}${didError ? " error" : ""}`}>
             <div className="album-cover">
                 <img
                     src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
