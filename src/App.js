@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { isMobileOnly } from "react-device-detect";
 import { useInterval } from "./hooks/useInterval";
 
 import { fetchTracks } from "./store/actionCreators";
 
-import AFCBackground from "./components/AFCBackground";
+import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
 import Audio from "./components/Audio";
 import NavBar from "./components/NavBar";
 import NavLinks from "./components/NavLinks";
@@ -38,23 +37,6 @@ function App() {
         session.playing.track.metadata.title,
     ]);
 
-    // Spawn a new AFCBackground to slide-down
-    // on-top of current one every 20 seconds
-    const [afcbackgrounds, setAfcbackgrounds] = useState([<AFCBackground key={0} />]);
-
-    const spawnAFCBackground = () => {
-        const lastComponent = afcbackgrounds[afcbackgrounds.length-1];
-        const newKey = lastComponent.key + 1;
-        setAfcbackgrounds(
-            [lastComponent, <AFCBackground key={newKey} />]
-        );
-    }
-
-    useInterval(() => {
-        if (!isMobileOnly)
-            spawnAFCBackground();
-    }, 20000);
-
     return (
         <>
             <Audio />
@@ -74,7 +56,7 @@ function App() {
                     </div>
 
                     {/* AFCBackground */}
-                    {afcbackgrounds}
+                    <AFCBackgroundMulti />
                 </div>
             </div>
         </>
