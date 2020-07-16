@@ -12,6 +12,8 @@ import {
     SESSION_SHUFFLE_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
+    SOCKET_CONNECTED_USERS,
+    SOCKET_GLOBAL_PLAYING,
 } from "./actionTypes";
 
 // Initial state of app
@@ -52,9 +54,7 @@ const initialState = {
         connection: socketIOClient(`${process.env.REACT_APP_API}`),
         global: {
             connectedUsers: 0,
-            session: {
-                playing: [],
-            },
+            playing: [],
             messages: [],
         },
     },
@@ -225,6 +225,31 @@ function musicApp(state = initialState, action) {
                     },
                 },
             };
+
+        case SOCKET_CONNECTED_USERS:
+            return {
+                ...state,
+                socket: {
+                    ...state.socket,
+                    global: {
+                        ...state.socket.global,
+                        connectedUsers: action.payload
+                    },
+                },
+            };
+
+
+    case SOCKET_GLOBAL_PLAYING:
+        return {
+            ...state,
+            socket: {
+                ...state.socket,
+                global: {
+                    ...state.socket.global,
+                    playing: action.payload,
+                },
+            },
+        };
 
         default:
             return state;
