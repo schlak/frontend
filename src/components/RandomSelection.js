@@ -8,19 +8,25 @@ import Album from "./Tracks/Album";
 
 function RandomSelection(props) {
     // Get track list from store
-    const trackStore = useSelector((state) => state.music.tracks);
+    const trackStore = useSelector((state) => state.music.tracks.data);
     const [albums, setAlbums] = useState([]);
+    const [albumsToRender, setAlbumsToRender] = useState([-1, -1, -1, -1]);
+
+    // Sort tracks index into albums
+    useEffect(() => {
+        setAlbums(groupTracksIntoAlbums(trackStore, trackStore));
+    }, [trackStore]);
 
     // Generate 4 - unique - random numbers (used as album indexes)
-    const chance = new Chance();
-    let albumsMaxIndex = 4;
-    if (albums.length > 0) albumsMaxIndex = albums.length - 1;
-
-    const albumsToRender = chance.unique(chance.integer, 4, {min: 0, max: albumsMaxIndex});
-
     useEffect(() => {
-        setAlbums(groupTracksIntoAlbums(trackStore.data, trackStore.data));
-    }, [trackStore]);
+        const chance = new Chance();
+        let albumsMaxIndex = 4;
+        if (albums.length > 0) albumsMaxIndex = albums.length - 1;
+
+        setAlbumsToRender(
+            chance.unique(chance.integer, 4, {min: 0, max: albumsMaxIndex})
+        );
+    }, []);
 
     return (
         <div className="random-selection">
