@@ -6,8 +6,8 @@ function SearchBar() {
     const dispatch = useDispatch();
 
     // Search input value in store
-    const search = useSelector((state) => state.music.tracks.filter.search);
     const tracks = useSelector((state) => state.music.tracks);
+    const search = tracks.filter.search;
 
     let tracksLength = tracks.data.length;
     if (tracks.filter.tags.length > 0) tracksLength = `${tracks.filteredData.length} / ${tracks.data.length}`;

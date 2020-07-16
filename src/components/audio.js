@@ -14,9 +14,11 @@ function Audio() {
     const dispatch = useDispatch();
 
     // Get session state from store
-    const session = useSelector((state) => state.session);
+    const track = useSelector((state) => state.session.playing.track);
+    const isPaused = useSelector((state) => state.session.playing.isPaused);
+    const playingIndex = useSelector((state) => state.session.playing.index);
+    const volume = useSelector((state) => state.session.playing.status.volume);
     const filter = useSelector((state) => state.music.tracks.filter);
-    const track = session.playing.track;
 
     const handlePlayNextTrack = () => {
         dispatch(playNextTrackBasedOnSession(true));
@@ -33,8 +35,8 @@ function Audio() {
         }));
     }
 
-    const handlePause = (isPaused) => {
-        dispatch(playingTrackIsPaused(isPaused));
+    const handlePause = (newIsPaused) => {
+        dispatch(playingTrackIsPaused(newIsPaused));
     }
 
     const handleDidError = (error) => {
@@ -61,7 +63,7 @@ function Audio() {
             if (code === "KeyP" || code === "KeyK") {
                 // Check if there is a track playing
                 if (track.id && filter.search.length === 0) {
-                    handlePause(!session.playing.isPaused);
+                    handlePause(!isPaused);
                 }
             }
         };
@@ -126,11 +128,8 @@ function Audio() {
         }
     }, [
         dispatch,
-        session.playing.index,
-        track.id,
-        track.metadata.album,
-        track.metadata.artist,
-        track.metadata.title,
+        playingIndex,
+        track,
     ]);
 
     return (
@@ -139,11 +138,11 @@ function Audio() {
                 <Sound
                     url={`${process.env.REACT_APP_API}/tracks/${track.id}/audio`}
                     playStatus={
-                        session.playing.isPaused
+                        isPaused
                             ? Sound.status.PAUSED
                             : Sound.status.PLAYING
                     }
-                    volume={session.playing.status.volume}
+                    volume={volume}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
                     onError={handleDidError}
