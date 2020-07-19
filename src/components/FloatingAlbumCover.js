@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSpring, animated } from "react-spring";
+import { isMobile } from "react-device-detect";
 
 import { playingTrackIsPaused } from "../store/actionCreators";
+
+import Icon from "./Icon";
 
 function FloatingAlbumCover() {
     const dispatch = useDispatch();
@@ -33,7 +36,7 @@ function FloatingAlbumCover() {
 
     return (
         <animated.div
-            className="floating-album-cover"
+            className={`floating-album-cover${track && isPaused ? " isPaused" : ""}${isMobile ? " isMobile" : ""}`}
             style={styles}
             onClick={handleClick}
         >
@@ -42,6 +45,13 @@ function FloatingAlbumCover() {
                 alt="album-cover"
                 draggable="false"
             />
+            <div className="icon">
+                {
+                    isPaused ?
+                    <Icon name="play" /> :
+                    <Icon name="pause" />
+                }
+            </div>
         </animated.div>
     );
 }

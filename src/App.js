@@ -6,6 +6,7 @@ import { fetchTracks } from "./store/actionCreators";
 
 import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
 import Audio from "./components/Audio";
+import FloatingAlbumCover from "./components/FloatingAlbumCover";
 import NavBar from "./components/NavBar";
 import NavLinks from "./components/NavLinks";
 import SocketGlobal from "./components/SocketGlobal";
@@ -51,6 +52,9 @@ function App() {
                         <Route path="/artists" render={props => <Artists />} />
                         <Route path="/tracks" render={props => <Tracks />} />
                     </div>
+
+                    {/* Active Track Album Cover */}
+                    <FloatingAlbumCover />
 
                     {/* AFCBackground */}
                     <AFCBackgroundMulti />
