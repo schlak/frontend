@@ -1,9 +1,10 @@
 .track-container {
     @include flex();
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     margin-top: 28px;
 
     &.--nowrap {
+        flex-wrap: nowrap;
         @media (max-width: 1450px) {
             flex-wrap: wrap;
         }
