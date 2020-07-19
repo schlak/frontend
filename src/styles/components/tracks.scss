@@ -3,8 +3,10 @@
     flex-wrap: nowrap;
     margin-top: 28px;
 
-    @media (max-width: 1450px) {
-        flex-wrap: wrap;
+    &.--nowrap {
+        @media (max-width: 1450px) {
+            flex-wrap: wrap;
+        }
     }
 }
 
@@ -31,6 +33,7 @@
         height: 280px;
         background: #f5f5f5;
         @include user-select(none);
+        @include transition(all, 280ms, ease);
 
         img {
             display: block;
@@ -82,6 +85,12 @@
                 }
             }
         }
+    }
+
+    &:hover .album-cover {
+        -webkit-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+           -moz-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+                box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
     }
 
     &.playing .album-action,

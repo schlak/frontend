@@ -31,7 +31,7 @@ function RandomSelection(props) {
     return (
         <div className="random-selection">
             <h2>Random Selection</h2>
-            <div className="track-container">
+            <div className="track-container --nowrap">
                 {
                     albumsToRender.map((albumIndex, index) => {
                         if (typeof albums[albumIndex] !== 'undefined') {
