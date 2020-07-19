@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { uniqBy } from "lodash";
 
 import TrackMini from "./Tracks/TrackMini";
 
 function ActiveUsers(props) {
-    // Connected users
-    const socket = useSelector((state) => state.socket.connection);
     const users = useSelector((state) => state.socket.global.connectedUsers);
     const globalPlaying = useSelector((state) => state.socket.global.playing);
 

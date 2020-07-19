@@ -8,7 +8,8 @@ import Icon from "../Icon";
 
 function Album({ album }) {
     const dispatch = useDispatch();
-    const playing = useSelector((state) => state.session.playing);
+    const playingIndex = useSelector((state) => state.session.playing.index);
+    const isPaused = useSelector((state) => state.session.playing.isPaused);
     const trackStore = useSelector((state) => state.music.tracks.data);
 
     // If api call failed
@@ -29,7 +30,7 @@ function Album({ album }) {
         albumName = album.album;
         albumArtist = album.album_artist;
         albumCoverId = trackStore[album.tracks[0]].id;
-        if (album.tracks.includes(playing.index)) isAlbumPlaying = true;
+        if (album.tracks.includes(playingIndex)) isAlbumPlaying = true;
     }
 
     // Action button handler
@@ -42,7 +43,7 @@ function Album({ album }) {
         } else {
             // Pause track
             dispatch(
-                playingTrackIsPaused(!playing.isPaused)
+                playingTrackIsPaused(!isPaused)
             );
         }
     };
@@ -51,7 +52,7 @@ function Album({ album }) {
         <div className={`album${isAlbumPlaying ? " playing" : ""}${isLoading ? " loading" : ""}${didError ? " error" : ""}`}>
             <div className="album-cover">
                 <img
-                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
+                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/280`}
                     alt="album-cover"
                     draggable="false"
                 />
@@ -67,7 +68,7 @@ function Album({ album }) {
             <div className="album-action" onClick={handleActionButton}>
                 <div className="album-action-button">
                     {
-                        !isAlbumPlaying || playing.isPaused ?
+                        !isAlbumPlaying || isPaused ?
                         <Icon name="play" isRounded={true} /> :
                         <Icon name="pause" isRounded={true} />
                     }

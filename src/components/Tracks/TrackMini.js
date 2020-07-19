@@ -16,14 +16,12 @@ function TrackMini({ index }) {
     if (playingIndex === index) isPlaying = true;
 
     // Assume loading state
-    let isLoading = true;
     let trackTitle = <Skeleton />;
     let trackArtist = <Skeleton />;
     let albumCoverId = "example";
 
     // Album exists
     if (track) {
-        isLoading = false;
         trackTitle = track.metadata.title;
         trackArtist = track.metadata.artist;
         albumCoverId = track.id;
@@ -42,7 +40,7 @@ function TrackMini({ index }) {
         <div className={`track-mini ${isPlaying ? " playing" : ""}`} onClick={handlePlayTrack}>
             <div className="album-cover">
                 <img
-                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
+                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/60`}
                     alt="album-cover"
                     draggable="false"
                 />
