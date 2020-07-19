@@ -8,6 +8,19 @@
     z-index: 80;
     cursor: pointer;
     background-color: #f5f5f5;
+    @include transition(-webkit-box-shadow, 280ms, ease);
+    @include transition(-moz-box-shadow, 280ms, ease);
+    @include transition(box-shadow, 280ms, ease);
+
+    &.notrack {
+        display: none;
+    }
+
+    &:hover {
+        -webkit-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+           -moz-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+                box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+    }
 
     @media (max-width: 1300px) {
         display: none;
@@ -39,6 +52,10 @@
         svg {
             width: 28px;
             height: 28px;
+
+            path {
+                fill: #333;
+            }
         }
     }
 

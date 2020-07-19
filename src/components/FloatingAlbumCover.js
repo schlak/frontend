@@ -21,7 +21,7 @@ function FloatingAlbumCover() {
     if (track) albumCoverId = track.id;
 
     // OnClick handler
-    // Play/Pause track\
+    // Play/Pause track
     const handleClick = (e) => {
         // Pause track
         dispatch(
@@ -36,7 +36,7 @@ function FloatingAlbumCover() {
 
     return (
         <animated.div
-            className={`floating-album-cover${track && isPaused ? " isPaused" : ""}${isMobile ? " isMobile" : ""}`}
+            className={`floating-album-cover${track && isPaused ? " isPaused" : ""}${isMobile ? " isMobile" : ""}${track ? "" : " notrack"}`}
             style={styles}
             onClick={handleClick}
         >
