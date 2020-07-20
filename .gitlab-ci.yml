@@ -10,7 +10,7 @@ test:
   cache:
     paths:
       - node_modules/
-  
+
   before_script:
     - npm install
 
@@ -18,13 +18,17 @@ test:
     - npm run test:coverage
     - unset CI
     - npm run build
-  
+
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 
 release:
   image: docker:19.03.1
   stage: build
+
+  only:
+    - master
+    - tags
 
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
@@ -36,7 +40,7 @@ release:
   services:
     - name: docker:19.03.1-dind
       command: ["--experimental"]
-  
+
   before_script:
     - mkdir -p $HOME/.docker/cli-plugins/
     - wget -O $HOME/.docker/cli-plugins/docker-buildx $BUILDX_URL
