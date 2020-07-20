@@ -26,12 +26,12 @@ function RandomSelection(props) {
         setAlbumsToRender(
             chance.unique(chance.integer, 4, {min: 0, max: albumsMaxIndex})
         );
-    }, []);
+    }, [albums.length]);
 
     return (
         <div className="random-selection">
             <h2>Random Selection</h2>
-            <div className="track-container --nowrap">
+            <div className="track-container grid grid-albums">
                 {
                     albumsToRender.map((albumIndex, index) => {
                         if (typeof albums[albumIndex] !== 'undefined') {

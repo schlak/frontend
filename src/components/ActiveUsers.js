@@ -13,7 +13,7 @@ function ActiveUsers(props) {
             <h2>Active Users</h2>
             <p>There are currently <strong>{users}</strong> active users</p>
 
-            <div className="track-container">
+            <div className="track-container flex">
                 {
                     uniqBy(globalPlaying, "playing").map((user, index) => {
                         return <TrackMini index={user.playing} key={index} />;

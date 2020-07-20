@@ -24,7 +24,7 @@ function AlbumList() {
     });
 
     return (
-        <div className="track-container">
+        <div className="track-container grid grid-albums">
             {isLoading &&
                 [...Array(8)].map((x, key) =>
                     <Album album={false} key={key} />
