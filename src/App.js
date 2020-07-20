@@ -13,6 +13,7 @@ import SocketGlobal from "./components/SocketGlobal";
 
 import Home from "./routes/Home";
 import Albums from "./routes/Albums";
+import AlbumIndividual from "./routes/AlbumIndividual";
 import Artists from "./routes/Artists";
 import Tracks from "./routes/Tracks";
 
@@ -48,7 +49,8 @@ function App() {
                     {/* Routes */}
                     <div className="app-page">
                         <Route path="/" exact render={props => <Home />} />
-                        <Route path="/albums" render={props => <Albums />} />
+                        <Route path="/albums" exact render={props => <Albums />} />
+                        <Route path="/albums/:id" render={props => <AlbumIndividual />} />
                         <Route path="/artists" render={props => <Artists />} />
                         <Route path="/tracks" render={props => <Tracks />} />
                     </div>
