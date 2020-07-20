@@ -1,6 +1,8 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
 
+import TrackList from "../components/TrackList/TrackList";
+
 function Tracks() {
     const styles = useSpring({
         from: {opacity: 0},
@@ -10,7 +12,10 @@ function Tracks() {
     return (
         <>
             <animated.div className="Tracks container" style={styles}>
-                <h2>Tracks</h2>
+                <section>
+                    <h2>Tracks</h2>
+                    <TrackList />
+                </section>
             </animated.div>
         </>
     );
