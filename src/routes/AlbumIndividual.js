@@ -50,6 +50,11 @@ function AlbumIndividual() {
         }
     };
 
+    // Jump to top of page
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <>
             <div className="AlbumIndividual container">
