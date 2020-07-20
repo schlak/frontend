@@ -29,7 +29,7 @@
 .track-container .album {
     position: relative;
     width: 100%;
-    // margin: 10px;
+    cursor: pointer;
 
     &.error {
         .album-cover {
@@ -65,7 +65,6 @@
             color: #222;
             font-size: 1.88rem;
             text-transform: capitalize;
-            cursor: default;
             @include text-overflow-ellipsis();
         }
 
@@ -195,10 +194,8 @@
         .track {
             width: 80%;
             cursor: default;
-            background-color: #fff;
 
-            &:hover,
-            &:nth-child(even) {
+            &:hover {
                 background-color: inherit;
             }
         }

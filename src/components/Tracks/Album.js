@@ -1,6 +1,7 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
 
@@ -8,6 +9,8 @@ import Icon from "../Icon";
 
 function Album({ album }) {
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const playingIndex = useSelector((state) => state.session.playing.index);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const trackStore = useSelector((state) => state.music.tracks.data);
@@ -33,8 +36,17 @@ function Album({ album }) {
         if (album.tracks.includes(playingIndex)) isAlbumPlaying = true;
     }
 
+    // Goto album url
+    const handleAlbumClick = (e) => {
+        e.stopPropagation();
+        if (album)
+            history.push(`/albums/${album.id}`);
+    };
+
     // Action button handler
     const handleActionButton = (e) => {
+        e.stopPropagation();
+
         if (!isAlbumPlaying) {
             // Play first track in album
             dispatch(
@@ -48,8 +60,14 @@ function Album({ album }) {
         }
     };
 
+    // Dynamic class list
+    let classList = "";
+    classList += isAlbumPlaying ? " playing" : "";
+    classList += isLoading ? " loading" : "";
+    classList += didError ? " error" : "";
+
     return (
-        <div className={`album${isAlbumPlaying ? " playing" : ""}${isLoading ? " loading" : ""}${didError ? " error" : ""}`}>
+        <div className={`album${classList}`} onClick={handleAlbumClick}>
             <div className="album-cover">
                 <img
                     src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/280`}

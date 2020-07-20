@@ -27,12 +27,16 @@ function Track({ index }) {
         );
     };
 
+    // Dynamic class list
+    let classList = "";
+    classList += isTrackPlaying ? " playing" : "";
+    classList += isTrackPaused ? " paused" : "";
+    classList += didError ? " error" : "";
+
     return (
         <div
             id={track.id}
-            className={`track${isTrackPlaying ? " playing" : ""}${
-                isTrackPaused ? " paused" : ""
-            }${didError ? " error" : ""}`}
+            className={`track${classList}`}
             onClick={playInSession}
         >
             <div className="track-info">
