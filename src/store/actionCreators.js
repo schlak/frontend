@@ -1,5 +1,9 @@
 import { api } from "../utils/api";
-import { filterTracks, doesTrackExist } from "../utils/sortTracks";
+import {
+    filterTracks,
+    doesTrackExist,
+    groupTracksIntoAlbums
+} from "../utils/sortTracks";
 import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,
@@ -25,8 +29,9 @@ export const fetchTracks = () => (dispatch) => {
     api()
         .get("/tracks")
         .then((res) => {
-            console.log("Tracks:", res.data);
-            dispatch({ type: FETCH_TRACKS_SUCCESS, payload: res.data });
+            // console.log("Tracks:", res.data);
+            const albums = groupTracksIntoAlbums(res.data, res.data);
+            dispatch({ type: FETCH_TRACKS_SUCCESS, payload: [res.data, albums] });
         })
         .catch((error) => {
             dispatch({ type: FETCH_TRACKS_FAILURE, payload: error });
