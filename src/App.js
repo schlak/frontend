@@ -1,56 +1,71 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchTracks } from "./store/actionCreators";
+
+import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
+import Audio from "./components/Audio";
+import FloatingAlbumCover from "./components/FloatingAlbumCover";
+import NavBar from "./components/NavBar";
+import NavLinks from "./components/NavLinks";
+import SocketGlobal from "./components/SocketGlobal";
+
+import Home from "./routes/Home";
+import Albums from "./routes/Albums";
+import AlbumIndividual from "./routes/AlbumIndividual";
+import Artists from "./routes/Artists";
+import Tracks from "./routes/Tracks";
 
 import "./styles/index.scss";
 
-import Audio from "./components/audio";
-// import Users from "./components/users";
-import SideBar from "./components/sideBar/sideBar";
-import TrackList from "./components/trackList/trackList";
-import TrackInfo from "./components/sideBar/trackInfo";
-import SearchBar from "./components/search/searchBar";
-import Tags from "./components/search/tags";
-import Controls from "./components/controls/controls";
-
 function App() {
-    // Get session state from store
-    const session = useSelector((state) => state.session);
+    const dispatch = useDispatch();
+    const sessionTrack = useSelector((state) => state.session.playing.track);
+
+    // Fetch tracks index from api
+    useEffect(() => {
+        dispatch(fetchTracks());
+    }, [dispatch]);
 
     // Update title with currently playing track
     useEffect(() => {
-        if (session.playing.track.id) {
-            document.title = `${session.playing.track.metadata.artist} - ${session.playing.track.metadata.title} | Music Library`;
+        if (sessionTrack.id) {
+            document.title = `${sessionTrack.metadata.artist} - ${sessionTrack.metadata.title} | Music Library`;
         }
-    }, [
-        session.playing.track.id,
-        session.playing.track.metadata.artist,
-        session.playing.track.metadata.title,
-    ]);
+    }, [sessionTrack]);
 
     return (
-        <div className="App">
-            <div className="container">
+        <>
+            <Audio />
+            <SocketGlobal />
+            <div className="App">
                 <div className="app-wrapper">
-                    <Audio />
+                    {/* Navbar + Navlinks */}
+                    <NavBar content="title" />
+                    <div style={{marginTop: "100px"}}></div>
+                    <NavLinks />
 
-                    <div className="main">
-                        {isMobile && <TrackInfo isFixedToTop={true} />}
-                        <div className={`filter-options${isMobile ? " offset" : ""}`}>
-                            <SearchBar />
-                            <Tags />
-                            <Controls />
-                        </div>
-                        <TrackList />
+                    {/* Routes */}
+                    <div className="app-page">
+                        <Route path="/" exact render={props => <Home />} />
+                        <Route path="/albums" exact render={props => <Albums />} />
+                        <Route path="/albums/:id" render={props => <AlbumIndividual />} />
+                        <Route path="/artists" render={props => <Artists />} />
+                        <Route path="/tracks" render={props => <Tracks />} />
                     </div>
 
-                    {
-                        !isMobile &&
-                        <SideBar />
-                    }
+                    {/* Active Track Album Cover */}
+                    <FloatingAlbumCover />
+
+                    {/* AFCBackground */}
+                    <AFCBackgroundMulti />
+
+                    {/* Footer */}
+                    <div style={{marginTop: "250px"}}></div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

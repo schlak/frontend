@@ -1,7 +1,5 @@
-import React from "react";
 import Fuse from "fuse.js";
-
-import Album from "../components/trackList/album";
+import sha1 from 'crypto-js/sha1';
 
 /*
  * Group tracks into albums
@@ -35,6 +33,7 @@ export const groupTracksIntoAlbums = (tracksStore, tracksToGroup) => {
         // create new album
         if (!found) {
             return albums.push({
+                id: sha1(track.metadata.album + track.metadata.album_artist).toString(),
                 album: track.metadata.album,
                 album_artist: track.metadata.album_artist,
                 genre: track.metadata.genre,
@@ -47,20 +46,6 @@ export const groupTracksIntoAlbums = (tracksStore, tracksToGroup) => {
     });
 
     return albums;
-};
-
-
-/*
- * Group tracks into album components
- *
- * @param {tracksStore}    tracks store object
- * @param {tracksToGroup}  tracks to group object
- * @return                 array of album components
- */
-export const groupTracksIntoAlbumComponents = (tracksStore, tracksToGroup) => {
-    return groupTracksIntoAlbums(tracksStore, tracksToGroup).map((data, key) => {
-        return <Album album={data} key={key} />;
-    });
 };
 
 

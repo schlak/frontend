@@ -8,9 +8,19 @@
 }
 
 
+@mixin container($size) {
+    max-width: $size;
+    margin-left: auto;
+    margin-right: auto;
+    @include transition(all, 80ms, ease);
+}
+
+
 @mixin flex() {
     display: -webkit-box;
+    display: -moz-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 }
 
@@ -18,10 +28,10 @@
 @mixin user-select($value) {
     -webkit-touch-callout: $value;
     -webkit-user-select: $value;
-    -khtml-user-select: $value;
-    -moz-user-select: $value;
-    -ms-user-select: $value;
-    user-select: $value;
+     -khtml-user-select: $value;
+       -moz-user-select: $value;
+        -ms-user-select: $value;
+            user-select: $value;
 }
 
 
@@ -30,6 +40,3 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
-
-// @include user-select(none);

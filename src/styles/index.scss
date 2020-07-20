@@ -6,11 +6,12 @@
 @import "reset";
 @import "global";
 
-@import "components/main";
-@import "components/album";
-@import "components/track";
-@import "components/trackStatusInfo";
-@import "components/searchBar";
-@import "components/tags";
-@import "components/controls";
-@import "components/sideBar";
+@import "components/ActiveUsers";
+@import "components/AFCBackground";
+@import "components/AlbumIndividual";
+@import "components/FloatingAlbumCover";
+@import "components/NavBar";
+@import "components/NavLinks";
+@import "components/SearchBar";
+
+@import "components/tracks";

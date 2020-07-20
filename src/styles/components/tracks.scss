@@ -1,0 +1,283 @@
+.track-container {
+    position: relative;
+
+    &.grid {
+        display: grid;
+        grid-gap: 10px;
+        margin-top: 28px;
+        overflow: hidden;
+
+        &.grid-albums {
+            grid-template-columns: 22% 22% 22% 22%;
+
+            @media (max-width: 1400px) {
+                grid-template-columns: 30% 30% 30%;
+            }
+            @media (max-width: 900px) {
+                grid-template-columns: 48% 48%;
+            }
+        }
+    }
+
+    &.flex {
+        @include flex();
+        flex-wrap: wrap;
+        margin-top: 28px;
+    }
+}
+
+.track-container .album {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+
+    &.error {
+        .album-cover {
+            background: #FF6C6F;
+        }
+    }
+    &.error .react-loading-skeleton {
+        background-color: #FF6C6F;
+        background-image: linear-gradient(90deg, #FF6C6F, #FF8285, #FF6C6F);
+    }
+    .react-loading-skeleton {
+        @include transition(all, 280ms, ease);
+    }
+
+    .album-cover {
+        width: 100%;
+        background: #f5f5f5;
+        @include user-select(none);
+        @include transition(all, 280ms, ease);
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &.loading {
+        .album-cover {
+            height: 240px;
+        }
+    }
+
+    .album-metadata {
+        margin: 10px 15px;
+
+        p {
+            color: #222;
+            font-size: 1.88rem;
+            text-transform: capitalize;
+            @include text-overflow-ellipsis();
+        }
+
+        .album-metadata-artist p {
+            color: #555;
+            font-size: 1.7rem;
+            margin-top: 6px;
+        }
+    }
+
+    .album-action {
+        position: absolute;
+        bottom: 88px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        opacity: 0;
+        cursor: pointer;
+        @include flex();
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+
+        .album-action-button {
+
+            svg {
+                width: 28px;
+                height: 28px;
+
+                path {
+                    fill: #333;
+                }
+            }
+        }
+    }
+
+    &:hover .album-cover {
+        -webkit-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+           -moz-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+                box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+    }
+
+    &.playing .album-action,
+    &:hover .album-action {
+        opacity: 1;
+    }
+}
+
+
+.track-container .track {
+    @include user-select(none);
+    padding: 5px 7px;
+    cursor: pointer;
+    color: #222;
+
+    &:hover {
+        background-color: #fafafa;
+    }
+
+    &.playing {
+        color: #fff;
+        background-color: #222;
+
+        &.paused {
+            background-color: #777;
+        }
+        &.error {
+            background-color: red;
+        }
+    }
+
+    .track-info {
+        @include flex();
+
+        p {
+            font-size: 1.3em;
+            width: 31.6%;
+            margin-right: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            @media (max-width: 1200px) {
+                width: 33%;
+            }
+            @media (max-width: 1000px) {
+                width: 50%;
+            }
+            @media (max-width: 700px) {
+                width: 100%;
+            }
+        }
+
+        p.length {
+            width: 5%;
+
+            @media (max-width: 1200px) {
+                display: none;
+            }
+        }
+
+        p.album {
+            @media (max-width: 1000px) {
+                display: none;
+            }
+        }
+
+        p.artist {
+            @media (max-width: 700px) {
+                display: none;
+            }
+        }
+    }
+}
+
+.track-container .track-album {
+    margin: 40px 0;
+
+    &.loading {
+        .album-info {
+            h2 {
+                width: 40%;
+                font-size: 1.8em;
+            }
+        }
+
+        .track {
+            width: 80%;
+            cursor: default;
+
+            &:hover {
+                background-color: inherit;
+            }
+        }
+    }
+
+    &.error .react-loading-skeleton {
+        background-color: #FF6C6F;
+        background-image: linear-gradient(90deg, #FF6C6F, #FF8285, #FF6C6F);
+    }
+    .react-loading-skeleton {
+        @include transition(all, 280ms, ease);
+    }
+
+    .album-info {
+        h2 {
+            font-size: 1.4em;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    .album-tracks {
+        margin: 15px;
+
+        @media (max-width: 700px) {
+            margin: 15px 0;
+        }
+    }
+}
+
+
+.track-container .track-mini {
+    position: relative;
+    width: 350px;
+    height: 100px;
+    margin: 10px;
+    padding: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #555;
+    @include flex();
+    flex-wrap: nowrap;
+    align-items: center;
+    cursor: pointer;
+    @include user-select(none);
+
+    .album-cover {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+        background: #f5f5f5;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .album-metadata {
+        width: 220px;
+
+        p {
+            color: #222;
+            font-size: 1.88rem;
+            text-transform: capitalize;
+            @include text-overflow-ellipsis();
+        }
+
+        .album-metadata-artist p {
+            color: #555;
+            font-size: 1.7rem;
+            margin-top: 6px;
+        }
+    }
+
+    &.playing {
+        border: 2px solid #444;
+    }
+}

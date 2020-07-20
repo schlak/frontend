@@ -12,12 +12,14 @@ import {
     SESSION_SHUFFLE_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
+    SOCKET_CONNECTED_USERS,
+    SOCKET_GLOBAL_PLAYING,
 } from "./actionTypes";
 
 /*
- * Fetch albums index from api
+ * Fetch tracks index from api
  */
-export const fetchAlbums = () => (dispatch) => {
+export const fetchTracks = () => (dispatch) => {
     dispatch({ type: FETCH_TRACKS_START, payload: [] });
 
     api()
@@ -249,4 +251,20 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
         tags: tags,
         filteredData: tracksFiltered
     } });
+};
+
+
+/*
+ * Socket: update connected users
+ */
+export const socketConnectedUserCount = (count) => (dispatch) => {
+    dispatch({ type: SOCKET_CONNECTED_USERS, payload: count });
+};
+
+
+/*
+ * Socket: update global playing session
+ */
+export const socketGlobalPlaying = (playing) => (dispatch) => {
+    dispatch({ type: SOCKET_GLOBAL_PLAYING, payload: playing });
 };
