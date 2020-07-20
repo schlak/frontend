@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { filterTracks, groupTracksIntoAlbums } from "../../utils/sortTracks";
@@ -23,6 +23,31 @@ function AlbumList() {
         return <Album album={data} key={key} />;
     });
 
+    // # of rendered albums
+    const defaultRenderAmmount = 12;
+    const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(defaultRenderAmmount);
+
+    useEffect(() => {
+        // Adds more albums as user scrolls to bottom of page
+        const handleScroll = () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - (window.innerHeight + 600))
+            {
+                if (renderedAlbumsCount < albumsBeingRendered.length) {
+                    // Add album to render
+                    setRenderedAlbumsCount(renderedAlbumsCount + 8);
+                }
+            } else if (window.scrollY <= 100) {
+                // Reset render count
+                setRenderedAlbumsCount(defaultRenderAmmount);
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+    });
+
     return (
         <div className="track-container grid grid-albums">
             {isLoading &&
@@ -31,7 +56,7 @@ function AlbumList() {
                 )
             }
 
-            {albumsBeingRendered}
+            {albumsBeingRendered.slice(0, renderedAlbumsCount)}
         </div>
     );
 }
