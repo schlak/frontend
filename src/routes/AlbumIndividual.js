@@ -16,13 +16,11 @@ function AlbumIndividual() {
     const { id } = useParams();
 
     const tracks = useSelector((state) => state.music.tracks.data);
+    const albums = useSelector((state) => state.music.tracks.albumsData);
     const isFetching = useSelector((state) => state.music.tracks.isFetching);
     const didError = useSelector((state) => state.music.tracks.didError);
     const playingIndex = useSelector((state) => state.session.playing.index);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
-
-    // Group tracks into albums
-    const albums = groupTracksIntoAlbums(tracks, tracks);
 
     // Search for album
     const album = albums.find((album) => album.id === id);

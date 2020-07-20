@@ -7,15 +7,9 @@ import { groupTracksIntoAlbums } from "../utils/sortTracks";
 import Album from "./Tracks/Album";
 
 function RandomSelection(props) {
-    // Get track list from store
-    const trackStore = useSelector((state) => state.music.tracks.data);
-    const [albums, setAlbums] = useState([]);
+    // Get albums list from store
+    const albums = useSelector((state) => state.music.tracks.albumsData);
     const [albumsToRender, setAlbumsToRender] = useState([-1, -1, -1, -1]);
-
-    // Sort tracks index into albums
-    useEffect(() => {
-        setAlbums(groupTracksIntoAlbums(trackStore, trackStore));
-    }, [trackStore]);
 
     // Generate 4 - unique - random numbers (used as album indexes)
     useEffect(() => {

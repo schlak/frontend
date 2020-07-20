@@ -70,7 +70,7 @@ function Album({ album }) {
         <div className={`album${classList}`} onClick={handleAlbumClick}>
             <div className="album-cover">
                 <img
-                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/280`}
+                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
                     alt="album-cover"
                     draggable="false"
                 />

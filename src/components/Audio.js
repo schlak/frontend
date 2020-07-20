@@ -38,6 +38,12 @@ function Audio() {
     const handlePause = (newIsPaused) => {
         dispatch(playingTrackIsPaused(newIsPaused));
     }
+    const handleTrackPause = () => {
+        dispatch(playingTrackIsPaused(true));
+    }
+    const handleTrackPlay = () => {
+        dispatch(playingTrackIsPaused(false));
+    }
 
     const handleDidError = (error) => {
         // Attempt to re-play
@@ -119,11 +125,11 @@ function Audio() {
 
             navigator.mediaSession.setActionHandler(
                 "pause",
-                handlePause(true)
+                handleTrackPause
             );
             navigator.mediaSession.setActionHandler(
                 "play",
-                handlePause(false)
+                handleTrackPlay
             );
         }
     }, [
