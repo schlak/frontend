@@ -9,7 +9,7 @@ import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
 import Track from "../components/Tracks/Track";
 
-function Albums() {
+function AlbumIndividual() {
     const dispatch = useDispatch();
 
     // Album ID in URL
@@ -20,7 +20,6 @@ function Albums() {
     const didError = useSelector((state) => state.music.tracks.didError);
     const playingIndex = useSelector((state) => state.session.playing.index);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
-    const isLoading = isFetching || didError;
 
     // Group tracks into albums
     const albums = groupTracksIntoAlbums(tracks, tracks);
@@ -33,6 +32,9 @@ function Albums() {
 
     // Album exists
     if (album && album.tracks.includes(playingIndex)) isAlbumPlaying = true;
+
+    //
+    const isLoading = !album || isFetching || didError;
 
     // Action button handler
     const handleActionButton = (e) => {
@@ -107,4 +109,4 @@ function Albums() {
     );
 }
 
-export default Albums;
+export default AlbumIndividual;
