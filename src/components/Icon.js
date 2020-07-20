@@ -15,7 +15,7 @@ function Icon(props) {
 
     return (
         <ReactSVG
-            src={`icons/${props.name}.svg`}
+            src={`/icons/${props.name}.svg`}
             loading={() => $placeholder}
             fallback={() => $placeholder}
         />
