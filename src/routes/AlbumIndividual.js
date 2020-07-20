@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useSpring, animated } from "react-spring";
 
-import { groupTracksIntoAlbums } from "../utils/sortTracks";
 import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
 import Track from "../components/Tracks/Track";
@@ -52,14 +50,9 @@ function AlbumIndividual() {
         }
     };
 
-    const styles = useSpring({
-        from: {opacity: 0},
-        to: {opacity: 1}
-    });
-
     return (
         <>
-            <animated.div className="AlbumIndividual container" style={styles}>
+            <div className="AlbumIndividual container">
                 <section>
                     <div className="album">
                         <div className="album-cover" onClick={handleActionButton}>
@@ -102,7 +95,7 @@ function AlbumIndividual() {
                         </div>
                     </div>
                 </section>
-            </animated.div>
+            </div>
         </>
     );
 }
