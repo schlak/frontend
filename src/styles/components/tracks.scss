@@ -57,6 +57,11 @@
             object-fit: cover;
         }
     }
+    &.loading {
+        .album-cover {
+            height: 240px;
+        }
+    }
 
     .album-metadata {
         margin: 10px 15px;
