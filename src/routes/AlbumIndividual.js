@@ -1,20 +1,25 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 
 import { groupTracksIntoAlbums } from "../utils/sortTracks";
+import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
 import Track from "../components/Tracks/Track";
 
 function Albums() {
+    const dispatch = useDispatch();
+
     // Album ID in URL
     const { id } = useParams();
 
     const tracks = useSelector((state) => state.music.tracks.data);
     const isFetching = useSelector((state) => state.music.tracks.isFetching);
     const didError = useSelector((state) => state.music.tracks.didError);
+    const playingIndex = useSelector((state) => state.session.playing.index);
+    const isPaused = useSelector((state) => state.session.playing.isPaused);
     const isLoading = isFetching || didError;
 
     // Group tracks into albums
@@ -23,9 +28,29 @@ function Albums() {
     // Search for album
     const album = albums.find((album) => album.id === id);
 
-    //
-    let albumExists = true;
-    if (!album) albumExists = false;
+    // Is album playing
+    let isAlbumPlaying = false;
+
+    // Album exists
+    if (album && album.tracks.includes(playingIndex)) isAlbumPlaying = true;
+
+    // Action button handler
+    const handleActionButton = (e) => {
+        e.stopPropagation();
+        if (album) {
+            if (!isAlbumPlaying) {
+                // Play first track in album
+                dispatch(
+                    playTrack(album.tracks[0])
+                );
+            } else {
+                // Pause track
+                dispatch(
+                    playingTrackIsPaused(!isPaused)
+                );
+            }
+        }
+    };
 
     const styles = useSpring({
         from: {opacity: 0},
@@ -37,7 +62,7 @@ function Albums() {
             <animated.div className="AlbumIndividual container" style={styles}>
                 <section>
                     <div className="album">
-                        <div className="album-cover">
+                        <div className="album-cover" onClick={handleActionButton}>
                             {
                                 isLoading ?
                                 <Skeleton width={400} height={400} /> :
@@ -49,15 +74,15 @@ function Albums() {
                             }
                         </div>
                         <div className="album-metadata">
-                            <h2>{isLoading ? <Skeleton /> : album.album}</h2>
-                            <p>{isLoading ? <Skeleton /> : `[${album.year}] - ${album.album_artist}`}</p>
+                            <h2>{isLoading ? <Skeleton width={300} /> : album.album}</h2>
+                            <p>{isLoading ? <Skeleton width={200} /> : `[${album.year}] - ${album.album_artist}`}</p>
                         </div>
                         <div className="track-container">
                             {isLoading &&
                                 [...Array(8)].map((x, key) =>
                                     <div className="track" key={key}>
                                         <p>
-                                            <Skeleton />
+                                            <Skeleton width={"80%"} />
                                         </p>
                                     </div>
                                 )
