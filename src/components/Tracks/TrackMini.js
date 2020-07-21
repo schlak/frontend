@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { playTrack } from "../../store/actionCreators";
 
+import Image from "../Image";
+
 function TrackMini({ index }) {
     const dispatch = useDispatch();
 
@@ -39,8 +41,9 @@ function TrackMini({ index }) {
     return (
         <div className={`track-mini ${isPlaying ? " playing" : ""}`} onClick={handlePlayTrack}>
             <div className="album-cover">
-                <img
+                <Image
                     src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/60`}
+                    fallback={`fallback--album-cover`}
                     alt="album-cover"
                     draggable="false"
                 />

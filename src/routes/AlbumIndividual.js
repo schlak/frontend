@@ -67,7 +67,7 @@ function AlbumIndividual() {
                                 <Skeleton width={400} height={400} /> :
                                 <Image
                                     src={isLoading ? "example" : `${process.env.REACT_APP_API}/tracks/${tracks[album.tracks[0]].id}/cover/400`}
-                                    fallback={`${process.env.REACT_APP_API}/tracks/example/cover/400`}
+                                    fallback={`fallback--album-cover`}
                                     alt="album-cover"
                                     draggable="false"
                                 />

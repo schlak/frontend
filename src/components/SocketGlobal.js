@@ -22,7 +22,7 @@ function SocketGlobal() {
         socket.on("global_tracks_playing", (payload) => {
             dispatch(socketGlobalPlaying(payload));
         });
-    }, [socket]);
+    }, [dispatch, socket]);
 
     // Send currently playing track
     useEffect(() => {
