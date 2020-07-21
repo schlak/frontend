@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
 
 import Icon from "../Icon";
+import Image from "../Image";
 
 function Album({ album }) {
     const dispatch = useDispatch();
@@ -69,8 +70,9 @@ function Album({ album }) {
     return (
         <div className={`album${classList}`} onClick={handleAlbumClick}>
             <div className="album-cover">
-                <img
+                <Image
                     src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                    fallback={`${process.env.REACT_APP_API}/tracks/example/cover/400`}
                     alt="album-cover"
                     draggable="false"
                 />

@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 import { playingTrackIsPaused } from "../store/actionCreators";
 
 import Icon from "./Icon";
+import Image from "./Image";
 
 function FloatingAlbumCover() {
     const dispatch = useDispatch();
@@ -40,8 +41,9 @@ function FloatingAlbumCover() {
             style={styles}
             onClick={handleClick}
         >
-            <img
-                src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/200`}
+            <Image
+                src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                fallback={`${process.env.REACT_APP_API}/tracks/example/cover/400`}
                 alt="album-cover"
                 draggable="false"
             />

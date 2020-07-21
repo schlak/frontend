@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Chance from "chance";
 
-import { groupTracksIntoAlbums } from "../utils/sortTracks";
-
 import Album from "./Tracks/Album";
 
 function RandomSelection(props) {

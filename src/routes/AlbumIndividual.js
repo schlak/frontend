@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
+import Image from "../components/Image";
 import Track from "../components/Tracks/Track";
 
 function AlbumIndividual() {
@@ -64,8 +65,9 @@ function AlbumIndividual() {
                             {
                                 isLoading ?
                                 <Skeleton width={400} height={400} /> :
-                                <img
-                                    src={isLoading ? "" : `${process.env.REACT_APP_API}/tracks/${tracks[album.tracks[0]].id}/cover/400`}
+                                <Image
+                                    src={isLoading ? "example" : `${process.env.REACT_APP_API}/tracks/${tracks[album.tracks[0]].id}/cover/400`}
+                                    fallback={`${process.env.REACT_APP_API}/tracks/example/cover/400`}
                                     alt="album-cover"
                                     draggable="false"
                                 />
