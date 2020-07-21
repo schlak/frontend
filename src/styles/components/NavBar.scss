@@ -31,6 +31,10 @@
         height: 100%;
     }
 
+    .navbar-var {
+        width: 100%;
+    }
+
     .navbar-logo {
         margin-right: 120px;
         -webkit-transform: scale(1);
@@ -43,7 +47,7 @@
         @media (max-width: 600px) {
             margin-right: 80px;
         }
-        @media (max-width: 400px) {
+        @media (max-width: 500px) {
             margin-right: 40px;
         }
 
