@@ -26,7 +26,7 @@ function App() {
     // Fetch tracks index from api
     useEffect(() => {
         dispatch(fetchTracks());
-    }, [dispatch]);
+    }, []);
 
     // Update title with currently playing track
     useEffect(() => {

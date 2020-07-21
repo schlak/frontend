@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { isMobile } from "react-device-detect";
+
 import { updateUserSearch } from "../store/actionCreators";
 
 function SearchBar() {
     const dispatch = useDispatch();
 
     // Search input value in store
-    const tracks = useSelector((state) => state.music.tracks);
-    const search = tracks.filter.search;
+    const tracks = useSelector((state) => state.music.tracks.data);
+    const filter = useSelector((state) => state.music.tracks.filter);
+    const filteredData = useSelector((state) => state.music.tracks.filteredData);
 
-    let tracksLength = tracks.data.length;
-    if (tracks.filter.tags.length > 0) tracksLength = `${tracks.filteredData.length} / ${tracks.data.length}`;
+    // Input state
+    const [search, setSearch] = useState("");
+    const [timer, setTimer]   = useState(null);
+
+    let tracksLength = tracks.length;
+    if (filter.tags.length > 0) tracksLength = `${filteredData.length} / ${tracks.length}`;
     if (tracksLength === 0) tracksLength = "loading";
 
-    const updateSearch = (evt) => {
+    const handleSearch = (evt) => {
         evt.preventDefault();
-        if (search !== evt.target.value) {
-            dispatch(updateUserSearch(evt.target.value));
+        if (filter.search !== evt.target.value) {
+            setSearch(evt.target.value);
+            // dispatch(updateUserSearch(evt.target.value));
         }
     }
+
+    useEffect(() => {
+        //  Do not search if user is still typing
+        clearTimeout(timer);
+
+        //  Wait n-ms after user has typed
+        setTimer(
+            setTimeout(function () {
+                dispatch(updateUserSearch(search));
+            }, !isMobile ? 300 : 500)
+        );
+    }, [search]);
 
     const handleInputFocus = (evt) => {
         document.getElementById("search").focus();
@@ -34,7 +54,7 @@ function SearchBar() {
                 id="search"
                 name="music"
                 value={search}
-                onChange={updateSearch}
+                onChange={handleSearch}
             />
         </div>
     );
