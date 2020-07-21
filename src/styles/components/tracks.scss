@@ -121,6 +121,24 @@
                 }
             }
         }
+
+        @media (max-width: 500px) {
+            bottom: 77px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+
+            .album-action-button {
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+        @media (max-width: 450px) {
+            bottom: 70px;
+            right: 15px;
+        }
     }
 
     &:hover .album-cover {
