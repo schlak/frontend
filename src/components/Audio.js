@@ -62,24 +62,6 @@ function Audio() {
         }
     }
 
-    // Listen for keypress
-    // Pause audio on 'space' or 'k'
-    useEffect(() => {
-        const onKeyUp = ({ code }) => {
-            if (code === "KeyP" || code === "KeyK") {
-                // Check if there is a track playing
-                if (track.id && filter.search.length === 0) {
-                    handlePause(!isPaused);
-                }
-            }
-        };
-
-        document.addEventListener("keyup", onKeyUp);
-        return () => {
-            document.removeEventListener("keyup", onKeyUp);
-        };
-    });
-
     // MediaMetadata audio API
     useEffect(() => {
         if ("mediaSession" in navigator) {
