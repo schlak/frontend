@@ -50,15 +50,16 @@
 
         p {
             color: #222;
-            font-size: 1.88rem;
+            font-size: 1.7rem;
             text-transform: capitalize;
             @include text-overflow-ellipsis();
         }
 
         .album-metadata-artist p {
             color: #555;
-            font-size: 1.7rem;
-            margin-top: 6px;
+            font-size: 1.5rem;
+            margin-top: 4px;
+            margin-bottom: 15px;
         }
 
         @media (max-width: 600px) {
@@ -119,7 +120,7 @@
         }
         @media (max-width: 450px) {
             bottom: 70px;
-            right: 15px;
+            right: 13px;
         }
     }
 
