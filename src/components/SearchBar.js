@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
 import { updateUserSearch } from "../store/actionCreators";
 
 function SearchBar() {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
 
     // Search input value in store
     const tracks = useSelector((state) => state.music.tracks.data);
@@ -29,13 +32,17 @@ function SearchBar() {
     }
 
     useEffect(() => {
-        //  Do not search if user is still typing
+        // Do not search if user is still typing
         clearTimeout(timer);
 
-        //  Wait n-ms after user has typed
+        // Wait n-ms after user has typed
         setTimer(
             setTimeout(function () {
                 dispatch(updateUserSearch(search));
+
+                // Switch to /albums route if searching from an album
+                if (location.pathname.match(/\/albums\/.*/) && search.length > 0)
+                    history.push("/albums");
             }, !isMobile ? 300 : 500)
         );
     }, [search]);
