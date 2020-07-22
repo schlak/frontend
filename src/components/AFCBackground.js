@@ -2,7 +2,7 @@ import React from "react";
 import { useSpring, animated } from "react-spring";
 
 function AFCBackground(props) {
-    const colors = ["#D5F1FF", "#FFE1FA", "#E9FFFA", "#FFFFE1"];
+    const colors = ["#d5f1ff", "#cdfff5", "#cdffda", "#fcffcd", "#ffeecd", "#ffcde8", "#fccdff", "#d5e0ff"];
     const color = colors[Math.floor(Math.random() * colors.length)]
 
     const styles = useSpring({
