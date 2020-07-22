@@ -21,6 +21,7 @@ function TrackAlbum({ album }) {
             return (
                 <Track
                     index={track}
+                    size="compact"
                     key={key}
                 />
             );

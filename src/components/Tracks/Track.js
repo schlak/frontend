@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { playTrack } from "../../store/actionCreators";
 
-function Track({ index }) {
+import Icon from "../Icon";
+
+function TrackNew({ index, size }) {
     const dispatch = useDispatch();
 
     // Track and session data from store
@@ -29,6 +31,7 @@ function Track({ index }) {
 
     // Dynamic class list
     let classList = "";
+    classList += size ? ` ${size}` : "";
     classList += isTrackPlaying ? " playing" : "";
     classList += isTrackPaused ? " paused" : "";
     classList += didError ? " error" : "";
@@ -39,16 +42,24 @@ function Track({ index }) {
             className={`track${classList}`}
             onClick={playInSession}
         >
-            <div className="track-info">
-                <p className="length">
-                    {moment.utc(track.metadata.duration * 1000).format("mm:ss")}
-                </p>
-                <p className="title">{track.metadata.title}</p>
-                <p className="artist">{track.metadata.artist}</p>
-                <p className="album">{track.metadata.album}</p>
+            <div className="track-col play-state">
+                {
+                    (isTrackPlaying && !isTrackPaused && !didError) ?
+                    <Icon name="pause" /> :
+                    <Icon name="play" />
+                }
+            </div>
+            <div className="track-col name">
+                {track.metadata.title}
+                <div className="artist">
+                    {track.metadata.artist}
+                </div>
+            </div>
+            <div className="track-col length">
+                {moment.utc(track.metadata.duration * 1000).format("mm:ss")}
             </div>
         </div>
     );
 }
 
-export default Track;
+export default TrackNew;
