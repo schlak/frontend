@@ -47,6 +47,14 @@ function SearchBar() {
         );
     }, [search]);
 
+    useEffect(() => {
+        // Clear search input value after selecting an album
+        if (location.pathname.match(/\/albums\/.*/)) {
+            setSearch("");
+            dispatch(updateUserSearch(""));
+        }
+    }, [location]);
+
     const handleInputFocus = (evt) => {
         document.getElementById("search").focus();
     }
