@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
+import { isSafari, isMobileSafari } from "react-device-detect";
 
 import { playTrack } from "../../store/actionCreators";
 
@@ -24,9 +25,18 @@ function TrackNew({ index, size }) {
 
     // Play track in session
     const playInSession = (e) => {
-        dispatch(
-            playTrack(index)
-        );
+        if (!isSafari && !isMobileSafari) {
+            dispatch( playTrack(index) );
+        } else {
+            // Play blank sound, then track
+            const audioTmp = new Audio("/blank.mp3");
+            audioTmp.play();
+
+            setTimeout(function() {
+                audioTmp.pause();
+                dispatch( playTrack(index) );
+            }, 1000);
+        }
     };
 
     // Dynamic class list

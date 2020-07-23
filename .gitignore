@@ -3,9 +3,6 @@ node_modules/
 .legacy
 
 cover.jpg
-*.mp3
-*.flac
-*.ogg
 
 package-lock.json
 yarn.lock
