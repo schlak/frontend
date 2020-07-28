@@ -132,3 +132,33 @@ export const doesTrackExist = (data, track) => {
 
     return res;
 };
+
+
+export const numberOfAlbumsOnOneRow = () => {
+    let width = window.innerWidth;
+    let albumsPerRow;
+
+    switch (true) {
+        case width < 900:
+            albumsPerRow = 2;
+            break;
+
+        case width < 1300:
+            albumsPerRow = 3;
+            break;
+
+        case width < 1500:
+            albumsPerRow = 4;
+            break;
+
+        default:
+            albumsPerRow = 5;
+    }
+
+    return albumsPerRow;
+};
+
+
+export const nRowsOfAlbums = (rows) => {
+    return numberOfAlbumsOnOneRow() * rows;
+};
