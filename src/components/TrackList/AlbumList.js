@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { filterTracks, groupTracksIntoAlbums } from "../../utils/sortTracks";
+import { filterTracks, groupTracksIntoAlbums, nRowsOfAlbums } from "../../utils/sortTracks";
 
 import Album from "../Tracks/Album";
 
@@ -24,7 +24,7 @@ function AlbumList() {
     });
 
     // # of rendered albums
-    const defaultRenderAmmount = 12;
+    const defaultRenderAmmount = nRowsOfAlbums(3);
     const [renderedAlbumsCount, setRenderedAlbumsCount] = useState(defaultRenderAmmount);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function AlbumList() {
             {
                 if (renderedAlbumsCount < albumsBeingRendered.length) {
                     // Add album to render
-                    setRenderedAlbumsCount(renderedAlbumsCount + 8);
+                    setRenderedAlbumsCount(renderedAlbumsCount + nRowsOfAlbums(3));
                 }
             } else if (window.scrollY <= 100) {
                 // Reset render count
