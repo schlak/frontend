@@ -8,9 +8,13 @@
         overflow: hidden;
 
         &.grid-albums {
-            grid-template-columns: 22% 22% 22% 22%;
+            grid-template-columns: 18% 18% 18% 18% 18%;
 
-            @media (max-width: 1400px) {
+            @media (max-width: 1500px) {
+                grid-template-columns: 22% 22% 22% 22%;
+                // grid-template-columns: 30% 30% 30%;
+            }
+            @media (max-width: 1300px) {
                 grid-template-columns: 30% 30% 30%;
             }
             @media (max-width: 900px) {
