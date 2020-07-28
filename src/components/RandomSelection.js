@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Chance from "chance";
 
+import { nRowsOfAlbums } from "../utils/sortTracks";
+
 import Album from "./Tracks/Album";
 
 function RandomSelection(props) {
@@ -9,14 +11,16 @@ function RandomSelection(props) {
     const albums = useSelector((state) => state.music.tracks.albumsData);
     const [albumsToRender, setAlbumsToRender] = useState([-1, -1, -1, -1]);
 
-    // Generate 4 - unique - random numbers (used as album indexes)
+    // Generate up-to 10 - unique - random numbers (used as album indexes)
     useEffect(() => {
         const chance = new Chance();
-        let albumsMaxIndex = 4;
+        let albumsAmmount = nRowsOfAlbums(2);
+        let albumsMaxIndex = albumsAmmount - 1;
         if (albums.length > 0) albumsMaxIndex = albums.length - 1;
+        if (albums.length > 0 && albums.length < albumsAmmount) albumsAmmount = albums.length;
 
         setAlbumsToRender(
-            chance.unique(chance.integer, 4, {min: 0, max: albumsMaxIndex})
+            chance.unique(chance.integer, albumsAmmount, {min: 0, max: albumsMaxIndex})
         );
     }, [albums.length]);
 
