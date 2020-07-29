@@ -1,4 +1,5 @@
 import socketIOClient from "socket.io-client";
+import { isMobile } from "react-device-detect";
 
 import {
     FETCH_TRACKS_START,
@@ -43,7 +44,7 @@ const initialState = {
             status: {
                 duration: null,
                 position: null,
-                volume: 50
+                volume: isMobile ? 100 : 50
             },
             index: -1,
             track: {
