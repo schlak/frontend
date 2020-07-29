@@ -6,6 +6,7 @@ import { fetchTracks } from "./store/actionCreators";
 
 import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
 import Audio from "./components/Audio";
+import AudioControlBar from "./components/AudioControlBar";
 import FloatingAlbumCover from "./components/FloatingAlbumCover";
 import NavBar from "./components/NavBar";
 import NavLinks from "./components/NavLinks";
@@ -55,10 +56,11 @@ function App() {
                         <Route path="/tracks" render={props => <Tracks />} />
                     </div>
 
-                    {/* Active Track Album Cover */}
-                    <FloatingAlbumCover />
+                    {/* Audio Control Bar */}
+                    <AudioControlBar />
 
-                    {/* AFCBackground */}
+                    {/* MISC elements with position fixed/absolute */}
+                    <FloatingAlbumCover />
                     <AFCBackgroundMulti />
 
                     {/* Footer */}
