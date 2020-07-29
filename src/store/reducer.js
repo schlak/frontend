@@ -10,6 +10,7 @@ import {
     SESSION_PLAYING_UPDATE_STATUS,
     SESSION_VOLUME,
     SESSION_SHUFFLE_TOGGLE,
+    SESSION_REPEAT_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
     SOCKET_CONNECTED_USERS,
@@ -33,7 +34,8 @@ const initialState = {
     },
     session: {
         actions: {
-            shuffle: false
+            shuffle: false,
+            repeat: false,
         },
         playing: {
             didError: false,
@@ -192,10 +194,24 @@ function musicApp(state = initialState, action) {
                     ...state.session,
                     actions: {
                         ...state.session.actions,
+                        repeat: false,
                         shuffle: !state.session.actions.shuffle
                     },
                 },
             };
+
+    case SESSION_REPEAT_TOGGLE:
+        return {
+            ...state,
+            session: {
+                ...state.session,
+                actions: {
+                    ...state.session.actions,
+                    shuffle: false,
+                    repeat: !state.session.actions.repeat
+                },
+            },
+        };
 
         case UPDATE_USER_SEARCH:
             return {
