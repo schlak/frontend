@@ -14,7 +14,8 @@ function RandomSelection(props) {
     // Generate up-to 10 - unique - random numbers (used as album indexes)
     useEffect(() => {
         const chance = new Chance();
-        let albumsAmmount = nRowsOfAlbums(2);
+        let albumsAmmount = nRowsOfAlbums(1);
+        if (albumsAmmount === 2) albumsAmmount = 4;
         let albumsMaxIndex = albumsAmmount - 1;
         if (albums.length > 0) albumsMaxIndex = albums.length - 1;
         if (albums.length > 0 && albums.length < albumsAmmount) albumsAmmount = albums.length;
