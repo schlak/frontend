@@ -18,6 +18,7 @@ function Audio() {
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const playingIndex = useSelector((state) => state.session.playing.index);
     const volume = useSelector((state) => state.session.playing.status.volume);
+    const doesRepeat = useSelector((state) => state.session.actions.repeat);
     const filter = useSelector((state) => state.music.tracks.filter);
 
     const handlePlayNextTrack = () => {
@@ -130,6 +131,7 @@ function Audio() {
                             ? Sound.status.PAUSED
                             : Sound.status.PLAYING
                     }
+                    loop={doesRepeat}
                     volume={volume}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
