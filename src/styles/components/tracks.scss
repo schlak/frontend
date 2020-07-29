@@ -54,19 +54,35 @@
 
         p {
             color: #222;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             text-transform: capitalize;
             @include text-overflow-ellipsis();
         }
 
         .album-metadata-artist p {
             color: #555;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-top: 4px;
             margin-bottom: 15px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 1500px) {
+            p {
+                font-size: 1.6rem;
+            }
+            .album-metadata-artist p {
+                font-size: 1.4rem;
+            }
+        }
+        @media (max-width: 1400px) {
+            p {
+                font-size: 1.5rem;
+            }
+            .album-metadata-artist p {
+                font-size: 1.3rem;
+            }
+        }
+        @media (max-width: 1300px) {
             p {
                 font-size: 1.6rem;
             }
@@ -80,6 +96,14 @@
             }
             .album-metadata-artist p {
                 font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 400px) {
+            p {
+                font-size: 1.3rem;
+            }
+            .album-metadata-artist p {
+                font-size: 1.1rem;
             }
         }
     }
