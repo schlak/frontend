@@ -15,6 +15,7 @@ import {
 
 import Icon from "./Icon";
 import Image from "./Image";
+import Slider from "./Slider";
 import AudioPositionElement from "./AudioPositionElement";
 
 function AudioControlBar() {
@@ -59,8 +60,8 @@ function AudioControlBar() {
         dispatch(playNextTrackBasedOnSession(false));
     };
 
-    const handleVolumeChange = (e) => {
-        dispatch(changeVolume(e.target.value));
+    const handleVolumeChange = (value) => {
+        dispatch(changeVolume(value));
     }
 
     const handleShuffleToggle = () => dispatch(shuffleToggle());
@@ -115,8 +116,22 @@ function AudioControlBar() {
                         </div>
                     </div>
                     <div className="volume col">
-                        <Icon name="volume-high" />
-                        <input type="range" min="0" max="100" onChange={handleVolumeChange} />
+                        <div className="volume-bar">
+                            <div className="volume-icon">
+                                {
+                                    volume >= 50 ?
+                                    <Icon name="volume-high" isRounded="true" /> :
+                                    volume > 0 ?
+                                    <Icon name="volume-medium" isRounded="true" /> :
+                                    <Icon name="volume-mute" isRounded="true" />
+                                }
+                            </div>
+                            <div className="volume-slider">
+                                <Slider value={volume} onChange={handleVolumeChange} />
+                            </div>
+                        </div>
+                        {/*<Icon name="volume-high" />
+                        <input type="range" min="0" max="100" onChange={handleVolumeChange} />*/}
                     </div>
                     <AudioPositionElement />
                 </div>

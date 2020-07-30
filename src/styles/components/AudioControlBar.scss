@@ -100,6 +100,26 @@
         }
     }
 
+    .volume {
+
+        .volume-bar {
+            @include flex();
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+
+            .volume-icon {
+                margin-right: 15px;
+
+                svg {
+                    path {
+                        fill: #222;
+                    }
+                }
+            }
+        }
+    }
+
     @media (max-width: 1250px) {
         .audio-control-bar-content {
             grid-template-columns: 48% 48%;
