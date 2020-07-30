@@ -17,8 +17,8 @@ function Slider(props) {
         return $el.current.getBoundingClientRect();
     }
 
-    const handleDrag = (e) => {
-        if (isActive) {
+    const handleDrag = (e, a = false) => {
+        if (isActive || a) {
             const rect = $el.current.getBoundingClientRect();
             const offset = e.pageX - rect.left;
             let percentage = Math.round((offset / rect.width) * 100);
@@ -42,7 +42,7 @@ function Slider(props) {
     }, [valuePercentage]);
 
     return (
-        <div ref={$el} className="slider" onMouseMove={handleDrag} onMouseDown={handleStart} onMouseUp={handleEnd}>
+        <div ref={$el} className="slider" onClick={(e) => handleDrag(e, true)} onMouseMove={handleDrag} onMouseDown={handleStart} onMouseUp={handleEnd}>
             <div className="slider-container">
                 <span className="slider-button" style={{left: `${valuePercentage - percentage(7, sliderRect().width)}%`}}></span>
                 <span className="slider-active" style={{width: `${valuePercentage}%`}}></span>
