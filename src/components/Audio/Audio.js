@@ -6,7 +6,7 @@ import {
     playingTrackIsPaused,
     playingTrackDidError,
     sessionUpdatePlayingStatus
-} from "../store/actionCreators";
+} from "../../store/actionCreators";
 
 import Sound from "react-sound";
 

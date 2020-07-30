@@ -10,6 +10,12 @@
     border-top: 1px solid #eee;
     @include user-select(none);
 
+    &.offset {
+        bottom: 70px;
+        z-index: 90;
+        display: none;
+    }
+
     .audio-control-bar-content {
         position: relative;
         display: grid;
@@ -128,7 +134,7 @@
             grid-template-columns: 48% 48%;
         }
 
-        .col.volume {
+        &.default .col.volume {
             display: none;
         }
     }
@@ -137,7 +143,11 @@
             grid-template-columns: 100%;
         }
 
-        .col.track {
+        &.offset {
+            display: block;
+        }
+
+        &.default .col.track {
             display: none;
         }
     }

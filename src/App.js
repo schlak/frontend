@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTracks } from "./store/actionCreators";
 
 import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
-import Audio from "./components/Audio";
-import AudioControlBar from "./components/AudioControlBar";
+import Audio from "./components/Audio/Audio";
+import AudioControlBar from "./components/Audio/AudioControlBar";
 import FloatingAlbumCover from "./components/FloatingAlbumCover";
 import NavBar from "./components/NavBar";
 import NavLinks from "./components/NavLinks";
@@ -57,7 +57,11 @@ function App() {
                     </div>
 
                     {/* Audio Control Bar */}
-                    <AudioControlBar />
+                    <AudioControlBar render={["all"]} />
+                    {
+                        window.innerWidth < 750 &&
+                        <AudioControlBar render={["track"]} offset={true} />
+                    }
 
                     {/* MISC elements with position fixed/absolute */}
                     <FloatingAlbumCover />
