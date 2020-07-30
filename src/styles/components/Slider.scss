@@ -1,5 +1,5 @@
 .slider {
-    width: 200px;
+    width: 150px;
     padding: 20px 0;
 
     .slider-container {
@@ -25,6 +25,7 @@
         width: 12px;
         height: 12px;
         z-index: 10;
+        opacity: 0;
         border-radius: 100%;
         background-color: #444;
     }
@@ -36,5 +37,11 @@
     .slider-active {
         z-index: 5;
         background-color: #777;
+    }
+
+    &:hover {
+        .slider-button {
+            opacity: 1;
+        }
     }
 }
