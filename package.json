@@ -1,6 +1,6 @@
 {
     "name": "music-library-player",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "private": true,
     "dependencies": {
         "axios": "^0.19.2",
@@ -40,9 +40,6 @@
         "test:watch": "react-scripts test --watchAll",
         "test:coverage": "react-scripts test --coverage",
         "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
     },
     "browserslist": {
         "production": [
