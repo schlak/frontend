@@ -19,7 +19,6 @@ function Audio() {
     const playingIndex = useSelector((state) => state.session.playing.index);
     const volume = useSelector((state) => state.session.playing.status.volume);
     const doesRepeat = useSelector((state) => state.session.actions.repeat);
-    const filter = useSelector((state) => state.music.tracks.filter);
 
     const handlePlayNextTrack = () => {
         dispatch(playNextTrackBasedOnSession(true));
@@ -36,9 +35,6 @@ function Audio() {
         }));
     }
 
-    const handlePause = (newIsPaused) => {
-        dispatch(playingTrackIsPaused(newIsPaused));
-    }
     const handleTrackPause = () => {
         dispatch(playingTrackIsPaused(true));
     }

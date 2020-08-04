@@ -6,7 +6,6 @@ import { isSafari, isMobileSafari } from "react-device-detect";
 
 import { playTrack } from "../../store/actionCreators";
 
-import Icon from "../Icon";
 import Image from "../Image";
 
 function TrackBig({ index, size }) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useSpring, animated } from "react-spring";
+// import { useSpring, animated } from "react-spring";
 
 import Tag from "./Tag";
 
