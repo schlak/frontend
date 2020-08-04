@@ -7,12 +7,16 @@
     .tag {
         color: #333;
         font-size: 1.2rem;
+        letter-spacing: 0.3px;
         background-color: #fff;
         text-transform: capitalize;
         @include user-select(none);
         margin: 4px;
-        padding: 7px 12px;
+        padding: 7px 13px;
         cursor: pointer;
+        @include flex();
+        align-items: center;
+        height: 28px;
 
         &:hover {
             background-color: #f4f4f4;
@@ -21,6 +25,17 @@
         &.selected {
             color: #fff;
             background-color: #222;
+        }
+
+        svg {
+            width: 15px;
+            height: 15px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+        strong {
+            margin: 0 4px;
         }
     }
 }

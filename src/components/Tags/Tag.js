@@ -1,12 +1,8 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import { useSelector, useDispatch } from "react-redux";
-import { filterToggleTag } from "../../store/actionCreators";
+import { useSelector } from "react-redux";
 
-function Tag({ tag }) {
-    const dispatch = useDispatch();
-
-    // Get selected tags from store
+function Tag({ tag, handleOnClick }) {
     const selectedTags = useSelector((state) => state.music.tracks.filter.tags);
     let isSelected = false;
 
@@ -14,9 +10,6 @@ function Tag({ tag }) {
     // -> exists within filtered array
     if (selectedTags.includes(tag))
         isSelected = true;
-
-    // Toggle tag in filter array
-    const handleToggleTag = (e) => dispatch(filterToggleTag(tag));
 
     // Return Skeleton tag if value is falsy
     if (!tag) {
@@ -26,7 +19,7 @@ function Tag({ tag }) {
     return (
         <div
             className={`tag${isSelected ? " selected" : ""}`}
-            onClick={handleToggleTag}
+            onClick={() => handleOnClick(tag)}
         >
             {tag}
         </div>

@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import { useSpring, animated } from "react-spring";
 
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { filterToggleTag } from "../../store/actionCreators";
+
+import Icon from "../Icon";
 import Tag from "./Tag";
 
 function Tags() {
+    const dispatch = useDispatch();
+
     const tracks = useSelector((state) => state.music.tracks.data);
     const isFetching = useSelector((state) => state.music.tracks.isFetching);
     const didError = useSelector((state) => state.music.tracks.didError);
@@ -12,6 +18,8 @@ function Tags() {
 
     // Tags
     const [tags, setTags] = useState([]);
+    const [areTagsHidden, setAreTagsHidden] = useLocalStorage("areTagsHidden", true);
+    const tagsRendered = areTagsHidden ? 5 : tags.length;
 
     // Populate genre tags
     useEffect(() => {
@@ -29,18 +37,46 @@ function Tags() {
         );
     }, [tracks]);
 
+    // Toggle tag in filter array
+    const handleToggleTag = (tag) => dispatch(filterToggleTag(tag));
+    const handleToggleTagsRendered = () => setAreTagsHidden(!areTagsHidden);
+
     return (
         <div className="tags">
             {isLoading &&
-                [...Array(6)].map((x, key) =>
+                [...Array(7)].map((x, key) =>
                     <Tag tag={null} key={key} />
                 )
             }
 
             {
-                tags.map((tag, key) => {
-                    return <Tag tag={tag} key={key} />
+                tags.slice(0, tagsRendered).map((tag, key) => {
+                    return (
+                        <Tag
+                            tag={tag}
+                            handleOnClick={handleToggleTag}
+                            key={key}
+                        />
+                    )
                 })
+            }
+
+            {
+                tags.length > 5 &&
+                <Tag
+                    tag={
+                        tagsRendered === tags.length ?
+                        <>
+                            <Icon name="minus" />
+                            Hide <strong>{Math.abs(5 - tagsRendered)}</strong> Tags...
+                        </> :
+                        <>
+                            <Icon name="plus" />
+                            Show <strong>{tags.length - tagsRendered}</strong> More Tags...
+                        </>
+                    }
+                    handleOnClick={handleToggleTagsRendered}
+                />
             }
         </div>
     );
