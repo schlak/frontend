@@ -19,7 +19,7 @@ function Tags() {
     // Tags
     const [tags, setTags] = useState([]);
     const [areTagsHidden, setAreTagsHidden] = useLocalStorage("areTagsHidden", true);
-    const tagsRendered = areTagsHidden ? 5 : tags.length;
+    const tagsRendered = areTagsHidden ? 6 : tags.length;
 
     // Populate genre tags
     useEffect(() => {
@@ -62,13 +62,13 @@ function Tags() {
             }
 
             {
-                tags.length > 5 &&
+                tags.length > 6 &&
                 <Tag
                     tag={
                         tagsRendered === tags.length ?
                         <>
                             <Icon name="minus" />
-                            Hide <strong>{Math.abs(5 - tagsRendered)}</strong> Tags...
+                            Hide <strong>{Math.abs(6 - tagsRendered)}</strong> Tags...
                         </> :
                         <>
                             <Icon name="plus" />
