@@ -7,7 +7,7 @@ import { playTrack } from "../../store/actionCreators";
 
 import Icon from "../Icon";
 
-function TrackNew({ index, size }) {
+function Track({ index, size }) {
     const dispatch = useDispatch();
 
     // Track and session data from store
@@ -72,4 +72,4 @@ function TrackNew({ index, size }) {
     );
 }
 
-export default TrackNew;
+export default Track;

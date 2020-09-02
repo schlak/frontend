@@ -59,6 +59,23 @@ function Audio() {
         }
     }
 
+    const handleKeyupToPause = (e) => {
+        if (e.code === "Space" && e.target.tagName !== "INPUT") {
+            e.preventDefault();
+            if (isPaused) { handleTrackPlay() }
+            else { handleTrackPause() }
+        }
+    }
+
+    // Keyup listener to play/pause track
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyupToPause);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyupToPause);
+        };
+    }, [handleKeyupToPause])
+
     // MediaMetadata audio API
     useEffect(() => {
         if ("mediaSession" in navigator) {

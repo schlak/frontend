@@ -11,6 +11,9 @@ import {createLogger} from "redux-logger";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+// Log version number
+// console.log(`Music Library [Version ${process.env.npm_package_version}]`);
+
 // Array of middleware to use with redux-store
 const middlewares = [thunk];
 
