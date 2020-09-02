@@ -12,7 +12,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 // Log version number
-// console.log(`Music Library [Version ${process.env.npm_package_version}]`);
+console.log(`Music Library [Version ${process.env.REACT_APP_VERSION || "> 0.0.0"}]`);
 
 // Array of middleware to use with redux-store
 const middlewares = [thunk];
