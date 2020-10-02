@@ -24,20 +24,25 @@ function PopularTracks(props) {
 
         stats = orderBy(stats, [1], ["desc", "asc"]);
 
-        setTracksToRender(stats.slice(0, 5));
+        setTracksToRender(stats.slice(0, 6));
     }, [tracks]);
 
     return (
-        <div className="popular-tracks">
-            <h2>Popular Tracks</h2>
-            <div className="track-container grid grid-tracks-big">
-                {
-                    tracksToRender.map((track, index) => {
-                        return <TrackBig index={track[0]} size="big" key={index} />;
-                    })
-                }
-            </div>
-        </div>
+        <>
+            {
+                (tracksToRender.length > 2) &&
+                <div className="popular-tracks">
+                    <h2>Popular Tracks</h2>
+                    <div className="track-container grid grid-tracks-big">
+                        {
+                            tracksToRender.map((track, index) => {
+                                return <TrackBig index={track[0]} size="big" key={index} />;
+                            })
+                        }
+                    </div>
+                </div>
+            }
+        </>
     );
 }
 
