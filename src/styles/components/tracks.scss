@@ -144,35 +144,8 @@
             }
         }
 
-        @media (max-width: 500px) {
-            bottom: 60px;
-            right: 15px;
-            width: 45px;
-            height: 45px;
-
-            .album-action-button {
-                svg {
-                    width: 24px;
-                    height: 24px;
-                }
-            }
-        }
-        @media (max-width: 450px) {
-            bottom: 55px;
-            right: 13px;
-        }
-        @media (max-width: 400px) {
-            bottom: 50px;
-            right: 10px;
-            width: 38px;
-            height: 38px;
-
-            .album-action-button {
-                svg {
-                    width: 20px;
-                    height: 20px;
-                }
-            }
+        @media (max-width: 580px) {
+            display: none;
         }
     }
 
