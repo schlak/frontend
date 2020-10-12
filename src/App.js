@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { isMobile } from "react-device-detect";
 
 import { fetchTracks } from "./store/actionCreators";
 
@@ -40,7 +41,7 @@ function App() {
         <>
             <Audio />
             <SocketGlobal />
-            <div className="App">
+            <div className={`App ${isMobile ? "is-mobile" : "is-desktop"}`}>
                 <div className="app-wrapper">
                     {/* Navbar + Navlinks */}
                     <NavBar content="title" />
