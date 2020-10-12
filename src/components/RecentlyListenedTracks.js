@@ -32,7 +32,7 @@ function RecentlyListenedTracks(props) {
             {
                 (tracksToRender.length > 2) &&
                 <div className="most-listened-tracks">
-                    <h2>Recently Listened To</h2>
+                    <h2>Recently Played</h2>
                     <div className="track-container grid grid-tracks-big">
                         {
                             tracksToRender.map((track, index) => {
