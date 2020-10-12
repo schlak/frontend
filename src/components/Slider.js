@@ -48,6 +48,7 @@ function Slider(props) {
             onMouseMove={handleDrag}
             onMouseDown={(e) => {handleStart(e); handleDrag(e, true)}}
             onMouseUp={handleEnd}
+            onMouseLeave={handleEnd}
         >
             <div className="slider-container">
                 <span className="slider-button" style={{left: `${valuePercentage - percentage(7, sliderRect().width)}%`}}></span>
