@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -39,13 +40,12 @@ function Album({ album }) {
 
     // Goto album url
     const handleAlbumClick = (e) => {
-        e.stopPropagation();
-        if (album)
-            history.push(`/albums/${album.id}`);
+        if (!album) e.preventDefault();
     };
 
     // Action button handler
     const handleActionButton = (e) => {
+        e.preventDefault();
         e.stopPropagation();
 
         if (!isAlbumPlaying) {
@@ -68,33 +68,35 @@ function Album({ album }) {
     classList += didError ? " error" : "";
 
     return (
-        <div className={`album${classList}`} onClick={handleAlbumClick}>
-            <div className="album-cover">
-                <Image
-                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
-                    fallback={`fallback--album-cover`}
-                    alt="album-cover"
-                    draggable="false"
-                />
-            </div>
-            <div className="album-metadata">
-                <div className="album-metadata-album">
-                    <p>{albumName}</p>
+        <Link to={album ? `/albums/${album.id}` : `#`} onClick={handleAlbumClick}>
+            <div className={`album${classList}`}>
+                <div className="album-cover">
+                    <Image
+                        src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                        fallback={`fallback--album-cover`}
+                        alt="album-cover"
+                        draggable="false"
+                    />
                 </div>
-                <div className="album-metadata-artist">
-                    <p>{albumArtist}</p>
+                <div className="album-metadata">
+                    <div className="album-metadata-album">
+                        <p>{albumName}</p>
+                    </div>
+                    <div className="album-metadata-artist">
+                        <p>{albumArtist}</p>
+                    </div>
+                </div>
+                <div className="album-action" onClick={handleActionButton}>
+                    <div className="album-action-button">
+                        {
+                            !isAlbumPlaying || isPaused ?
+                            <Icon name="play" isRounded={true} /> :
+                            <Icon name="pause" isRounded={true} />
+                        }
+                    </div>
                 </div>
             </div>
-            <div className="album-action" onClick={handleActionButton}>
-                <div className="album-action-button">
-                    {
-                        !isAlbumPlaying || isPaused ?
-                        <Icon name="play" isRounded={true} /> :
-                        <Icon name="pause" isRounded={true} />
-                    }
-                </div>
-            </div>
-        </div>
+        </Link>
     );
 }
 
