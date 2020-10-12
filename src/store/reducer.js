@@ -26,7 +26,7 @@ const initialState = {
             isFetching: true,
             filter: {
                 tags: [],
-                search: ""
+                search: "",
             },
             albumsData: [],
             filteredData: [],
@@ -44,7 +44,9 @@ const initialState = {
             status: {
                 duration: null,
                 position: null,
-                volume: isMobile ? 100 : 50
+                volume: isMobile
+                    ? 100
+                    : JSON.parse(localStorage.getItem("volume")) || 50,
             },
             index: -1,
             track: {
@@ -167,13 +169,15 @@ function musicApp(state = initialState, action) {
                         ...state.session.playing,
                         status: {
                             ...state.session.playing.status,
-                            ...action.payload
+                            ...action.payload,
                         },
                     },
                 },
             };
 
         case SESSION_VOLUME:
+            localStorage.setItem("volume", action.payload);
+
             return {
                 ...state,
                 session: {
@@ -182,7 +186,7 @@ function musicApp(state = initialState, action) {
                         ...state.session.playing,
                         status: {
                             ...state.session.playing.status,
-                            volume: action.payload
+                            volume: action.payload,
                         },
                     },
                 },
@@ -196,23 +200,23 @@ function musicApp(state = initialState, action) {
                     actions: {
                         ...state.session.actions,
                         repeat: false,
-                        shuffle: !state.session.actions.shuffle
+                        shuffle: !state.session.actions.shuffle,
                     },
                 },
             };
 
-    case SESSION_REPEAT_TOGGLE:
-        return {
-            ...state,
-            session: {
-                ...state.session,
-                actions: {
-                    ...state.session.actions,
-                    shuffle: false,
-                    repeat: !state.session.actions.repeat
+        case SESSION_REPEAT_TOGGLE:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    actions: {
+                        ...state.session.actions,
+                        shuffle: false,
+                        repeat: !state.session.actions.repeat,
+                    },
                 },
-            },
-        };
+            };
 
         case UPDATE_USER_SEARCH:
             return {
@@ -223,8 +227,8 @@ function musicApp(state = initialState, action) {
                         ...state.music.tracks,
                         filter: {
                             ...state.music.tracks.filter,
-                            search: action.payload
-                        }
+                            search: action.payload,
+                        },
                     },
                 },
             };
@@ -238,9 +242,9 @@ function musicApp(state = initialState, action) {
                         ...state.music.tracks,
                         filter: {
                             ...state.music.tracks.filter,
-                            tags: action.payload.tags
+                            tags: action.payload.tags,
                         },
-                        filteredData: action.payload.filteredData
+                        filteredData: action.payload.filteredData,
                     },
                 },
             };
@@ -252,23 +256,22 @@ function musicApp(state = initialState, action) {
                     ...state.socket,
                     global: {
                         ...state.socket.global,
-                        connectedUsers: action.payload
+                        connectedUsers: action.payload,
                     },
                 },
             };
 
-
-    case SOCKET_GLOBAL_PLAYING:
-        return {
-            ...state,
-            socket: {
-                ...state.socket,
-                global: {
-                    ...state.socket.global,
-                    playing: action.payload,
+        case SOCKET_GLOBAL_PLAYING:
+            return {
+                ...state,
+                socket: {
+                    ...state.socket,
+                    global: {
+                        ...state.socket.global,
+                        playing: action.payload,
+                    },
                 },
-            },
-        };
+            };
 
         default:
             return state;

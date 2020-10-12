@@ -1,11 +1,11 @@
 {
     "name": "music-library-player",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "private": true,
     "dependencies": {
         "axios": "^0.19.2",
         "chance": "^1.1.6",
-		"cross-env": "^7.0.2",
+        "cross-env": "^7.0.2",
         "crypto-js": "^4.0.0",
         "fuse.js": "^6.2.1",
         "lodash": "^4.17.15",
