@@ -139,11 +139,11 @@ export const numberOfAlbumsOnOneRow = () => {
     let albumsPerRow;
 
     switch (true) {
-        case width < 900:
+        case width < 800:
             albumsPerRow = 2;
             break;
 
-        case width < 1300:
+        case width < 1100:
             albumsPerRow = 3;
             break;
 
