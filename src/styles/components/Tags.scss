@@ -11,9 +11,10 @@
         background-color: #fff;
         text-transform: capitalize;
         @include user-select(none);
-        margin: 4px;
-        padding: 7px 13px;
         cursor: pointer;
+        margin: 4px;
+        padding: 7px 18px;
+        border-radius: 20px;
         @include flex();
         align-items: center;
         height: 28px;
