@@ -25,6 +25,13 @@
 }
 
 
+@mixin flex-center() {
+    @include flex();
+    align-items: center;
+    justify-content: center;
+}
+
+
 @mixin user-select($value) {
     -webkit-touch-callout: $value;
     -webkit-user-select: $value;

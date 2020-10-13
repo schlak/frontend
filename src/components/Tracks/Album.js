@@ -77,6 +77,15 @@ function Album({ album }) {
                         alt="album-cover"
                         draggable="false"
                     />
+                    <div className="album-action" onClick={handleActionButton}>
+                        <div className="album-action-button">
+                            {
+                                !isAlbumPlaying || isPaused ?
+                                <Icon name="play" isRounded={true} /> :
+                                <Icon name="pause" isRounded={true} />
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div className="album-metadata">
                     <div className="album-metadata-album">
@@ -84,15 +93,6 @@ function Album({ album }) {
                     </div>
                     <div className="album-metadata-artist">
                         <p>{albumArtist}</p>
-                    </div>
-                </div>
-                <div className="album-action" onClick={handleActionButton}>
-                    <div className="album-action-button">
-                        {
-                            !isAlbumPlaying || isPaused ?
-                            <Icon name="play" isRounded={true} /> :
-                            <Icon name="pause" isRounded={true} />
-                        }
                     </div>
                 </div>
             </div>
