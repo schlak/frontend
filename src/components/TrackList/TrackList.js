@@ -51,7 +51,7 @@ function TrackList() {
     return (
         <div className="track-container">
             {isLoading &&
-                [...Array(8)].map((x, key) =>
+                [...Array(4)].map((x, key) =>
                     <TrackAlbum album={false} key={key} />
                 )
             }

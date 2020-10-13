@@ -31,14 +31,10 @@ function TrackAlbum({ album }) {
         // Loading state
         let loadingKey = Math.floor(Math.random() * (8 - 2)) + 2;
         isLoading = true;
-        $title = <Skeleton />;
+        $title = <Skeleton width={"80%"} />;
         $tracks = [...Array(loadingKey)].map((value, key) => {
             return (
-                <div className="track" key={key}>
-                    <p>
-                        <Skeleton />
-                    </p>
-                </div>
+                <Skeleton className="track compact" style={{borderBottom: "2px solid #f5f5f5"}} />
             );
         })
     }

@@ -51,7 +51,7 @@ function AlbumList() {
     return (
         <div className="track-container grid grid-albums">
             {isLoading &&
-                [...Array(8)].map((x, key) =>
+                [...Array(nRowsOfAlbums(3))].map((x, key) =>
                     <Album album={false} key={key} />
                 )
             }
