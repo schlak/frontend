@@ -69,7 +69,7 @@ function App() {
                     <AFCBackgroundMulti />
 
                     {/* Footer */}
-                    <div style={{marginTop: "250px"}}></div>
+                    <div className="footer"></div>
                 </div>
             </div>
         </>

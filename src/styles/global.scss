@@ -70,6 +70,12 @@ section {
 }
 
 
+.footer {
+    @include container(1250px);
+    margin-top: 150px;
+}
+
+
 ::-webkit-scrollbar {
     width: 10px;
 }
