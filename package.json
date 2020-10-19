@@ -1,8 +1,9 @@
 {
     "name": "music-library-player",
-    "version": "2.0.9",
+    "version": "2.1.0",
     "private": true,
     "dependencies": {
+        "@bug-catch/browser": "^0.5.2",
         "axios": "^0.19.2",
         "chance": "^1.1.6",
         "cross-env": "^7.0.2",

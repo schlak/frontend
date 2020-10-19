@@ -6,13 +6,24 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import musicApp from "./store/reducer";
 import thunk from "redux-thunk";
-import {createLogger} from "redux-logger";
+import { createLogger } from "redux-logger";
+import bugcatch from "@bug-catch/browser";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 // Log version number
-console.log(`Music Library [Version ${process.env.REACT_APP_VERSION || "> 0.0.0"}]`);
+const appVersion = process.env.REACT_APP_VERSION || "> 0.0.0";
+console.log(`Music Library [Version ${appVersion}]`);
+
+// Bugcatch init
+// logs all errors
+if (process.env.REACT_APP_BUGCATCH_ENABLE) {
+    bugcatch.init({
+        base_url: `${process.env.REACT_APP_API}/bugcatch`,
+        release: appVersion,
+    });
+}
 
 // Array of middleware to use with redux-store
 const middlewares = [thunk];
@@ -21,7 +32,8 @@ const middlewares = [thunk];
 if (process.env.NODE_ENV === "development") {
     middlewares.push(
         createLogger({
-            predicate: (getState, action) => action.type !== "SESSION_PLAYING_UPDATE_STATUS"
+            predicate: (getState, action) =>
+                action.type !== "SESSION_PLAYING_UPDATE_STATUS",
         })
     );
 }
