@@ -7,17 +7,18 @@
     z-index: 100;
     overflow: hidden;
     border-bottom: 0px solid #eee;
-    background-color: rgba(255,255,255, 0);
+    background-color: rgba(255, 255, 255, 0);
     @include transition(all, 180ms, ease);
+    will-change: height, border-bottom, background-color;
 
     &.--scroll {
         height: 60px;
         border-bottom: 1px solid #eee;
-        background-color: rgba(255,255,255, 1);
+        background-color: rgba(255, 255, 255, 1);
 
         .navbar-logo {
             -webkit-transform: scale(0.8);
-                    transform: scale(0.8);
+            transform: scale(0.8);
         }
 
         .navbar-title {
@@ -38,8 +39,9 @@
     .navbar-logo {
         margin-right: 120px;
         -webkit-transform: scale(1);
-                transform: scale(1);
+        transform: scale(1);
         @include transition(transform, 180ms, ease);
+        will-change: transform;
 
         @media (max-width: 750px) {
             margin-right: 100px;
@@ -65,5 +67,6 @@
         font-size: 2.1em;
         letter-spacing: 0.5px;
         @include transition(all, 180ms, ease);
+        will-change: font-size;
     }
 }
