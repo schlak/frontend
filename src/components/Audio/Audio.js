@@ -17,8 +17,9 @@ function Audio() {
     const track = useSelector((state) => state.session.playing.track);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const playingIndex = useSelector((state) => state.session.playing.index);
-    const volume = useSelector((state) => state.session.playing.status.volume);
     const doesRepeat = useSelector((state) => state.session.actions.repeat);
+    const volume = useSelector((state) => state.session.playing.status.volume);
+    const isMute = useSelector((state) => state.session.playing.status.isMute);
 
     const handlePlayNextTrack = () => {
         dispatch(playNextTrackBasedOnSession(true));
@@ -140,12 +141,10 @@ function Audio() {
                 <Sound
                     url={`${process.env.REACT_APP_API}/tracks/${track.id}/audio`}
                     playStatus={
-                        isPaused
-                            ? Sound.status.PAUSED
-                            : Sound.status.PLAYING
+                        isPaused ? Sound.status.PAUSED : Sound.status.PLAYING
                     }
                     loop={doesRepeat}
-                    volume={volume}
+                    volume={isMute ? 0 : volume}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
                     onError={handleDidError}

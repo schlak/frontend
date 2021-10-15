@@ -10,6 +10,7 @@ import {
     SESSION_PLAYING_TOGGLE,
     SESSION_PLAYING_UPDATE_STATUS,
     SESSION_VOLUME,
+    SESSION_VOLUME_MUTE,
     SESSION_SHUFFLE_TOGGLE,
     SESSION_REPEAT_TOGGLE,
     UPDATE_USER_SEARCH,
@@ -44,6 +45,7 @@ const initialState = {
             status: {
                 duration: null,
                 position: null,
+                isMute: false,
                 volume: isMobile
                     ? 100
                     : JSON.parse(localStorage.getItem("volume")) || 50,
@@ -195,6 +197,21 @@ function musicApp(state = initialState, action) {
                         status: {
                             ...state.session.playing.status,
                             volume: action.payload,
+                        },
+                    },
+                },
+            };
+
+        case SESSION_VOLUME_MUTE:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        status: {
+                            ...state.session.playing.status,
+                            isMute: action.payload,
                         },
                     },
                 },
