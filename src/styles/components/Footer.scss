@@ -1,8 +1,8 @@
 .footer {
     @include container(880px);
     @include user-select(none);
-    margin-top: 140px;
-    margin-bottom: 140px;
+    margin-top: 120px;
+    margin-bottom: 120px;
     opacity: 0.8;
 
     hr {

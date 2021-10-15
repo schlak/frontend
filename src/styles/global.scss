@@ -9,7 +9,7 @@ html {
 
 body,
 html {
-    font-family: 'Tahoma', 'Raleway', 'Roboto', sans-serif;
+    font-family: "Tahoma", "Raleway", "Roboto", sans-serif;
 }
 
 strong {
@@ -44,11 +44,9 @@ section {
     margin-bottom: 70px;
 }
 
-
 .app-wrapper {
     @include container(1920px);
 }
-
 
 .container {
     @include container(1250px);
@@ -68,13 +66,6 @@ section {
         padding: 0 20px;
     }
 }
-
-
-.footer {
-    @include container(1250px);
-    margin-top: 150px;
-}
-
 
 ::-webkit-scrollbar {
     width: 10px;
