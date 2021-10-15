@@ -152,7 +152,9 @@ function AudioControlBar(props) {
                     <div className="volume col">
                         <div className="volume-bar">
                             <div
-                                className="volume-icon"
+                                className={`volume-icon${
+                                    isMute ? " is-faded" : ""
+                                }`}
                                 onClick={handleVolumeMuteToggle}
                             >
                                 {volume >= 50 && !isMute ? (
