@@ -168,6 +168,34 @@ export const numberOfAlbumsOnOneRow = () => {
     return albumsPerRow;
 };
 
+export const numberOfTracksOnOneRow = () => {
+    let width = window.innerWidth;
+    let tracksPerRow;
+
+    switch (true) {
+        case width < 850:
+            tracksPerRow = 1;
+            break;
+
+        case width < 1400:
+            tracksPerRow = 2;
+            break;
+
+        case width < 1800:
+            tracksPerRow = 3;
+            break;
+
+        default:
+            tracksPerRow = 4;
+    }
+
+    return tracksPerRow;
+};
+
 export const nRowsOfAlbums = (rows) => {
     return numberOfAlbumsOnOneRow() * rows;
+};
+
+export const nRowsOfTracks = (rows) => {
+    return numberOfTracksOnOneRow() * rows;
 };
