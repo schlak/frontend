@@ -7,22 +7,42 @@
         flex-wrap: nowrap;
 
         .navlinks-link {
+            color: #444;
             margin-right: 20px;
 
             &.active {
                 span {
+                    color: #222;
                     font-weight: bold;
+
+                    &::before {
+                        opacity: 1;
+                    }
                 }
             }
 
             span {
-                font-size: 2em;
+                font-size: 1.7em;
                 padding: 10px 30px;
                 text-transform: capitalize;
-            }
-            &:first-of-type span {
-                padding: 10px 0;
-                padding-right: 30px;
+
+                &::before {
+                    position: absolute;
+                    content: "";
+                    z-index: -1;
+                    left: 7.5%;
+                    top: -40%;
+                    width: 85%;
+                    height: 180%;
+                    border-radius: 4px;
+                    background-color: rgba($color: #fff, $alpha: 0.7);
+                    @include transition(all, 80ms, ease);
+                    opacity: 0;
+                }
+
+                &:hover::before {
+                    opacity: 0.5;
+                }
             }
         }
 
