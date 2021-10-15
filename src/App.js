@@ -44,10 +44,8 @@ function App() {
             <SocketGlobal />
             <div className={`App ${isMobile ? "is-mobile" : "is-desktop"}`}>
                 <div className="app-wrapper">
-                    {/* Navbar + Navlinks */}
+                    {/* Navbar + Navlinks & Title + Search-bar */}
                     <NavBar content="title" />
-                    <div style={{ marginTop: "100px" }}></div>
-                    <NavLinks />
 
                     {/* Routes */}
                     <div className="app-page">

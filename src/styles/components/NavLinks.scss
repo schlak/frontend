@@ -1,5 +1,5 @@
 .navlinks {
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
 
     .navlinks-content {
         @include user-select(none);
@@ -13,7 +13,7 @@
             &.active {
                 span {
                     color: #222;
-                    font-weight: bold;
+                    // font-weight: bold;
 
                     &::before {
                         opacity: 1;
@@ -35,13 +35,13 @@
                     width: 85%;
                     height: 180%;
                     border-radius: 4px;
-                    background-color: rgba($color: #fff, $alpha: 0.7);
+                    background-color: rgba($color: #fff, $alpha: 0.8);
                     @include transition(all, 80ms, ease);
                     opacity: 0;
                 }
 
                 &:hover::before {
-                    opacity: 0.5;
+                    opacity: 0.7;
                 }
             }
         }

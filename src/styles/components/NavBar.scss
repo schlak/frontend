@@ -24,6 +24,14 @@
         .navbar-title {
             font-size: 1.9em;
         }
+
+        .navlinks .navlinks-content .navlinks-link {
+            span {
+                &::before {
+                    background-color: rgba($color: #f8f8f8, $alpha: 0.7);
+                }
+            }
+        }
     }
 
     .navbar-content {
@@ -37,7 +45,7 @@
     }
 
     .navbar-logo {
-        margin-right: 120px;
+        margin-right: 70px;
         -webkit-transform: scale(1);
         transform: scale(1);
         @include transition(transform, 180ms, ease);
@@ -54,8 +62,8 @@
         }
 
         svg {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
 
             path {
                 fill: #333333;
@@ -68,5 +76,16 @@
         letter-spacing: 0.5px;
         @include transition(all, 180ms, ease);
         will-change: font-size;
+    }
+}
+
+.navbar-secondary {
+    @include flex();
+    align-items: center;
+    margin-bottom: 70px;
+
+    h1.navbar-title {
+        font-size: 2.2em;
+        margin-right: 60px;
     }
 }
