@@ -8,17 +8,20 @@
         overflow: hidden;
 
         &.grid-albums {
-            grid-template-columns: 18% 18% 18% 18% 18%;
+            grid-template-columns: repeat(6, 1fr);
 
+            @media (max-width: 1800px) {
+                grid-template-columns: repeat(5, 1fr);
+            }
             @media (max-width: 1500px) {
-                grid-template-columns: 22% 22% 22% 22%;
+                grid-template-columns: repeat(4, 1fr);
                 // grid-template-columns: 30% 30% 30%;
             }
             @media (max-width: 1100px) {
-                grid-template-columns: 30% 30% 30%;
+                grid-template-columns: repeat(3, 1fr);
             }
             @media (max-width: 800px) {
-                grid-template-columns: 48% 48%;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 

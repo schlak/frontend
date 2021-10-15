@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import sha1 from 'crypto-js/sha1';
+import sha1 from "crypto-js/sha1";
 
 /*
  * Group tracks into albums
@@ -17,15 +17,19 @@ export const groupTracksIntoAlbums = (tracksStore, tracksToGroup) => {
         let found = false;
 
         // Find proper index of track in tracksStore
-        const storeIndex = tracksStore.findIndex(storeTrack => storeTrack.id === track.id);
+        const storeIndex = tracksStore.findIndex(
+            (storeTrack) => storeTrack.id === track.id
+        );
 
         // Loop albums array
         // Search for matching album data
         albums.forEach((album, j) => {
-            if (track.metadata.album === album.album &&
-                track.metadata.album_artist === album.album_artist) {
-                    albums[j].tracks.push(storeIndex);
-                    found = true;
+            if (
+                track.metadata.album === album.album &&
+                track.metadata.album_artist === album.album_artist
+            ) {
+                albums[j].tracks.push(storeIndex);
+                found = true;
             }
         });
 
@@ -33,21 +37,20 @@ export const groupTracksIntoAlbums = (tracksStore, tracksToGroup) => {
         // create new album
         if (!found) {
             return albums.push({
-                id: sha1(track.metadata.album + track.metadata.album_artist).toString(),
+                id: sha1(
+                    track.metadata.album + track.metadata.album_artist
+                ).toString(),
                 album: track.metadata.album,
                 album_artist: track.metadata.album_artist,
                 genre: track.metadata.genre,
                 year: track.metadata.year,
-                tracks: [
-                    storeIndex
-                ]
+                tracks: [storeIndex],
             });
         }
     });
 
     return albums;
 };
-
 
 /*
  * Fuzzy-search for a track in tracks array
@@ -65,8 +68,8 @@ export const fuzzySearchForTrack = (tracks, filter) => {
             "metadata.album",
             "metadata.artist",
             "metadata.album_artist",
-            "metadata.year"
-        ]
+            "metadata.year",
+        ],
     });
 
     // List of matches
@@ -76,7 +79,6 @@ export const fuzzySearchForTrack = (tracks, filter) => {
     return false;
 };
 
-
 /*
  * Filter tracks from selected tags or user input
  *
@@ -84,29 +86,34 @@ export const fuzzySearchForTrack = (tracks, filter) => {
  * @param {filter}  filter options
  * @return          array of index keys for state.music.albums.data
  */
-export const filterTracks = (tracksStore, tracksToFilter, filter, includeSearch = false) => {
-    return tracksToFilter.reduce(function(filtered, track, key) {
+export const filterTracks = (
+    tracksStore,
+    tracksToFilter,
+    filter,
+    includeSearch = false
+) => {
+    return tracksToFilter.reduce(function (filtered, track, key) {
         // RegExp filter tags (case-insensitive)
         const regexTags = new RegExp(filter.tags.join("|"), "i");
 
         // Run search on each track
         if (filter.search.length > 0 && includeSearch) {
             const trackFound = fuzzySearchForTrack([track], filter);
-            if (!trackFound)
-                return filtered;
+            if (!trackFound) return filtered;
         }
 
         // If no filter applyed: add all all tracks
         // Or if track tag matches filter in RegExp
-        if (filter.tags.length === 0  ||
-            (filter.tags.length > 0 && regexTags.test(track.metadata.genre))) {
+        if (
+            filter.tags.length === 0 ||
+            (filter.tags.length > 0 && regexTags.test(track.metadata.genre))
+        ) {
             filtered.push(track);
         }
 
         return filtered;
     }, []);
 };
-
 
 /*
  * Deturmines if a track exists
@@ -133,7 +140,6 @@ export const doesTrackExist = (data, track) => {
     return res;
 };
 
-
 export const numberOfAlbumsOnOneRow = () => {
     let width = window.innerWidth;
     let albumsPerRow;
@@ -151,13 +157,16 @@ export const numberOfAlbumsOnOneRow = () => {
             albumsPerRow = 4;
             break;
 
-        default:
+        case width < 1800:
             albumsPerRow = 5;
+            break;
+
+        default:
+            albumsPerRow = 6;
     }
 
     return albumsPerRow;
 };
-
 
 export const nRowsOfAlbums = (rows) => {
     return numberOfAlbumsOnOneRow() * rows;
