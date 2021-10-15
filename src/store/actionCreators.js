@@ -2,7 +2,7 @@ import { api } from "../utils/api";
 import {
     filterTracks,
     doesTrackExist,
-    groupTracksIntoAlbums
+    groupTracksIntoAlbums,
 } from "../utils/sortTracks";
 import {
     FETCH_TRACKS_START,
@@ -13,6 +13,7 @@ import {
     SESSION_PLAYING_TOGGLE,
     SESSION_PLAYING_UPDATE_STATUS,
     SESSION_VOLUME,
+    SESSION_VOLUME_MUTE,
     SESSION_SHUFFLE_TOGGLE,
     SESSION_REPEAT_TOGGLE,
     UPDATE_USER_SEARCH,
@@ -32,7 +33,10 @@ export const fetchTracks = () => (dispatch) => {
         .then((res) => {
             // console.log("Tracks:", res.data);
             const albums = groupTracksIntoAlbums(res.data, res.data);
-            dispatch({ type: FETCH_TRACKS_SUCCESS, payload: [res.data, albums] });
+            dispatch({
+                type: FETCH_TRACKS_SUCCESS,
+                payload: [res.data, albums],
+            });
         })
         .catch((error) => {
             dispatch({ type: FETCH_TRACKS_FAILURE, payload: error });
@@ -63,7 +67,9 @@ export const playRandomTrack = () => (dispatch, getState) => {
     const ranTrack = trackList[ranIndex];
 
     // Get actual index of track in data
-    const trackIndex = tracks.findIndex(storeTrack => storeTrack.id === ranTrack.id);
+    const trackIndex = tracks.findIndex(
+        (storeTrack) => storeTrack.id === ranTrack.id
+    );
 
     dispatch({ type: SESSION_PLAY_TRACK, payload: trackIndex });
 };
@@ -85,15 +91,24 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
             // #1 Re-create filter
             // #2 Is current track in filter
             const tracksFiltered = state.music.tracks.filteredData;
-            const [trackExists, trackIndexFiltered] = doesTrackExist(tracksFiltered, tracks[trackIndex]);
+            const [trackExists, trackIndexFiltered] = doesTrackExist(
+                tracksFiltered,
+                tracks[trackIndex]
+            );
 
             if (trackExists) {
                 newIndex = trackIndexFiltered + 1;
                 if (tracksFiltered.length <= newIndex) newIndex = 0;
 
-                newIndex = tracks.findIndex(storeTrack => storeTrack.id === tracksFiltered[newIndex].id);
+                newIndex = tracks.findIndex(
+                    (storeTrack) =>
+                        storeTrack.id === tracksFiltered[newIndex].id
+                );
 
-                return dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
+                return dispatch({
+                    type: SESSION_PLAY_TRACK,
+                    payload: newIndex,
+                });
             }
         }
 
@@ -112,7 +127,6 @@ export const playNextTrack = (trackIndex) => (dispatch, getState) => {
     dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
 };
 
-
 /*
  * Play previous track
  */
@@ -130,15 +144,24 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
             // #1 Re-create filter
             // #2 Is current track in filter
             const tracksFiltered = state.music.tracks.filteredData;
-            const [trackExists, trackIndexFiltered] = doesTrackExist(tracksFiltered, tracks[trackIndex]);
+            const [trackExists, trackIndexFiltered] = doesTrackExist(
+                tracksFiltered,
+                tracks[trackIndex]
+            );
 
             if (trackExists) {
                 newIndex = trackIndexFiltered - 1;
                 if (newIndex < 0) newIndex = tracksFiltered.length - 1;
 
-                newIndex = tracks.findIndex(storeTrack => storeTrack.id === tracksFiltered[newIndex].id);
+                newIndex = tracks.findIndex(
+                    (storeTrack) =>
+                        storeTrack.id === tracksFiltered[newIndex].id
+                );
 
-                return dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
+                return dispatch({
+                    type: SESSION_PLAY_TRACK,
+                    payload: newIndex,
+                });
             }
         }
 
@@ -157,15 +180,16 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
     dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
 };
 
-
 /*
  * Decide what to play based on current session
  */
-export const playNextTrackBasedOnSession = (playNext = true) => (dispatch, getState) => {
+export const playNextTrackBasedOnSession = (playNext = true) => (
+    dispatch,
+    getState
+) => {
     const state = getState();
 
-    if (state.session.actions.shuffle)
-        return dispatch(playRandomTrack());
+    if (state.session.actions.shuffle) return dispatch(playRandomTrack());
 
     if (playNext) {
         dispatch(playNextTrack(state.session.playing.index));
@@ -173,7 +197,6 @@ export const playNextTrackBasedOnSession = (playNext = true) => (dispatch, getSt
         dispatch(playPreviousTrack(state.session.playing.index));
     }
 };
-
 
 /*
  * Pause currently playing track
@@ -196,7 +219,6 @@ export const sessionUpdatePlayingStatus = (status) => (dispatch) => {
     dispatch({ type: SESSION_PLAYING_UPDATE_STATUS, payload: status });
 };
 
-
 /*
  * Change volume to an exact ammount (0/100)
  */
@@ -204,6 +226,12 @@ export const changeVolume = (newVolume) => (dispatch) => {
     dispatch({ type: SESSION_VOLUME, payload: newVolume });
 };
 
+/*
+ * Mute volume - previous volume level is not effected
+ */
+export const muteVolume = (isMute) => (dispatch) => {
+    dispatch({ type: SESSION_VOLUME_MUTE, payload: isMute });
+};
 
 /*
  * Toggle shuffle
@@ -212,7 +240,6 @@ export const shuffleToggle = () => (dispatch) => {
     dispatch({ type: SESSION_SHUFFLE_TOGGLE });
 };
 
-
 /*
  * Toggle repeat
  */
@@ -220,14 +247,12 @@ export const repeatToggle = () => (dispatch) => {
     dispatch({ type: SESSION_REPEAT_TOGGLE });
 };
 
-
 /*
  * Update search input value
  */
 export const updateUserSearch = (search) => (dispatch) => {
     dispatch({ type: UPDATE_USER_SEARCH, payload: search });
 };
-
 
 /*
  * Toggle filter tags array value
@@ -251,22 +276,21 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
 
     // Filter tracks
     if (tags.length > 0) {
-        tracksFiltered = filterTracks(
-            tracks.data, tracks.data,
-            {
-                ...filter,
-                tags
-            }
-        );
+        tracksFiltered = filterTracks(tracks.data, tracks.data, {
+            ...filter,
+            tags,
+        });
     }
 
     // Update tags array
-    dispatch({ type: FILTER_TOGGLE_TAG, payload: {
-        tags: tags,
-        filteredData: tracksFiltered
-    } });
+    dispatch({
+        type: FILTER_TOGGLE_TAG,
+        payload: {
+            tags: tags,
+            filteredData: tracksFiltered,
+        },
+    });
 };
-
 
 /*
  * Socket: update connected users
@@ -274,7 +298,6 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
 export const socketConnectedUserCount = (count) => (dispatch) => {
     dispatch({ type: SOCKET_CONNECTED_USERS, payload: count });
 };
-
 
 /*
  * Socket: update global playing session

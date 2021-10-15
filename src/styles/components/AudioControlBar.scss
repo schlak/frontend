@@ -21,7 +21,7 @@
         display: grid;
         grid-gap: 10px;
         height: 100%;
-        grid-template-columns: 30% 30% 30%;
+        grid-template-columns: repeat(3, 1fr);
 
         .col {
             @include flex();
@@ -34,6 +34,13 @@
             }
             &:first-of-type {
                 justify-content: flex-start;
+            }
+
+            @media (min-width: 1600px) {
+                &.volume,
+                &:first-of-type {
+                    justify-content: center;
+                }
             }
         }
     }
@@ -67,7 +74,7 @@
             @include text-overflow-ellipsis();
 
             .artist {
-                opacity: .7;
+                opacity: 0.7;
                 font-size: 90%;
                 @include text-overflow-ellipsis();
             }
@@ -75,7 +82,6 @@
     }
 
     .controls {
-
         .divider {
             height: 50%;
             width: 1px;
@@ -110,7 +116,6 @@
     }
 
     .volume {
-
         .volume-bar {
             @include flex();
             align-items: center;
@@ -119,6 +124,12 @@
 
             .volume-icon {
                 margin-right: 15px;
+
+                &.is-faded {
+                    svg path {
+                        fill: lighten(#333, 20%);
+                    }
+                }
 
                 svg {
                     width: 22px;

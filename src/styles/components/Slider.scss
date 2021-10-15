@@ -39,6 +39,15 @@
         background-color: #777;
     }
 
+    &.is-faded {
+        .slider-button {
+            background-color: lighten(#444, 40%);
+        }
+        .slider-active {
+            background-color: lighten(#777, 40%);
+        }
+    }
+
     &:hover {
         .slider-button {
             opacity: 1;

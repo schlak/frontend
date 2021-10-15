@@ -1,0 +1,23 @@
+.footer {
+    @include container(880px);
+    @include user-select(none);
+    margin-top: 120px;
+    margin-bottom: 120px;
+    opacity: 0.8;
+
+    hr {
+        margin-bottom: 22px;
+    }
+
+    p {
+        color: #222;
+        font-size: 1.6em;
+        font-style: italic;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    small {
+        font-size: 88%;
+    }
+}

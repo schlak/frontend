@@ -1,10 +1,8 @@
-
 @font-face {
     font-family: "Tahoma";
-    src: url("/fonts/Tahoma/Tahoma.eot");
-    src: local("Tahoma"),
-        local("Tahoma Regular"),
-        url("/fonts/Tahoma/Tahoma.woff2") format("woff2"),
-        url("/fonts/Tahoma/Tahoma.woff") format("woff"),
-        url("/fonts/Tahoma/Tahoma.svg#filename") format("svg");
+    src: url("./fonts/Tahoma/Tahoma.eot");
+    src: local("Tahoma"), local("Tahoma Regular"),
+        url("./fonts/Tahoma/Tahoma.woff2") format("woff2"),
+        url("./fonts/Tahoma/Tahoma.woff") format("woff"),
+        url("./fonts/Tahoma/Tahoma.svg#filename") format("svg");
 }

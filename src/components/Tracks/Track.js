@@ -14,7 +14,9 @@ function Track({ index, size }) {
     const track = useSelector((state) => state.music.tracks.data[index]);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const playingId = useSelector((state) => state.session.playing.track.id);
-    const playingDidError = useSelector((state) => state.session.playing.didError);
+    const playingDidError = useSelector(
+        (state) => state.session.playing.didError
+    );
 
     // Is this track currently playing?
     const isTrackPlaying = track.id === playingId;
@@ -25,18 +27,7 @@ function Track({ index, size }) {
 
     // Play track in session
     const playInSession = (e) => {
-        if (!isSafari && !isMobileSafari) {
-            dispatch( playTrack(index) );
-        } else {
-            // Play blank sound, then track
-            const audioTmp = new Audio("/blank.mp3");
-            audioTmp.play();
-
-            setTimeout(function() {
-                audioTmp.pause();
-                dispatch( playTrack(index) );
-            }, 1000);
-        }
+        dispatch(playTrack(index));
     };
 
     // Dynamic class list
@@ -53,17 +44,15 @@ function Track({ index, size }) {
             onClick={playInSession}
         >
             <div className="track-col play-state">
-                {
-                    (isTrackPlaying && !isTrackPaused && !didError) ?
-                    <Icon name="pause" /> :
+                {isTrackPlaying && !isTrackPaused && !didError ? (
+                    <Icon name="pause" />
+                ) : (
                     <Icon name="play" />
-                }
+                )}
             </div>
             <div className="track-col name">
                 {track.metadata.title}
-                <div className="artist">
-                    {track.metadata.artist}
-                </div>
+                <div className="artist">{track.metadata.artist}</div>
             </div>
             <div className="track-col length">
                 {moment.utc(track.metadata.duration * 1000).format("mm:ss")}

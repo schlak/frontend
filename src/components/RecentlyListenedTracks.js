@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { orderBy } from "lodash";
 
-import { nRowsOfAlbums } from "../utils/sortTracks";
-
 import TrackBig from "./Tracks/TrackBig";
 
 function RecentlyListenedTracks(props) {
@@ -14,6 +12,7 @@ function RecentlyListenedTracks(props) {
     // Find 5 most recently listened to tracks
     useEffect(() => {
         let stats = [];
+        let numberOfTracks = 6;
 
         for (const i in tracks) {
             const lastPlayed = tracks[i].stats.lastPlayed;
@@ -24,24 +23,31 @@ function RecentlyListenedTracks(props) {
 
         stats = orderBy(stats, [1], ["desc", "asc"]);
 
-        setTracksToRender(stats.slice(0, 6));
+        if (window.innerWidth > 1800) {
+            numberOfTracks = 8;
+        }
+
+        setTracksToRender(stats.slice(0, numberOfTracks));
     }, [tracks]);
 
     return (
         <>
-            {
-                (tracksToRender.length > 2) &&
+            {tracksToRender.length > 2 && (
                 <div className="most-listened-tracks">
                     <h2>Recently Played</h2>
                     <div className="track-container grid grid-tracks-big">
-                        {
-                            tracksToRender.map((track, index) => {
-                                return <TrackBig index={track[0]} size="big" key={index} />;
-                            })
-                        }
+                        {tracksToRender.map((track, index) => {
+                            return (
+                                <TrackBig
+                                    index={track[0]}
+                                    size="big"
+                                    key={index}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
-            }
+            )}
         </>
     );
 }

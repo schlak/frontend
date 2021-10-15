@@ -9,7 +9,7 @@ html {
 
 body,
 html {
-    font-family: 'Tahoma', 'Raleway', 'Roboto', sans-serif;
+    font-family: "Tahoma", "Raleway", "Roboto", sans-serif;
 }
 
 strong {
@@ -27,7 +27,9 @@ h5 {
 }
 
 h2 {
-    font-size: 2.8rem;
+    color: #222;
+    font-size: 3.4rem; // 3.5rem
+    // letter-spacing: 1px;
 }
 
 p {
@@ -44,18 +46,19 @@ section {
     margin-bottom: 70px;
 }
 
-
 .app-wrapper {
     @include container(1920px);
 }
 
-
 .container {
-    @include container(1250px);
+    @include container(1650px);
     padding: 0 20px;
 
-    @media (max-width: 1700px) {
-        @include container(1200px);
+    @media (max-width: 1800px) {
+        @include container(1400px);
+    }
+    @media (max-width: 1600px) {
+        @include container(1250px);
     }
     @media (max-width: 1400px) {
         @include container(1000px);
@@ -68,13 +71,6 @@ section {
         padding: 0 20px;
     }
 }
-
-
-.footer {
-    @include container(1250px);
-    margin-top: 150px;
-}
-
 
 ::-webkit-scrollbar {
     width: 10px;
