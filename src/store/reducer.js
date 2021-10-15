@@ -130,7 +130,7 @@ function musicApp(state = initialState, action) {
                         ...state.session.playing,
                         didError: false,
                         isPaused: false,
-                        index: action.payload,
+                        index: parseInt(action.payload),
                         track: state.music.tracks.data[action.payload],
                     },
                 },
