@@ -11,7 +11,6 @@ import AudioControlBar from "./components/Audio/AudioControlBar";
 import FloatingAlbumCover from "./components/FloatingAlbumCover";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
-import NavLinks from "./components/NavLinks";
 import SocketGlobal from "./components/SocketGlobal";
 
 import Home from "./routes/Home";

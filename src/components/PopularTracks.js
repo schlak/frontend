@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { orderBy } from "lodash";
 
-import { nRowsOfAlbums } from "../utils/sortTracks";
-
 import TrackBig from "./Tracks/TrackBig";
 
 function PopularTracks(props) {
@@ -14,6 +12,7 @@ function PopularTracks(props) {
     // Find the top 5 most listened to tracks
     useEffect(() => {
         let stats = [];
+        let numberOfTracks = 6;
 
         for (const i in tracks) {
             const timesPlayed = tracks[i].stats.timesPlayed;
@@ -24,7 +23,11 @@ function PopularTracks(props) {
 
         stats = orderBy(stats, [1], ["desc", "asc"]);
 
-        setTracksToRender(stats.slice(0, 6));
+        if (window.innerWidth > 1800) {
+            numberOfTracks = 8;
+        }
+
+        setTracksToRender(stats.slice(0, numberOfTracks));
     }, [tracks]);
 
     return (

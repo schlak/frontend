@@ -27,13 +27,16 @@
 
         &.grid-tracks-big {
             margin-top: 28px;
-            grid-template-columns: 30% 30% 30%;
+            grid-template-columns: repeat(4, 1fr);
 
+            @media (max-width: 1800px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
             @media (max-width: 1400px) {
-                grid-template-columns: 48% 48%;
+                grid-template-columns: repeat(2, 1fr);
             }
             @media (max-width: 850px) {
-                grid-template-columns: 100%;
+                grid-template-columns: repeat(1, 1fr);
             }
         }
     }

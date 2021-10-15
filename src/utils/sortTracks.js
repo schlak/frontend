@@ -162,7 +162,7 @@ export const numberOfAlbumsOnOneRow = () => {
             break;
 
         default:
-            albumsPerRow = 6;
+            albumsPerRow = 7;
     }
 
     return albumsPerRow;
