@@ -1,11 +1,9 @@
 
 node_modules/
+data/
 .legacy
 
 cover.jpg
-
-package-lock.json
-yarn.lock
 
 # dependencies
 /node_modules
