@@ -114,6 +114,14 @@ function musicApp(state = initialState, action) {
             if (state.music.tracks.isFetching || state.music.tracks.didError)
                 return state;
 
+            // Update track stats
+            // * Last played timestamp
+            // * Times played count
+            // prettier-ignore
+            state.music.tracks.data[action.payload].stats.lastPlayed = Date.now();
+            // prettier-ignore
+            state.music.tracks.data[action.payload].stats.timesPlayed += 1;
+
             return {
                 ...state,
                 session: {
