@@ -16,7 +16,9 @@ function Footer() {
     return (
         <div className="footer" style={styles}>
             <hr />
-            <p>Music Library</p>
+            <p>
+                Music Library <small>@ {new Date().getFullYear()}</small>
+            </p>
         </div>
     );
 }
