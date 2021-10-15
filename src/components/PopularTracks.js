@@ -17,7 +17,7 @@ function PopularTracks(props) {
 
         for (const i in tracks) {
             const timesPlayed = tracks[i].stats.timesPlayed;
-            if (timesPlayed > 0) {
+            if (timesPlayed > 1) {
                 stats.push([i, tracks[i].stats.timesPlayed]);
             }
         }
@@ -29,19 +29,22 @@ function PopularTracks(props) {
 
     return (
         <>
-            {
-                (tracksToRender.length > 2) &&
+            {tracksToRender.length > 2 && (
                 <div className="popular-tracks">
                     <h2>Popular Tracks</h2>
                     <div className="track-container grid grid-tracks-big">
-                        {
-                            tracksToRender.map((track, index) => {
-                                return <TrackBig index={track[0]} size="big" key={index} />;
-                            })
-                        }
+                        {tracksToRender.map((track, index) => {
+                            return (
+                                <TrackBig
+                                    index={track[0]}
+                                    size="big"
+                                    key={index}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
-            }
+            )}
         </>
     );
 }
