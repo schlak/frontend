@@ -15,7 +15,9 @@ function TrackBig({ index, size }) {
     const track = useSelector((state) => state.music.tracks.data[index]);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const playingIndex = useSelector((state) => state.session.playing.index);
-    const playingDidError = useSelector((state) => state.session.playing.didError);
+    const playingDidError = useSelector(
+        (state) => state.session.playing.didError
+    );
 
     // Is this track currently playing?
     let isTrackPlaying = false;
@@ -35,28 +37,15 @@ function TrackBig({ index, size }) {
     if (track) {
         trackTitle = track.metadata.title;
         trackArtist = track.metadata.artist;
-        trackDuration = moment.utc(track.metadata.duration * 1000).format("mm:ss");
+        trackDuration = moment
+            .utc(track.metadata.duration * 1000)
+            .format("mm:ss");
         albumCoverId = track.id;
     }
 
     // Play track in session
     const playInSession = (e) => {
-        if (!isSafari && !isMobileSafari) {
-            dispatch( playTrack(index) );
-        } else {
-            // Play blank sound, then track
-            const audioTmp = new Audio("/blank.mp3");
-            const promise = audioTmp.play();
-
-            promise.then(_ => {
-                setTimeout(function() {
-                    audioTmp.pause();
-                    dispatch( playTrack(index) );
-                }, 200);
-            }).catch(error => {
-                dispatch( playTrack(index) );
-            });
-        }
+        dispatch(playTrack(index));
     };
 
     // Dynamic class list
@@ -67,10 +56,7 @@ function TrackBig({ index, size }) {
     classList += didError ? " error" : "";
 
     return (
-        <div
-            className={`track${classList}`}
-            onClick={playInSession}
-        >
+        <div className={`track${classList}`} onClick={playInSession}>
             <div className="track-col image">
                 <Image
                     src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
@@ -81,13 +67,9 @@ function TrackBig({ index, size }) {
             </div>
             <div className="track-col name">
                 {trackTitle}
-                <div className="artist">
-                    {trackArtist}
-                </div>
+                <div className="artist">{trackArtist}</div>
             </div>
-            <div className="track-col length">
-                {trackDuration}
-            </div>
+            <div className="track-col length">{trackDuration}</div>
         </div>
     );
 }
