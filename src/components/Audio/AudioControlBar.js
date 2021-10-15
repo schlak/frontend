@@ -63,6 +63,7 @@ function AudioControlBar(props) {
 
     const handleVolumeChange = (value) => {
         dispatch(changeVolume(value));
+        dispatch(muteVolume(false));
     };
 
     const handleVolumeMuteToggle = () => {
@@ -119,31 +120,31 @@ function AudioControlBar(props) {
                             className={`icon${doesShuffle ? " active" : ""}`}
                             onClick={handleShuffleToggle}
                         >
-                            <Icon name="shuffle" />
+                            <Icon name="shuffle" isRounded="true" />
                         </div>
                         <span className="divider"></span>
                         <div className="icon" onClick={handlePlayPreviousTrack}>
-                            <Icon name="skip-previous" />
+                            <Icon name="skip-previous" isRounded="true" />
                         </div>
                         <div
                             className={`icon${isPaused ? " active" : ""}`}
                             onClick={handlePause}
                         >
                             {isPaused ? (
-                                <Icon name="play" />
+                                <Icon name="play" isRounded="true" />
                             ) : (
-                                <Icon name="pause" />
+                                <Icon name="pause" isRounded="true" />
                             )}
                         </div>
                         <div className="icon" onClick={handlePlayNextTrack}>
-                            <Icon name="skip-next" />
+                            <Icon name="skip-next" isRounded="true" />
                         </div>
                         <span className="divider"></span>
                         <div
                             className={`icon${doesRepeat ? " active" : ""}`}
                             onClick={handleRepeatToggle}
                         >
-                            <Icon name="replay" />
+                            <Icon name="replay" isRounded="true" />
                         </div>
                     </div>
                 )}
