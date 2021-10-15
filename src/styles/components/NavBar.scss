@@ -45,37 +45,44 @@
     }
 
     .navbar-logo {
-        margin-right: 70px;
+        margin-right: 77px;
         -webkit-transform: scale(1);
         transform: scale(1);
         @include transition(transform, 180ms, ease);
         will-change: transform;
 
-        @media (max-width: 750px) {
-            margin-right: 100px;
+        @media (max-width: 800px) {
+            margin-right: 45px;
         }
-        @media (max-width: 600px) {
-            margin-right: 80px;
+        @media (max-width: 700px) {
+            margin-right: 30px;
         }
         @media (max-width: 500px) {
-            margin-right: 40px;
+            margin-right: 30px;
+        }
+        @media (max-width: 380px) {
+            margin-right: 20px;
+        }
+        @media (max-width: 340px) {
+            margin-right: 10px;
+        }
+        @media (max-width: 325px) {
+            margin-right: 5px;
         }
 
         svg {
             width: 45px;
             height: 45px;
 
+            @media (max-width: 460px) {
+                width: 40px;
+                height: 40px;
+            }
+
             path {
                 fill: #333333;
             }
         }
-    }
-
-    .navbar-title {
-        font-size: 2.1em;
-        letter-spacing: 0.5px;
-        @include transition(all, 180ms, ease);
-        will-change: font-size;
     }
 }
 
@@ -87,5 +94,8 @@
     h1.navbar-title {
         font-size: 2.2em;
         margin-right: 60px;
+        letter-spacing: 0.3px;
+        will-change: font-size;
+        @include transition(all, 180ms, ease);
     }
 }

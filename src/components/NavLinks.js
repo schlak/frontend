@@ -3,7 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useTrail, animated } from "react-spring";
 
 function NavLinks() {
-    const links = ["home", "albums", "tracks", "playlists"];
+    const links = [];
+    if (window.innerWidth > 600) {
+        links.push("home", "albums", "tracks", "playlists");
+    } else {
+        links.push("home", "albums", "playlists");
+    }
+
     const [activeLink, setActiveLink] = useState("home");
 
     const location = useLocation();
@@ -24,7 +30,7 @@ function NavLinks() {
 
     return (
         <div className={`navlinks`}>
-            <div className="navlinks-content container">
+            <div className="navlinks-content">
                 {trail.map(({ x, ...rest }, index) => {
                     let link = links[index];
                     let isActive = false;

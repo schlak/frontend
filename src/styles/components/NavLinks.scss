@@ -2,6 +2,7 @@
     // margin-bottom: 50px;
 
     .navlinks-content {
+        box-sizing: content-box;
         @include user-select(none);
         @include flex();
         flex-wrap: nowrap;
@@ -9,6 +10,10 @@
         .navlinks-link {
             color: #444;
             margin-right: 20px;
+
+            @media (max-width: 800px) {
+                margin-right: 0px;
+            }
 
             &.active {
                 span {
@@ -26,6 +31,21 @@
                 padding: 10px 30px;
                 text-transform: capitalize;
 
+                @media (max-width: 800px) {
+                    font-size: 1.5em;
+                }
+                @media (max-width: 460px) {
+                    font-size: 1.4em;
+                    padding: 6px 25px;
+                }
+                @media (max-width: 400px) {
+                    font-size: 1.2em;
+                    padding: 6px 20px;
+                }
+                @media (max-width: 325px) {
+                    padding: 6px 15px;
+                }
+
                 &::before {
                     position: absolute;
                     content: "";
@@ -42,33 +62,6 @@
 
                 &:hover::before {
                     opacity: 0.7;
-                }
-            }
-        }
-
-        @media (max-width: 700px) {
-            justify-content: space-between;
-
-            .navlinks-link {
-                span {
-                    font-size: 1.8em;
-                    padding: 10px 20px;
-                }
-                &:first-of-type span {
-                    padding-right: 20px;
-                }
-            }
-        }
-        @media (max-width: 500px) {
-            .navlinks-link {
-                margin-right: 0px;
-
-                span {
-                    font-size: 1.8em;
-                    padding: 10px 10px;
-                }
-                &:first-of-type span {
-                    padding-right: 10px;
                 }
             }
         }
