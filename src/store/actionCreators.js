@@ -17,6 +17,7 @@ import {
     SESSION_SHUFFLE_TOGGLE,
     SESSION_REPEAT_TOGGLE,
     SESSION_PIP_TOGGLE,
+    COLOR_NEXT,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
     SOCKET_CONNECTED_USERS,
@@ -252,6 +253,13 @@ export const repeatToggle = () => (dispatch) => {
  */
 export const pipToggle = () => (dispatch) => {
     dispatch({ type: SESSION_PIP_TOGGLE });
+};
+
+/*
+ * New global color
+ */
+export const colorNext = () => (dispatch) => {
+    dispatch({ type: COLOR_NEXT });
 };
 
 /*

@@ -14,6 +14,8 @@ import {
     SESSION_SHUFFLE_TOGGLE,
     SESSION_REPEAT_TOGGLE,
     SESSION_PIP_TOGGLE,
+    COLOR_NEXT,
+    COLOR_UPDATE_CURRENT,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
     SOCKET_CONNECTED_USERS,
@@ -22,6 +24,19 @@ import {
 
 // Initial state of app
 const initialState = {
+    color: {
+        colors: [
+            "#d5f1ff",
+            "#cdfff5",
+            "#cdffda",
+            "#fcffcd",
+            "#ffeecd",
+            "#ffcde8",
+            "#fccdff",
+            "#d5e0ff",
+        ],
+        current: Math.floor(Math.random() * 7), // Select a random color to start
+    },
     music: {
         tracks: {
             didError: false,
@@ -311,6 +326,29 @@ function musicApp(state = initialState, action) {
                         ...state.socket.global,
                         playing: action.payload,
                     },
+                },
+            };
+
+        case COLOR_UPDATE_CURRENT:
+            return {
+                ...state,
+                color: {
+                    ...state.color,
+                    current: action.payload,
+                },
+            };
+
+        case COLOR_NEXT:
+            // Move to next color
+            // Loop back to the begining once finished
+            let nextCurrent = state.color.current + 1;
+            if (nextCurrent > state.color.colors.length - 1) nextCurrent = 0;
+
+            return {
+                ...state,
+                color: {
+                    ...state.color,
+                    current: nextCurrent,
                 },
             };
 
