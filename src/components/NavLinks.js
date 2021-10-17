@@ -16,7 +16,7 @@ function NavLinks() {
 
     useEffect(() => {
         if (location.pathname === "/") return setActiveLink("home");
-        setActiveLink(location.pathname.substring(1));
+        setActiveLink(location.pathname.substring(1).split("/")[0]);
     }, [location]);
 
     // Animation
