@@ -61,6 +61,9 @@ section {
         @include container(1250px);
     }
     @media (max-width: 1400px) {
+        @include container(1100px);
+    }
+    @media (max-width: 1200px) {
         @include container(1000px);
     }
     @media (max-width: 1100px) {
