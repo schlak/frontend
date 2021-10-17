@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { isFirefox } from "react-device-detect";
 
 import {
     playNextTrackBasedOnSession,
@@ -16,7 +17,6 @@ import Sound from "react-sound";
 const canvas = document.createElement("canvas");
 canvas.width = canvas.height = 512;
 const video = document.createElement("video");
-video.srcObject = canvas.captureStream();
 video.muted = true;
 
 function Audio() {
@@ -86,8 +86,14 @@ function Audio() {
     const handlePictureInPicture = async () => {
         if (
             document.pictureInPictureEnabled &&
-            !video.disablePictureInPicture
+            !video.disablePictureInPicture &&
+            typeof track.id === "string"
         ) {
+            if (isFirefox) {
+                video.srcObject = canvas.mozCaptureStream();
+            } else {
+                video.srcObject = canvas.captureStream();
+            }
             const image = new Image();
             image.crossOrigin = true;
             image.src = [...navigator.mediaSession.metadata.artwork].pop().src;
