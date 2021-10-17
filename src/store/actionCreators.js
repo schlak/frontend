@@ -16,6 +16,7 @@ import {
     SESSION_VOLUME_MUTE,
     SESSION_SHUFFLE_TOGGLE,
     SESSION_REPEAT_TOGGLE,
+    SESSION_PIP_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
     SOCKET_CONNECTED_USERS,
@@ -183,20 +184,19 @@ export const playPreviousTrack = (trackIndex) => (dispatch, getState) => {
 /*
  * Decide what to play based on current session
  */
-export const playNextTrackBasedOnSession = (playNext = true) => (
-    dispatch,
-    getState
-) => {
-    const state = getState();
+export const playNextTrackBasedOnSession =
+    (playNext = true) =>
+    (dispatch, getState) => {
+        const state = getState();
 
-    if (state.session.actions.shuffle) return dispatch(playRandomTrack());
+        if (state.session.actions.shuffle) return dispatch(playRandomTrack());
 
-    if (playNext) {
-        dispatch(playNextTrack(state.session.playing.index));
-    } else {
-        dispatch(playPreviousTrack(state.session.playing.index));
-    }
-};
+        if (playNext) {
+            dispatch(playNextTrack(state.session.playing.index));
+        } else {
+            dispatch(playPreviousTrack(state.session.playing.index));
+        }
+    };
 
 /*
  * Pause currently playing track
@@ -245,6 +245,13 @@ export const shuffleToggle = () => (dispatch) => {
  */
 export const repeatToggle = () => (dispatch) => {
     dispatch({ type: SESSION_REPEAT_TOGGLE });
+};
+
+/*
+ * Toggle PIP - picture-in-picture
+ */
+export const pipToggle = () => (dispatch) => {
+    dispatch({ type: SESSION_PIP_TOGGLE });
 };
 
 /*

@@ -32,6 +32,7 @@ const middlewares = [thunk];
 if (process.env.NODE_ENV === "development") {
     middlewares.push(
         createLogger({
+            collapsed: true,
             predicate: (getState, action) =>
                 action.type !== "SESSION_PLAYING_UPDATE_STATUS",
         })

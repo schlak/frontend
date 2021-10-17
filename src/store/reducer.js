@@ -13,6 +13,7 @@ import {
     SESSION_VOLUME_MUTE,
     SESSION_SHUFFLE_TOGGLE,
     SESSION_REPEAT_TOGGLE,
+    SESSION_PIP_TOGGLE,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
     SOCKET_CONNECTED_USERS,
@@ -38,6 +39,7 @@ const initialState = {
         actions: {
             shuffle: false,
             repeat: false,
+            showPip: false, // picture-in-picture
         },
         playing: {
             didError: false,
@@ -59,7 +61,9 @@ const initialState = {
         selected: {},
     },
     socket: {
-        connection: socketIOClient(`${process.env.REACT_APP_API}`),
+        connection: socketIOClient(`${process.env.REACT_APP_API}`, {
+            transports: ["websocket"],
+        }),
         global: {
             connectedUsers: 0,
             playing: [],
@@ -239,6 +243,18 @@ function musicApp(state = initialState, action) {
                         ...state.session.actions,
                         shuffle: false,
                         repeat: !state.session.actions.repeat,
+                    },
+                },
+            };
+
+        case SESSION_PIP_TOGGLE:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    actions: {
+                        ...state.session.actions,
+                        showPip: !state.session.actions.showPip,
                     },
                 },
             };
