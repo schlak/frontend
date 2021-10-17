@@ -5,7 +5,9 @@ import {
     playNextTrackBasedOnSession,
     playingTrackIsPaused,
     playingTrackDidError,
-    sessionUpdatePlayingStatus
+    sessionUpdatePlayingStatus,
+    changeVolume,
+    muteVolume,
 } from "../../store/actionCreators";
 
 import Sound from "react-sound";
@@ -30,43 +32,97 @@ function Audio() {
     };
 
     const handlePlaying = (audio) => {
-        dispatch(sessionUpdatePlayingStatus({
-            duration: audio.duration,
-            position: audio.position,
-        }));
-    }
+        dispatch(
+            sessionUpdatePlayingStatus({
+                duration: audio.duration,
+                position: audio.position,
+            })
+        );
+    };
 
     const handleTrackPause = () => {
         dispatch(playingTrackIsPaused(true));
-    }
+    };
     const handleTrackPlay = () => {
         dispatch(playingTrackIsPaused(false));
-    }
+    };
+
+    const handleVolumeMuteToggle = () => {
+        if (isMute) {
+            dispatch(muteVolume(false));
+        } else {
+            dispatch(muteVolume(true));
+        }
+    };
 
     const handleDidError = (error) => {
         // Attempt to re-play
-        const audioElement = window.soundManager.sounds[window.soundManager.soundIDs[0]]._a;
+        const audioElement =
+            window.soundManager.sounds[window.soundManager.soundIDs[0]]._a;
         const promise = audioElement.play();
 
         if (promise !== undefined) {
-            promise.catch(error => {
-                dispatch(playingTrackDidError());
-                dispatch(playingTrackIsPaused(true));
-            }).then(() => {
-                dispatch(playingTrackIsPaused(false));
-            });
+            promise
+                .catch((error) => {
+                    dispatch(playingTrackDidError());
+                    dispatch(playingTrackIsPaused(true));
+                })
+                .then(() => {
+                    dispatch(playingTrackIsPaused(false));
+                });
         } else {
             dispatch(playingTrackDidError());
         }
-    }
+    };
 
     const handleKeyupToPause = (e) => {
-        if (e.code === "Space" && e.target.tagName !== "INPUT") {
-            e.preventDefault();
-            if (isPaused) { handleTrackPlay() }
-            else { handleTrackPause() }
+        // Skip if user is typing in the search-bar
+        if (e.target.tagName !== "INPUT") {
+            // Space = play/pause
+            if (e.code === "Space") {
+                e.preventDefault();
+                if (isPaused) {
+                    handleTrackPlay();
+                } else {
+                    handleTrackPause();
+                }
+            }
+
+            // ">" = next track
+            if (e.code === "Period") {
+                e.preventDefault();
+                handlePlayNextTrack();
+            }
+
+            // "<" = previous track
+            if (e.code === "Comma") {
+                e.preventDefault();
+                handlePlayPreviousTrack();
+            }
+
+            // "m" = mute/unmute track
+            if (e.code === "KeyM") {
+                e.preventDefault();
+                handleVolumeMuteToggle();
+            }
+
+            // // "-" = decrease volume
+            // if (e.code === "Minus") {
+            //     e.preventDefault();
+            //     let newVolume = volume - 10;
+            //     if (newVolume < 0) newVolume = 0;
+            //     dispatch(changeVolume(newVolume));
+            // }
+
+            // // "+" = increase volume
+            // if (e.code === "Equal") {
+            //     e.preventDefault();
+            //     let newVolume = volume + 10;
+            //     if (newVolume > 100) newVolume = 100;
+            //     dispatch(changeVolume(newVolume));
+            // }
         }
-    }
+    };
 
     // Keyup listener to play/pause track
     useEffect(() => {
@@ -75,7 +131,7 @@ function Audio() {
         return () => {
             window.removeEventListener("keydown", handleKeyupToPause);
         };
-    }, [handleKeyupToPause])
+    }, [handleKeyupToPause]);
 
     // MediaMetadata audio API
     useEffect(() => {
@@ -114,26 +170,18 @@ function Audio() {
             });
 
             navigator.mediaSession.setActionHandler(
-                "nexttrack", handlePlayNextTrack
+                "nexttrack",
+                handlePlayNextTrack
             );
             navigator.mediaSession.setActionHandler(
-                "previoustrack", handlePlayPreviousTrack
+                "previoustrack",
+                handlePlayPreviousTrack
             );
 
-            navigator.mediaSession.setActionHandler(
-                "pause",
-                handleTrackPause
-            );
-            navigator.mediaSession.setActionHandler(
-                "play",
-                handleTrackPlay
-            );
+            navigator.mediaSession.setActionHandler("pause", handleTrackPause);
+            navigator.mediaSession.setActionHandler("play", handleTrackPlay);
         }
-    }, [
-        dispatch,
-        playingIndex,
-        track,
-    ]);
+    }, [dispatch, playingIndex, track]);
 
     return (
         <>
