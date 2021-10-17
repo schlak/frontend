@@ -8,9 +8,16 @@ import {
     sessionUpdatePlayingStatus,
     changeVolume,
     muteVolume,
+    pipToggle,
 } from "../../store/actionCreators";
 
 import Sound from "react-sound";
+
+const canvas = document.createElement("canvas");
+canvas.width = canvas.height = 512;
+const video = document.createElement("video");
+video.srcObject = canvas.captureStream();
+video.muted = true;
 
 function Audio() {
     const dispatch = useDispatch();
@@ -22,6 +29,7 @@ function Audio() {
     const doesRepeat = useSelector((state) => state.session.actions.repeat);
     const volume = useSelector((state) => state.session.playing.status.volume);
     const isMute = useSelector((state) => state.session.playing.status.isMute);
+    const showPip = useSelector((state) => state.session.actions.showPip);
 
     const handlePlayNextTrack = () => {
         dispatch(playNextTrackBasedOnSession(true));
@@ -75,6 +83,22 @@ function Audio() {
         }
     };
 
+    const handlePictureInPicture = async () => {
+        if (
+            document.pictureInPictureEnabled &&
+            !video.disablePictureInPicture
+        ) {
+            const image = new Image();
+            image.crossOrigin = true;
+            image.src = [...navigator.mediaSession.metadata.artwork].pop().src;
+            await image.decode();
+
+            canvas.getContext("2d").drawImage(image, 0, 0, 512, 512);
+            await video.play();
+            await video.requestPictureInPicture();
+        }
+    };
+
     const handleKeyupToPause = (e) => {
         // Skip if user is typing in the search-bar
         if (e.target.tagName !== "INPUT") {
@@ -104,6 +128,12 @@ function Audio() {
             if (e.code === "KeyM") {
                 e.preventDefault();
                 handleVolumeMuteToggle();
+            }
+
+            // "p" = PIP, picture-in-picture
+            if (e.code === "KeyP") {
+                e.preventDefault();
+                dispatch(pipToggle());
             }
 
             // // "-" = decrease volume
@@ -181,7 +211,21 @@ function Audio() {
             navigator.mediaSession.setActionHandler("pause", handleTrackPause);
             navigator.mediaSession.setActionHandler("play", handleTrackPlay);
         }
-    }, [dispatch, playingIndex, track]);
+
+        // PIP, picture-in-picture
+        if (showPip) {
+            handlePictureInPicture();
+        } else {
+            if (document.pictureInPictureElement)
+                document.exitPictureInPicture();
+        }
+
+        return () => {
+            // Close PIP
+            if (document.pictureInPictureElement)
+                document.exitPictureInPicture();
+        };
+    }, [dispatch, playingIndex, track, showPip]);
 
     return (
         <>
@@ -200,6 +244,22 @@ function Audio() {
             )}
         </>
     );
+
+    // // Play track in session
+    // const playInSession = (e) => {
+    //     if (!isSafari && !isMobileSafari) {
+    //         dispatch( playTrack(index) );
+    //     } else {
+    //         // Play blank sound, then track
+    //         const audioTmp = new Audio("/blank.mp3");
+    //         audioTmp.play();
+
+    //         setTimeout(function() {
+    //             audioTmp.pause();
+    //             dispatch( playTrack(index) );
+    //         }, 1000);
+    //     }
+    // };
 
     // <Sound
     //   url="cool_sound.mp3"
