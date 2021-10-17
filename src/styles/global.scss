@@ -10,6 +10,8 @@ html {
 body,
 html {
     font-family: "Tahoma", "Raleway", "Roboto", sans-serif;
+    background-color: $background-color;
+    color: $text-color;
 }
 
 strong {
@@ -79,11 +81,11 @@ section {
     width: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: $scrollbar-track;
 }
 ::-webkit-scrollbar-thumb {
-    background: #aaa;
+    background: $scrollbar-thumb;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #777;
+    background: $scrollbar-thumb-hover;
 }

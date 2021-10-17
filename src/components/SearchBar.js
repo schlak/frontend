@@ -16,6 +16,8 @@ function SearchBar() {
     const filteredData = useSelector(
         (state) => state.music.tracks.filteredData
     );
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
 
     // Input state
     const [search, setSearch] = useState("");
@@ -71,7 +73,11 @@ function SearchBar() {
     };
 
     return (
-        <div className="search-bar" onClick={handleInputFocus}>
+        <div
+            className="search-bar"
+            onClick={handleInputFocus}
+            style={{ backgroundColor: colors[colorIndex] }}
+        >
             <svg viewBox="0 0 24 24">
                 <path
                     fill="currentColor"

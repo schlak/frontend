@@ -1,10 +1,13 @@
 .search-bar {
+    position: relative;
     @include flex();
     align-items: center;
     cursor: text;
     width: 500px;
+    overflow: hidden;
     border-radius: 20px;
-    background-color: rgba($color: #fff, $alpha: 0.7);
+    @include transition(all, 280ms, ease);
+    background-color: rgba($color: $background-shade-10, $alpha: 1);
 
     @media (max-width: 800px) {
         width: 400px;
@@ -18,11 +21,9 @@
 
     &:hover,
     &:focus {
-        background-color: darken(#fff, 2%);
-
         svg {
             path {
-                fill: #777;
+                fill: $background-shade-2;
             }
         }
     }
@@ -33,7 +34,7 @@
         margin-left: 22px;
 
         path {
-            fill: #888;
+            fill: $background-shade-20;
         }
     }
 
@@ -45,5 +46,6 @@
         text-indent: 20px;
         border: none;
         background: none;
+        @include inputPlaceholder($background-shade-20);
     }
 }
