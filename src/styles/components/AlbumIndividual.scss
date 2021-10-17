@@ -51,38 +51,55 @@
         margin-bottom: 50px;
 
         .album-links-link {
+            position: relative;
             @include grayscaleMixin(100%, 1);
             @include transition(all, 120ms, ease);
             margin-right: 30px;
+            border-radius: 4px;
 
             &:hover,
             &:active {
                 @include grayscaleMixin(0%, 0);
 
-                &::before {
-                    opacity: 1;
+                & .album-links-link-background {
+                    opacity: 0.7;
                 }
             }
 
-            &::before {
-                content: "";
+            .album-links-link-background {
                 position: absolute;
-                top: -6px;
-                left: -1px;
-                width: 70px;
-                height: 60px;
-                z-index: -1;
+                top: 0;
+                left: -5%;
                 opacity: 0;
+                z-index: -1;
+                width: 110%;
+                height: 100%;
                 border-radius: 4px;
-                background-color: rgba($color: #eee, $alpha: 0.4);
                 @include transition(all, 80ms, ease);
+                background-color: rgba($color: #eee, $alpha: 0.4);
             }
+
+            // &::before {
+            //     content: "";
+            //     position: absolute;
+            //     top: -6px;
+            //     left: -1px;
+            //     width: 70px;
+            //     height: 60px;
+            //     z-index: -1;
+            //     opacity: 0;
+            //     border-radius: 4px;
+            //     background-color: rgba($color: #eee, $alpha: 0.4);
+            //     background-color: attr(data-color);
+            //     // attr(data-content)
+            //     @include transition(all, 80ms, ease);
+            // }
 
             a {
                 cursor: pointer;
 
                 & > div {
-                    padding: 10px 20px;
+                    padding: 15px 20px;
                 }
             }
 
