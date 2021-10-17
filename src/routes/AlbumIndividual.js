@@ -46,7 +46,7 @@ function AlbumIndividual() {
     if (!isLoading) {
         // prettier-ignore
         linkSearch = `${album.album_artist} - ${album.album}`;
-        linkSearch = linkSearch.replace(/\s/g, "+");
+        linkSearch = encodeURIComponent(linkSearch).replace(/%20/g, "+");
         // album.year;
     }
 
