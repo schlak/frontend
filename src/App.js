@@ -5,18 +5,18 @@ import { isMobile } from "react-device-detect";
 
 import { fetchTracks } from "./store/actionCreators";
 
-import AFCBackgroundMulti from "./components/AFCBackgroundMulti";
 import Audio from "./components/Audio/Audio";
 import AudioControlBar from "./components/Audio/AudioControlBar";
 import FloatingAlbumCover from "./components/FloatingAlbumCover";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import GlobalColor from "./components/GlobalColor";
 import SocketGlobal from "./components/SocketGlobal";
 
 import Home from "./routes/Home";
 import Albums from "./routes/Albums";
 import AlbumIndividual from "./routes/AlbumIndividual";
-import Artists from "./routes/Artists";
+import Playlists from "./routes/Playlists";
 import Tracks from "./routes/Tracks";
 
 import "./styles/index.scss";
@@ -59,8 +59,8 @@ function App() {
                             render={(props) => <AlbumIndividual />}
                         />
                         <Route
-                            path="/artists"
-                            render={(props) => <Artists />}
+                            path="/playlists"
+                            render={(props) => <Playlists />}
                         />
                         <Route path="/tracks" render={(props) => <Tracks />} />
                     </div>
@@ -73,7 +73,8 @@ function App() {
 
                     {/* MISC elements with position fixed/absolute */}
                     <FloatingAlbumCover />
-                    <AFCBackgroundMulti />
+                    <GlobalColor />
+                    {/* <AFCBackgroundMulti /> */}
 
                     {/* Footer */}
                     <Footer />
