@@ -8,7 +8,7 @@
         flex-wrap: nowrap;
 
         .navlinks-link {
-            color: #444;
+            color: $text-color; // rgba($color: $text-color, $alpha: 1);
             margin-right: 20px;
 
             @media (max-width: 800px) {
@@ -17,9 +17,6 @@
 
             &.active {
                 span {
-                    color: #222;
-                    // font-weight: bold;
-
                     &::before {
                         opacity: 1;
                     }
@@ -55,7 +52,10 @@
                     width: 85%;
                     height: 180%;
                     border-radius: 4px;
-                    background-color: rgba($color: #fff, $alpha: 0.8);
+                    background-color: rgba(
+                        $color: $background-shade-20,
+                        $alpha: 0.7
+                    );
                     @include transition(all, 80ms, ease);
                     opacity: 0;
                 }
