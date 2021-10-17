@@ -52,11 +52,30 @@
 
         .album-links-link {
             @include grayscaleMixin(100%, 1);
+            @include transition(all, 120ms, ease);
             margin-right: 30px;
 
             &:hover,
             &:active {
                 @include grayscaleMixin(0%, 0);
+
+                &::before {
+                    opacity: 1;
+                }
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -6px;
+                left: -1px;
+                width: 70px;
+                height: 60px;
+                z-index: -1;
+                opacity: 0;
+                border-radius: 4px;
+                background-color: rgba($color: #eee, $alpha: 0.4);
+                @include transition(all, 80ms, ease);
             }
 
             a {
