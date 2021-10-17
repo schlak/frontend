@@ -84,24 +84,30 @@ function Audio() {
     };
 
     const handlePictureInPicture = async () => {
-        if (
-            document.pictureInPictureEnabled &&
-            !video.disablePictureInPicture &&
-            typeof track.id === "string"
-        ) {
-            if (isFirefox) {
-                video.srcObject = canvas.mozCaptureStream();
-            } else {
-                video.srcObject = canvas.captureStream();
-            }
-            const image = new Image();
-            image.crossOrigin = true;
-            image.src = [...navigator.mediaSession.metadata.artwork].pop().src;
-            await image.decode();
+        try {
+            if (
+                document.pictureInPictureEnabled &&
+                !video.disablePictureInPicture &&
+                typeof track.id === "string"
+            ) {
+                if (isFirefox) {
+                    video.srcObject = canvas.mozCaptureStream();
+                } else {
+                    video.srcObject = canvas.captureStream();
+                }
+                const image = new Image();
+                image.crossOrigin = true;
+                image.src = [
+                    ...navigator.mediaSession.metadata.artwork,
+                ].pop().src;
+                await image.decode();
 
-            canvas.getContext("2d").drawImage(image, 0, 0, 512, 512);
-            await video.play();
-            await video.requestPictureInPicture();
+                canvas.getContext("2d").drawImage(image, 0, 0, 512, 512);
+                await video.play();
+                await video.requestPictureInPicture();
+            }
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -225,12 +231,6 @@ function Audio() {
             if (document.pictureInPictureElement)
                 document.exitPictureInPicture();
         }
-
-        return () => {
-            // Close PIP
-            if (document.pictureInPictureElement)
-                document.exitPictureInPicture();
-        };
     }, [dispatch, playingIndex, track, showPip]);
 
     return (
