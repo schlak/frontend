@@ -1,11 +1,16 @@
 .AlbumIndividual {
     .album {
-        @media (min-width: 1600px) {
+        @media (min-width: 1200px) {
             @include flex();
 
             .album-cover {
                 width: 600px;
                 height: 600px;
+
+                @media (max-width: 1400px) {
+                    width: 400px;
+                    height: 400px;
+                }
             }
 
             .album-side {
