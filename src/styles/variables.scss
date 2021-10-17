@@ -1,12 +1,27 @@
+// Dark theme
+$background-color: #151515;
+$text-color: #ffffff;
 
-//  Color palette
-$white: #FFFFFF;
-$black: #111;
-$dark:  #444;
+$background-shade-2: lighten($background-color, 2%);
+$background-shade-5: lighten($background-color, 5%);
+$background-shade-10: lighten($background-color, 10%);
+$background-shade-20: lighten($background-color, 20%);
+$background-shade-40: lighten($background-color, 40%);
+$background-shade-60: lighten($background-color, 60%);
+$background-shade-80: lighten($background-color, 80%);
+$background-shade-100: lighten($background-color, 100%);
 
-$green: #00D292;
-$amber: #F3D900;
-$red:   #FF4D6F;
+$scrollbar-track: $background-color;
+$scrollbar-thumb: $background-shade-40;
+$scrollbar-thumb-hover: $background-shade-60;
 
 //
-$side-bar--width: 600px;
+//
+//
+// // Light theme
+// $background-color: #ffffff;
+// $text-color: #222222;
+
+// $scrollbar-track: #f1f1f1;
+// $scrollbar-thumb: #aaa;
+// $scrollbar-thumb-hover: #777;
