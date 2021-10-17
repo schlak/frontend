@@ -339,10 +339,15 @@ function musicApp(state = initialState, action) {
             };
 
         case COLOR_NEXT:
-            // Move to next color
-            // Loop back to the begining once finished
-            let nextCurrent = state.color.current + 1;
-            if (nextCurrent > state.color.colors.length - 1) nextCurrent = 0;
+            // Pick a random color
+            // If the random color is the current color, increment color by one,
+            // and loop back to the begining once finished
+            let nextCurrent = Math.floor(Math.random() * 7);
+            if (nextCurrent === state.color.current) {
+                nextCurrent = state.color.current + 1;
+                if (nextCurrent > state.color.colors.length - 1)
+                    nextCurrent = 0;
+            }
 
             return {
                 ...state,
