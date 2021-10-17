@@ -1,4 +1,38 @@
 .AlbumIndividual {
+    .album {
+        @media (min-width: 1600px) {
+            @include flex();
+
+            .album-cover {
+                width: 600px;
+                height: 600px;
+            }
+
+            .album-side {
+                flex-grow: 1;
+                padding: 0px 80px;
+            }
+
+            .album-metadata {
+                h2 {
+                    font-size: 4.4rem;
+                }
+
+                p {
+                    color: #444;
+                    font-weight: bold;
+                    font-size: 2.3rem;
+                    margin-top: 8px;
+                }
+            }
+
+            .track-container {
+                // margin-top: 100px;
+                width: 100%;
+            }
+        }
+    }
+
     .album-cover {
         width: 400px;
         height: 400px;
