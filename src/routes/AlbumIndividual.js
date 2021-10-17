@@ -22,6 +22,9 @@ function AlbumIndividual() {
     const playingIndex = useSelector((state) => state.session.playing.index);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
 
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
+
     // Search for album
     const album = albums.find((album) => album.id === id);
 
@@ -114,6 +117,12 @@ function AlbumIndividual() {
 
                         <div className="album-links">
                             <div className="album-links-link">
+                                <div
+                                    className="album-links-link-background"
+                                    style={{
+                                        backgroundColor: colors[colorIndex],
+                                    }}
+                                ></div>
                                 <a
                                     href={`${linkGoogle}${linkSearch}`}
                                     target="_blank"
@@ -123,6 +132,12 @@ function AlbumIndividual() {
                                 </a>
                             </div>
                             <div className="album-links-link">
+                                <div
+                                    className="album-links-link-background"
+                                    style={{
+                                        backgroundColor: colors[colorIndex],
+                                    }}
+                                ></div>
                                 <a
                                     href={`${linkYoutube}${linkSearch}`}
                                     target="_blank"
@@ -135,6 +150,12 @@ function AlbumIndividual() {
                                 </a>
                             </div>
                             <div className="album-links-link">
+                                <div
+                                    className="album-links-link-background"
+                                    style={{
+                                        backgroundColor: colors[colorIndex],
+                                    }}
+                                ></div>
                                 <a
                                     href={`${linkDiscogs}${linkSearch}`}
                                     target="_blank"
