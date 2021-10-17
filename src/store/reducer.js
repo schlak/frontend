@@ -59,7 +59,9 @@ const initialState = {
         selected: {},
     },
     socket: {
-        connection: socketIOClient(`${process.env.REACT_APP_API}`),
+        connection: socketIOClient(`${process.env.REACT_APP_API}`, {
+            transports: ["websocket"],
+        }),
         global: {
             connectedUsers: 0,
             playing: [],
