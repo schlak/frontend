@@ -7,6 +7,16 @@
 
     hr {
         margin-bottom: 22px;
+
+        @media (max-width: 1200px) {
+            width: 80%;
+        }
+        @media (max-width: 1000px) {
+            width: 60%;
+        }
+        @media (max-width: 600px) {
+            width: 70%;
+        }
     }
 
     p {
