@@ -1,5 +1,4 @@
 .AlbumIndividual {
-
     .album-cover {
         width: 400px;
         height: 400px;
@@ -24,9 +23,10 @@
     .album-metadata {
         max-width: 800px;
         margin-top: 30px;
-        margin-bottom: 50px;
+        margin-bottom: 40px;
 
-        h2, p {
+        h2,
+        p {
             color: #222;
             text-transform: capitalize;
             @include text-overflow-ellipsis();
@@ -41,6 +41,37 @@
             font-weight: bold;
             font-size: 1.8rem;
             margin-top: 8px;
+        }
+    }
+
+    .album-links {
+        @include user-select(none);
+        @include flex();
+        align-items: center;
+        margin-bottom: 50px;
+
+        .album-links-link {
+            @include grayscaleMixin(100%, 1);
+            margin-right: 30px;
+
+            &:hover,
+            &:active {
+                @include grayscaleMixin(0%, 0);
+            }
+
+            a {
+                cursor: pointer;
+
+                & > div {
+                    padding: 10px 20px;
+                }
+            }
+
+            svg {
+                width: 28px;
+                height: 28px;
+                shape-rendering: geometricPrecision;
+            }
         }
     }
 }

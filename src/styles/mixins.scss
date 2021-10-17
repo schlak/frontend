@@ -1,4 +1,3 @@
-
 @mixin transition($which, $duration, $curve) {
     -webkit-transition: $which $duration $curve;
     -khtml-transition: $which $duration $curve;
@@ -7,6 +6,13 @@
     transition: $which $duration $curve;
 }
 
+@mixin grayscaleMixin($ammountPercent, $ammountNumber) {
+    //filter: gray; /* IE */
+    -webkit-filter: grayscale($ammountNumber); /* Old WebKit */
+    -webkit-filter: grayscale($ammountPercent); /* New WebKit */
+    //filter: url(resources.svg#desaturate); /* older Firefox */
+    filter: grayscale($ammountPercent); /* Current draft standard */
+}
 
 @mixin container($size) {
     max-width: $size;
@@ -14,7 +20,6 @@
     margin-right: auto;
     @include transition(all, 80ms, ease);
 }
-
 
 @mixin flex() {
     display: -webkit-box;
@@ -24,23 +29,20 @@
     display: flex;
 }
 
-
 @mixin flex-center() {
     @include flex();
     align-items: center;
     justify-content: center;
 }
 
-
 @mixin user-select($value) {
     -webkit-touch-callout: $value;
     -webkit-user-select: $value;
-     -khtml-user-select: $value;
-       -moz-user-select: $value;
-        -ms-user-select: $value;
-            user-select: $value;
+    -khtml-user-select: $value;
+    -moz-user-select: $value;
+    -ms-user-select: $value;
+    user-select: $value;
 }
-
 
 @mixin text-overflow-ellipsis() {
     overflow: hidden;

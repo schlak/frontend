@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
+import Icon from "../components/Icon";
 import Image from "../components/Image";
 import Track from "../components/Tracks/Track";
 
@@ -33,20 +34,29 @@ function AlbumIndividual() {
     //
     const isLoading = !album || isFetching || didError;
 
+    // Build external links
+    let linkSearch = "";
+    let linkGoogle = "https://www.google.com/search?q=";
+    let linkYoutube = "https://www.youtube.com/results?search_query=";
+    let linkDiscogs = "https://www.discogs.com/search/?q=";
+
+    if (!isLoading) {
+        // prettier-ignore
+        linkSearch = `${album.album_artist} - ${album.album}`;
+        linkSearch = linkSearch.replace(/\s/g, "+");
+        // album.year;
+    }
+
     // Action button handler
     const handleActionButton = (e) => {
         e.stopPropagation();
         if (album) {
             if (!isAlbumPlaying) {
                 // Play first track in album
-                dispatch(
-                    playTrack(album.tracks[0])
-                );
+                dispatch(playTrack(album.tracks[0]));
             } else {
                 // Pause track
-                dispatch(
-                    playingTrackIsPaused(!isPaused)
-                );
+                dispatch(playingTrackIsPaused(!isPaused));
             }
         }
     };
@@ -61,44 +71,97 @@ function AlbumIndividual() {
             <div className="AlbumIndividual container">
                 <section>
                     <div className="album">
-                        <div className="album-cover" onClick={handleActionButton}>
-                            {
-                                isLoading ?
-                                <Skeleton width={400} height={400} /> :
+                        <div
+                            className="album-cover"
+                            onClick={handleActionButton}
+                        >
+                            {isLoading ? (
+                                <Skeleton width={400} height={400} />
+                            ) : (
                                 <Image
-                                    src={isLoading ? "example" : `${process.env.REACT_APP_API}/tracks/${tracks[album.tracks[0]].id}/cover/400`}
+                                    src={
+                                        isLoading
+                                            ? "example"
+                                            : `${
+                                                  process.env.REACT_APP_API
+                                              }/tracks/${
+                                                  tracks[album.tracks[0]].id
+                                              }/cover/400`
+                                    }
                                     fallback={`fallback--album-cover`}
                                     alt="album-cover"
                                     draggable="false"
                                 />
-                            }
+                            )}
                         </div>
+
                         <div className="album-metadata">
-                            <h2>{isLoading ? <Skeleton width={300} /> : album.album}</h2>
-                            <p>{isLoading ? <Skeleton width={200} /> : `[${album.year}] - ${album.album_artist}`}</p>
+                            <h2>
+                                {isLoading ? (
+                                    <Skeleton width={300} />
+                                ) : (
+                                    album.album
+                                )}
+                            </h2>
+                            <p>
+                                {isLoading ? (
+                                    <Skeleton width={200} />
+                                ) : (
+                                    `[${album.year}] - ${album.album_artist}`
+                                )}
+                            </p>
                         </div>
+
+                        <div className="album-links">
+                            <div className="album-links-link">
+                                <a
+                                    href={`${linkGoogle}${linkSearch}`}
+                                    target="_blank"
+                                    // title="Search Google for this track"
+                                >
+                                    <Icon name="logo-google" isRounded="true" />
+                                </a>
+                            </div>
+                            <div className="album-links-link">
+                                <a
+                                    href={`${linkYoutube}${linkSearch}`}
+                                    target="_blank"
+                                    // title="Search YouTube for this track"
+                                >
+                                    <Icon
+                                        name="logo-youtube"
+                                        isRounded="true"
+                                    />
+                                </a>
+                            </div>
+                            <div className="album-links-link">
+                                <a
+                                    href={`${linkDiscogs}${linkSearch}`}
+                                    target="_blank"
+                                    // title="Search Discogs for this track"
+                                >
+                                    <Icon
+                                        name="logo-discogs-vinyl"
+                                        isRounded="true"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+
                         <div className="track-container">
                             {isLoading &&
-                                [...Array(8)].map((x, key) =>
+                                [...Array(8)].map((x, key) => (
                                     <div className="track" key={key}>
                                         <p>
                                             <Skeleton width={"80%"} />
                                         </p>
                                     </div>
-                                )
-                            }
+                                ))}
 
-                            {
-                                !isLoading &&
+                            {!isLoading &&
                                 album.tracks.map((track, key) => {
-                                    return (
-                                        <Track
-                                            index={track}
-                                            key={key}
-                                        />
-                                    );
-                                })
-                            }
+                                    return <Track index={track} key={key} />;
+                                })}
                         </div>
                     </div>
                 </section>
