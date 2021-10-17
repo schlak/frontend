@@ -20,11 +20,12 @@
 
             .album-metadata {
                 h2 {
+                    color: $text-color;
                     font-size: 4.4rem;
                 }
 
                 p {
-                    color: #444;
+                    color: $background-shade-80;
                     font-weight: bold;
                     font-size: 2.3rem;
                     margin-top: 8px;
@@ -91,7 +92,6 @@
 
         .album-links-link {
             position: relative;
-            @include grayscaleMixin(100%, 1);
             @include transition(all, 120ms, ease);
             margin-right: 30px;
             border-radius: 4px;
@@ -101,7 +101,7 @@
                 @include grayscaleMixin(0%, 0);
 
                 & .album-links-link-background {
-                    opacity: 0.6;
+                    opacity: 1;
                 }
             }
 

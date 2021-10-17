@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
@@ -111,7 +111,17 @@ function AlbumIndividual() {
                                     {isLoading ? (
                                         <Skeleton width={200} />
                                     ) : (
-                                        `[${album.year}] - ${album.album_artist}`
+                                        <>
+                                            <span
+                                                style={{
+                                                    color: colors[colorIndex],
+                                                }}
+                                            >
+                                                {album.year}
+                                            </span>
+                                            {" - "}
+                                            {album.album_artist}
+                                        </>
                                     )}
                                 </p>
                             </div>
