@@ -10,6 +10,9 @@ import { playingTrackIsPaused } from "../store/actionCreators";
 import Icon from "./Icon";
 import Image from "./Image";
 
+import { ReactComponent as LogoPlay } from "../icons/play.svg";
+import { ReactComponent as LogoPause } from "../icons/pause.svg";
+
 function FloatingAlbumCover() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -63,12 +66,12 @@ function FloatingAlbumCover() {
                 alt="album-cover"
                 draggable="false"
             />
-            <div
-                className="icon"
-                onClick={handlePause}
-                // style={{ backgroundColor: colors[colorIndex] }}
-            >
-                {isPaused ? <Icon name="play" /> : <Icon name="pause" />}
+            <div className="icon" onClick={handlePause}>
+                {isPaused ? (
+                    <LogoPlay fill={colors[colorIndex]} />
+                ) : (
+                    <LogoPause fill={colors[colorIndex]} />
+                )}
             </div>
         </animated.div>
     );

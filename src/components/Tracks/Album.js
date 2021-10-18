@@ -5,8 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
 
-import Icon from "../Icon";
 import Image from "../Image";
+
+import { ReactComponent as LogoPlay } from "../../icons/play.svg";
+import { ReactComponent as LogoPause } from "../../icons/pause.svg";
 
 function Album({ album }) {
     const dispatch = useDispatch();
@@ -77,16 +79,18 @@ function Album({ album }) {
                         alt="album-cover"
                         draggable="false"
                     />
-                    <div
-                        className="album-action"
-                        onClick={handleActionButton}
-                        // style={{ backgroundColor: colors[colorIndex] }}
-                    >
+                    <div className="album-action" onClick={handleActionButton}>
                         <div className="album-action-button">
                             {!isAlbumPlaying || isPaused ? (
-                                <Icon name="play" isRounded={true} />
+                                <LogoPlay
+                                    fill={
+                                        isAlbumPlaying && isPaused
+                                            ? colors[colorIndex]
+                                            : "#fff"
+                                    }
+                                />
                             ) : (
-                                <Icon name="pause" isRounded={true} />
+                                <LogoPause fill={colors[colorIndex]} />
                             )}
                         </div>
                     </div>
