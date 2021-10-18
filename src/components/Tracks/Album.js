@@ -15,6 +15,9 @@ function Album({ album }) {
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const trackStore = useSelector((state) => state.music.tracks.data);
 
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
+
     // If api call failed
     const didError = useSelector((state) => state.music.tracks.didError);
 
@@ -74,7 +77,11 @@ function Album({ album }) {
                         alt="album-cover"
                         draggable="false"
                     />
-                    <div className="album-action" onClick={handleActionButton}>
+                    <div
+                        className="album-action"
+                        onClick={handleActionButton}
+                        style={{ backgroundColor: colors[colorIndex] }}
+                    >
                         <div className="album-action-button">
                             {!isAlbumPlaying || isPaused ? (
                                 <Icon name="play" isRounded={true} />

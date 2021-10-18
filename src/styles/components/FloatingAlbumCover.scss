@@ -7,7 +7,7 @@
     opacity: 1;
     z-index: 80;
     cursor: pointer;
-    background-color: #f5f5f5;
+    background-color: $background-shade-80;
     @include transition(-webkit-box-shadow, 280ms, ease);
     @include transition(-moz-box-shadow, 280ms, ease);
     @include transition(box-shadow, 280ms, ease);
@@ -17,16 +17,16 @@
     }
 
     &:hover {
-        -webkit-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
-           -moz-box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
-                box-shadow: 0px 2px 4px -1px rgba(0,0,0, .28);
+        -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.28);
+        -moz-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.28);
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.28);
     }
 
     @media (max-width: 1300px) {
         display: none;
     }
     @media (max-height: 750px) {
-        display: none;
+        // display: none;
     }
 
     img {
@@ -49,13 +49,14 @@
         justify-content: center;
         background-color: #fff;
         border-radius: 20px;
+        @include transition(all, 280ms, ease);
 
         svg {
             width: 20px;
             height: 20px;
 
             path {
-                fill: #333;
+                fill: #222;
             }
         }
     }

@@ -139,6 +139,7 @@
         @include flex-center();
         background-color: #fff;
         border-radius: 100%;
+        @include transition(background-color, 280ms, ease);
 
         .album-action-button {
             @include flex-center();
@@ -148,7 +149,7 @@
                 height: 25px;
 
                 path {
-                    fill: #333;
+                    fill: #222;
                 }
             }
         }

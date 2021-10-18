@@ -19,6 +19,9 @@ function FloatingAlbumCover() {
     const track = useSelector((state) => state.music.tracks.data[playingIndex]);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
 
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
+
     // Album cover ID
     // Fallback to example image if no track is playing
     let albumCoverId = "example";
@@ -28,7 +31,9 @@ function FloatingAlbumCover() {
     const handleGoToAlbum = (e) => {
         e.stopPropagation();
         if (track) {
-            const albumId = sha1(track.metadata.album + track.metadata.album_artist).toString();
+            const albumId = sha1(
+                track.metadata.album + track.metadata.album_artist
+            ).toString();
             history.push("/albums/" + albumId);
         }
     };
@@ -36,19 +41,19 @@ function FloatingAlbumCover() {
     // Play/Pause track
     const handlePause = (e) => {
         e.stopPropagation();
-        dispatch(
-            playingTrackIsPaused(!isPaused)
-        );
+        dispatch(playingTrackIsPaused(!isPaused));
     };
 
     const styles = useSpring({
-        from: {height: 0, opacity: 0},
-        to: {height: track ? 200 : 0, opacity: track ? 1 : 0}
+        from: { height: 0, opacity: 0 },
+        to: { height: track ? 200 : 0, opacity: track ? 1 : 0 },
     });
 
     return (
         <animated.div
-            className={`floating-album-cover${track && isPaused ? " isPaused" : ""}${isMobile ? " isMobile" : ""}${track ? "" : " notrack"}`}
+            className={`floating-album-cover${
+                track && isPaused ? " isPaused" : ""
+            }${isMobile ? " isMobile" : ""}${track ? "" : " notrack"}`}
             style={styles}
             onClick={handleGoToAlbum}
         >
@@ -58,12 +63,12 @@ function FloatingAlbumCover() {
                 alt="album-cover"
                 draggable="false"
             />
-            <div className="icon" onClick={handlePause}>
-                {
-                    isPaused ?
-                    <Icon name="play" /> :
-                    <Icon name="pause" />
-                }
+            <div
+                className="icon"
+                onClick={handlePause}
+                style={{ backgroundColor: colors[colorIndex] }}
+            >
+                {isPaused ? <Icon name="play" /> : <Icon name="pause" />}
             </div>
         </animated.div>
     );
