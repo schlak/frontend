@@ -24,12 +24,10 @@
 
             .album-metadata {
                 h2 {
-                    color: $text-color;
                     font-size: 4.4rem;
                 }
 
                 p {
-                    color: $background-shade-80;
                     font-weight: bold;
                     font-size: 2.3rem;
                     margin-top: 8px;
@@ -71,20 +69,37 @@
 
         h2,
         p {
-            color: #222;
+            color: $text-color;
             text-transform: capitalize;
             @include text-overflow-ellipsis();
         }
 
         h2 {
-            font-size: 3rem;
+            font-size: 4.4rem;
         }
 
         p {
-            color: #444;
+            color: $background-shade-80;
             font-weight: bold;
-            font-size: 1.8rem;
+            font-size: 2.3rem;
             margin-top: 8px;
+        }
+
+        @media (max-width: 650px) {
+            h2 {
+                font-size: 3.8rem;
+            }
+            p {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 3rem;
+            }
+            p {
+                font-size: 1.8rem;
+            }
         }
     }
 
