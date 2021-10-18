@@ -16,6 +16,7 @@ function AlbumIndividual() {
     const dispatch = useDispatch();
 
     const $albumCover = useRef(null);
+    const $albumSide = useRef(null);
 
     // Album ID in URL
     const { id } = useParams();
@@ -72,12 +73,22 @@ function AlbumIndividual() {
     const handleScroll = (e) => {
         if (isLoading || window.innerWidth < 1200) return false;
 
-        if (window.scrollY > 100 && album.tracks.length > 7) {
-            console.log($albumCover.current);
-            console.log(window.scrollY);
-
+        if (window.scrollY > 100 && album.tracks.length >= 5) {
             $albumCover.current.style.position = "fixed";
             $albumCover.current.style.top = "100px";
+
+            // prettier-ignore
+            let albumSideBottom = $albumSide.current.offsetTop + $albumSide.current.offsetHeight; // Side bottom position
+
+            let albumCoverHeight = $albumCover.current.offsetHeight; // Cover height
+            let albumCoverBottom =
+                document.documentElement.scrollTop + 100 + albumCoverHeight; // Cover bottom position
+            let albumCoverFinalPositionTop = albumSideBottom - albumCoverHeight;
+
+            if (albumCoverBottom >= albumSideBottom) {
+                $albumCover.current.style.position = "absolute";
+                $albumCover.current.style.top = `${albumCoverFinalPositionTop}px`;
+            }
         } else {
             $albumCover.current.style.position = "relative";
             $albumCover.current.style.top = "0px";
@@ -129,7 +140,7 @@ function AlbumIndividual() {
                             </div>
                         </div>
 
-                        <div className="album-side">
+                        <div className="album-side" ref={$albumSide}>
                             <div className="album-metadata">
                                 <h2>
                                     {isLoading ? (
