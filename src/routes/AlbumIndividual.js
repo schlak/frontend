@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
-import Icon from "../components/Icon";
 import Image from "../components/Image";
 import Track from "../components/Tracks/Track";
 
@@ -15,6 +14,9 @@ import { ReactComponent as IconLogoDiscogs } from "../icons/logo-discogs-vinyl.s
 
 function AlbumIndividual() {
     const dispatch = useDispatch();
+
+    const $albumCover = useRef(null);
+    const $albumSide = useRef(null);
 
     // Album ID in URL
     const { id } = useParams();
@@ -68,6 +70,44 @@ function AlbumIndividual() {
         }
     };
 
+    // Create a floating album cover on scroll to keep the cover
+    // in view if there are lots of tracks.
+    const handleScroll = (e) => {
+        if (isLoading || window.innerWidth < 1200) return false;
+
+        if (window.scrollY > 100 && album.tracks.length >= 5) {
+            $albumCover.current.style.position = "fixed";
+            $albumCover.current.style.top = "100px";
+
+            // Prevent album cover floating past tracks.
+            // Calculate exactly where to stop album-cover - bottom of album-side.
+            //
+            // prettier-ignore
+            let albumSideBottom = $albumSide.current.offsetTop + $albumSide.current.offsetHeight; // Side bottom position
+
+            let albumCoverHeight = $albumCover.current.offsetHeight; // Cover height
+            let albumCoverBottom =
+                document.documentElement.scrollTop + 100 + albumCoverHeight; // Cover bottom position
+            let albumCoverFinalPositionTop = albumSideBottom - albumCoverHeight;
+
+            if (albumCoverBottom >= albumSideBottom) {
+                $albumCover.current.style.position = "absolute";
+                $albumCover.current.style.top = `${albumCoverFinalPositionTop}px`;
+            }
+        } else {
+            $albumCover.current.style.position = "relative";
+            $albumCover.current.style.top = "0px";
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [isLoading]);
+
     // Jump to top of page
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -78,31 +118,34 @@ function AlbumIndividual() {
             <div className="AlbumIndividual container">
                 <section>
                     <div className="album">
-                        <div
-                            className="album-cover"
-                            onClick={handleActionButton}
-                        >
-                            {isLoading ? (
-                                <Skeleton width={600} height={600} />
-                            ) : (
-                                <Image
-                                    src={
-                                        isLoading
-                                            ? "example"
-                                            : `${
-                                                  process.env.REACT_APP_API
-                                              }/tracks/${
-                                                  tracks[album.tracks[0]].id
-                                              }/cover/600`
-                                    }
-                                    fallback={`fallback--album-cover`}
-                                    alt="album-cover"
-                                    draggable="false"
-                                />
-                            )}
+                        <div className="album-cover-wrapper">
+                            <div
+                                className="album-cover"
+                                onClick={handleActionButton}
+                                ref={$albumCover}
+                            >
+                                {isLoading ? (
+                                    <Skeleton width={600} height={600} />
+                                ) : (
+                                    <Image
+                                        src={
+                                            isLoading
+                                                ? "example"
+                                                : `${
+                                                      process.env.REACT_APP_API
+                                                  }/tracks/${
+                                                      tracks[album.tracks[0]].id
+                                                  }/cover/600`
+                                        }
+                                        fallback={`fallback--album-cover`}
+                                        alt="album-cover"
+                                        draggable="false"
+                                    />
+                                )}
+                            </div>
                         </div>
 
-                        <div className="album-side">
+                        <div className="album-side" ref={$albumSide}>
                             <div className="album-metadata">
                                 <h2>
                                     {isLoading ? (
