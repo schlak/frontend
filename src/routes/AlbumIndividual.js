@@ -106,7 +106,7 @@ function AlbumIndividual() {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [isLoading]);
 
     // Jump to top of page
     useEffect(() => {
