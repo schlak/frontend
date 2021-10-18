@@ -39,7 +39,7 @@ function PopularTracks(props) {
                         {tracksToRender.map((track, index) => {
                             return (
                                 <TrackBig
-                                    index={track[0]}
+                                    index={parseInt(track[0])}
                                     size="big"
                                     key={index}
                                 />
