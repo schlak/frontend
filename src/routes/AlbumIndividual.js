@@ -70,6 +70,8 @@ function AlbumIndividual() {
         }
     };
 
+    // Create a floating album cover on scroll to keep the cover
+    // in view if there are lots of tracks.
     const handleScroll = (e) => {
         if (isLoading || window.innerWidth < 1200) return false;
 
@@ -77,6 +79,9 @@ function AlbumIndividual() {
             $albumCover.current.style.position = "fixed";
             $albumCover.current.style.top = "100px";
 
+            // Prevent album cover floating past tracks.
+            // Calculate exactly where to stop album-cover - bottom of album-side.
+            //
             // prettier-ignore
             let albumSideBottom = $albumSide.current.offsetTop + $albumSide.current.offsetHeight; // Side bottom position
 
