@@ -74,7 +74,7 @@ function Album({ album }) {
             <div className={`album${classList}`}>
                 <div className="album-cover">
                     <Image
-                        src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                        src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
                         fallback={`fallback--album-cover`}
                         alt="album-cover"
                         draggable="false"

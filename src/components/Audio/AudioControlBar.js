@@ -109,7 +109,7 @@ function AudioControlBar(props) {
                     <div className="track col" onClick={handleGoToAlbum}>
                         <div className="track-cover">
                             <Image
-                                src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                                src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/50`}
                                 fallback={`fallback--album-cover`}
                                 alt="album-cover"
                                 draggable="false"
