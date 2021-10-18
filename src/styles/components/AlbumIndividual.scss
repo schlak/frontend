@@ -1,4 +1,48 @@
 .AlbumIndividual {
+    .album {
+        @media (min-width: 1200px) {
+            @include flex();
+
+            .album-cover {
+                width: 600px;
+                height: 600px;
+
+                @media (max-width: 1400px) {
+                    width: 500px;
+                    height: 500px;
+                }
+            }
+
+            .album-side {
+                flex-grow: 1;
+                padding: 0px 80px;
+
+                @media (max-width: 1400px) {
+                    padding: 0px 50px;
+                }
+            }
+
+            .album-metadata {
+                h2 {
+                    color: $text-color;
+                    font-size: 4.4rem;
+                }
+
+                p {
+                    color: $background-shade-80;
+                    font-weight: bold;
+                    font-size: 2.3rem;
+                    margin-top: 8px;
+                }
+            }
+
+            .track-container {
+                // margin-top: 100px;
+                width: 100%;
+            }
+        }
+    }
+
     .album-cover {
         width: 400px;
         height: 400px;
@@ -52,7 +96,6 @@
 
         .album-links-link {
             position: relative;
-            @include grayscaleMixin(100%, 1);
             @include transition(all, 120ms, ease);
             margin-right: 30px;
             border-radius: 4px;
@@ -62,7 +105,7 @@
                 @include grayscaleMixin(0%, 0);
 
                 & .album-links-link-background {
-                    opacity: 0.6;
+                    opacity: 1;
                 }
             }
 

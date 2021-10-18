@@ -12,7 +12,7 @@ function RecentlyListenedTracks(props) {
     // Find 5 most recently listened to tracks
     useEffect(() => {
         let stats = [];
-        let numberOfTracks = 6;
+        let numberOfTracks = 15;
 
         for (const i in tracks) {
             const lastPlayed = tracks[i].stats.lastPlayed;
@@ -23,8 +23,12 @@ function RecentlyListenedTracks(props) {
 
         stats = orderBy(stats, [1], ["desc", "asc"]);
 
-        if (window.innerWidth > 1800) {
+        if (window.innerWidth < 1000) {
             numberOfTracks = 8;
+        } else if (window.innerWidth < 1400) {
+            numberOfTracks = 9;
+        } else if (window.innerWidth < 1800) {
+            numberOfTracks = 12;
         }
 
         setTracksToRender(stats.slice(0, numberOfTracks));
@@ -39,7 +43,7 @@ function RecentlyListenedTracks(props) {
                         {tracksToRender.map((track, index) => {
                             return (
                                 <TrackBig
-                                    index={track[0]}
+                                    index={parseInt(track[0])}
                                     size="big"
                                     key={index}
                                 />

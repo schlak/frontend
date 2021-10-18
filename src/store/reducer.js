@@ -18,6 +18,7 @@ import {
     COLOR_UPDATE_CURRENT,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
+    FILTER_RESET_TAGS,
     SOCKET_CONNECTED_USERS,
     SOCKET_GLOBAL_PLAYING,
 } from "./actionTypes";
@@ -301,6 +302,22 @@ function musicApp(state = initialState, action) {
                             tags: action.payload.tags,
                         },
                         filteredData: action.payload.filteredData,
+                    },
+                },
+            };
+
+        case FILTER_RESET_TAGS:
+            return {
+                ...state,
+                music: {
+                    ...state.music,
+                    tracks: {
+                        ...state.music.tracks,
+                        filter: {
+                            ...state.music.tracks.filter,
+                            tags: [],
+                        },
+                        filteredData: [],
                     },
                 },
             };

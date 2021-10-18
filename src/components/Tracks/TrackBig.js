@@ -2,7 +2,6 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { isSafari, isMobileSafari } from "react-device-detect";
 
 import { playTrack } from "../../store/actionCreators";
 
@@ -59,7 +58,7 @@ function TrackBig({ index, size }) {
         <div className={`track${classList}`} onClick={playInSession}>
             <div className="track-col image">
                 <Image
-                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                    src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/50`}
                     fallback={`fallback--album-cover`}
                     alt="album-cover"
                     draggable="false"

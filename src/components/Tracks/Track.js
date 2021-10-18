@@ -1,13 +1,13 @@
 import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { isSafari, isMobileSafari } from "react-device-detect";
 
 import { playTrack } from "../../store/actionCreators";
 
-import Icon from "../Icon";
+import { ReactComponent as IconPlay } from "../../icons/play.svg";
+import { ReactComponent as IconPause } from "../../icons/pause.svg";
 
-function Track({ index, size }) {
+function Track({ index, trackNumber, size }) {
     const dispatch = useDispatch();
 
     // Track and session data from store
@@ -17,6 +17,8 @@ function Track({ index, size }) {
     const playingDidError = useSelector(
         (state) => state.session.playing.didError
     );
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
 
     // Is this track currently playing?
     const isTrackPlaying = track.id === playingId;
@@ -45,16 +47,19 @@ function Track({ index, size }) {
         >
             <div className="track-col play-state">
                 {isTrackPlaying && !isTrackPaused && !didError ? (
-                    <Icon name="pause" />
+                    <IconPause />
                 ) : (
-                    <Icon name="play" />
+                    <IconPlay />
                 )}
             </div>
             <div className="track-col name">
                 {track.metadata.title}
                 <div className="artist">{track.metadata.artist}</div>
             </div>
-            <div className="track-col length">
+            <div
+                className="track-col length"
+                style={{ color: colors[colorIndex] }}
+            >
                 {moment.utc(track.metadata.duration * 1000).format("mm:ss")}
             </div>
         </div>

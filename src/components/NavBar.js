@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Icon from "./Icon";
 import NavLinks from "./NavLinks";
 import SearchBar from "./SearchBar";
 
+import { ReactComponent as IconLogo } from "../icons/logo.svg";
+
 function NavBar() {
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
+
     const [onScroll, setOnScroll] = useState(false);
 
     const handleScroll = () => {
@@ -31,7 +36,7 @@ function NavBar() {
                 <div className="navbar-content container">
                     <span className="navbar-logo">
                         <Link to="/">
-                            <Icon name="logo" isRounded={true} />
+                            <IconLogo fill={colors[colorIndex]} />
                         </Link>
                     </span>
                     <div className="navbar-var">

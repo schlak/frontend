@@ -6,9 +6,8 @@
     height: 70px;
     z-index: 100;
     // overflow: hidden;
-    background: #ffffff;
-    border-top: 1px solid #eee;
     @include user-select(none);
+    background: $background-shade-2;
 
     &.offset {
         bottom: 70px;
@@ -35,13 +34,6 @@
             &:first-of-type {
                 justify-content: flex-start;
             }
-
-            @media (min-width: 1600px) {
-                &.volume,
-                &:first-of-type {
-                    justify-content: center;
-                }
-            }
         }
     }
 
@@ -50,7 +42,7 @@
         top: -2px;
         left: 0;
         height: 2px;
-        background-color: #555;
+        background-color: $background-shade-80;
         @include transition(all, 80ms, ease);
     }
 
@@ -86,7 +78,7 @@
             height: 50%;
             width: 1px;
             margin: 0 10px;
-            background-color: #ddd;
+            background-color: $background-shade-60;
         }
 
         .icon {
@@ -94,21 +86,26 @@
             margin: 0 5px;
             cursor: pointer;
             border-radius: 100%;
+            @include flex-center();
 
             svg {
                 width: 22px;
                 height: 22px;
-
-                path {
-                    fill: #333;
-                }
             }
 
             &.active {
-                background-color: #333;
+                background-color: $background-shade-20;
                 svg {
                     path {
                         fill: #fff;
+                    }
+                }
+
+                &.play-pause {
+                    svg {
+                        path {
+                            fill: inherit;
+                        }
                     }
                 }
             }
@@ -126,8 +123,9 @@
                 margin-right: 15px;
 
                 &.is-faded {
+                    opacity: 0.7;
                     svg path {
-                        fill: lighten(#333, 20%);
+                        fill: darken($background-shade-80, 30%);
                     }
                 }
 
@@ -136,7 +134,7 @@
                     height: 22px;
 
                     path {
-                        fill: #333;
+                        fill: $forground-color;
                     }
                 }
             }

@@ -1,21 +1,24 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
 
-import Icon from "../Icon";
 import Image from "../Image";
+
+import { ReactComponent as IconPlay } from "../../icons/play.svg";
+import { ReactComponent as IconPause } from "../../icons/pause.svg";
 
 function Album({ album }) {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const playingIndex = useSelector((state) => state.session.playing.index);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
     const trackStore = useSelector((state) => state.music.tracks.data);
+
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
 
     // If api call failed
     const didError = useSelector((state) => state.music.tracks.didError);
@@ -50,14 +53,10 @@ function Album({ album }) {
 
         if (!isAlbumPlaying) {
             // Play first track in album
-            dispatch(
-                playTrack(album.tracks[0])
-            );
+            dispatch(playTrack(album.tracks[0]));
         } else {
             // Pause track
-            dispatch(
-                playingTrackIsPaused(!isPaused)
-            );
+            dispatch(playingTrackIsPaused(!isPaused));
         }
     };
 
@@ -68,22 +67,31 @@ function Album({ album }) {
     classList += didError ? " error" : "";
 
     return (
-        <Link to={album ? `/albums/${album.id}` : `#`} onClick={handleAlbumClick}>
+        <Link
+            to={album ? `/albums/${album.id}` : `#`}
+            onClick={handleAlbumClick}
+        >
             <div className={`album${classList}`}>
                 <div className="album-cover">
                     <Image
-                        src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/400`}
+                        src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/600`}
                         fallback={`fallback--album-cover`}
                         alt="album-cover"
                         draggable="false"
                     />
                     <div className="album-action" onClick={handleActionButton}>
                         <div className="album-action-button">
-                            {
-                                !isAlbumPlaying || isPaused ?
-                                <Icon name="play" isRounded={true} /> :
-                                <Icon name="pause" isRounded={true} />
-                            }
+                            {!isAlbumPlaying || isPaused ? (
+                                <IconPlay
+                                    fill={
+                                        isAlbumPlaying && isPaused
+                                            ? colors[colorIndex]
+                                            : "#fff"
+                                    }
+                                />
+                            ) : (
+                                <IconPause fill={colors[colorIndex]} />
+                            )}
                         </div>
                     </div>
                 </div>

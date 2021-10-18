@@ -5,10 +5,10 @@
     margin: 28px 0;
 
     .tag {
-        color: #333;
+        color: $background-shade-80;
         font-size: 1.2rem;
         letter-spacing: 0.3px;
-        background-color: #fff;
+        background-color: $background-shade-10;
         text-transform: capitalize;
         @include user-select(none);
         cursor: pointer;
@@ -19,13 +19,37 @@
         align-items: center;
         height: 28px;
 
+        &.greyed-out {
+            opacity: 0.3;
+        }
+
+        &.tag-reset {
+            cursor: default;
+            opacity: 0.3;
+        }
+        &.tag-reset.active {
+            cursor: pointer;
+            opacity: 1;
+        }
+
         &:hover {
-            background-color: #f4f4f4;
+            background-color: $background-shade-40;
+
+            &.greyed-out {
+                opacity: 1;
+            }
+
+            &.tag-reset {
+                background-color: $background-shade-10;
+            }
+            &.tag-reset.active {
+                background-color: $background-shade-40;
+            }
         }
 
         &.selected {
-            color: #fff;
-            background-color: #222;
+            color: $background-shade-2;
+            background-color: $background-shade-80;
         }
 
         svg {
@@ -33,6 +57,10 @@
             height: 15px;
             margin-right: 4px;
             vertical-align: middle;
+
+            path {
+                fill: $background-shade-80;
+            }
         }
 
         strong {
