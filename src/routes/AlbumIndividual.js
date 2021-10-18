@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
 
-import Icon from "../components/Icon";
 import Image from "../components/Image";
 import Track from "../components/Tracks/Track";
 
@@ -15,6 +14,8 @@ import { ReactComponent as IconLogoDiscogs } from "../icons/logo-discogs-vinyl.s
 
 function AlbumIndividual() {
     const dispatch = useDispatch();
+
+    const $albumCover = useRef(null);
 
     // Album ID in URL
     const { id } = useParams();
@@ -68,6 +69,29 @@ function AlbumIndividual() {
         }
     };
 
+    const handleScroll = (e) => {
+        if (isLoading) return false;
+
+        if (window.scrollY > 100 && album.tracks.length > 7) {
+            console.log($albumCover.current);
+            console.log(window.scrollY);
+
+            $albumCover.current.style.position = "fixed";
+            $albumCover.current.style.top = "100px";
+        } else {
+            $albumCover.current.style.position = "relative";
+            $albumCover.current.style.top = "0px";
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     // Jump to top of page
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -78,28 +102,31 @@ function AlbumIndividual() {
             <div className="AlbumIndividual container">
                 <section>
                     <div className="album">
-                        <div
-                            className="album-cover"
-                            onClick={handleActionButton}
-                        >
-                            {isLoading ? (
-                                <Skeleton width={600} height={600} />
-                            ) : (
-                                <Image
-                                    src={
-                                        isLoading
-                                            ? "example"
-                                            : `${
-                                                  process.env.REACT_APP_API
-                                              }/tracks/${
-                                                  tracks[album.tracks[0]].id
-                                              }/cover/600`
-                                    }
-                                    fallback={`fallback--album-cover`}
-                                    alt="album-cover"
-                                    draggable="false"
-                                />
-                            )}
+                        <div className="album-cover-wrapper">
+                            <div
+                                className="album-cover"
+                                onClick={handleActionButton}
+                                ref={$albumCover}
+                            >
+                                {isLoading ? (
+                                    <Skeleton width={600} height={600} />
+                                ) : (
+                                    <Image
+                                        src={
+                                            isLoading
+                                                ? "example"
+                                                : `${
+                                                      process.env.REACT_APP_API
+                                                  }/tracks/${
+                                                      tracks[album.tracks[0]].id
+                                                  }/cover/600`
+                                        }
+                                        fallback={`fallback--album-cover`}
+                                        alt="album-cover"
+                                        draggable="false"
+                                    />
+                                )}
+                            </div>
                         </div>
 
                         <div className="album-side">
