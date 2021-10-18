@@ -40,6 +40,9 @@ function AudioControlBar(props) {
     const volume = useSelector((state) => state.session.playing.status.volume);
     const isMute = useSelector((state) => state.session.playing.status.isMute);
 
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
+
     // Album cover ID
     // Fallback to example image if no track is playing
     let albumCoverId = "example";
@@ -129,27 +132,33 @@ function AudioControlBar(props) {
                             className={`icon${doesShuffle ? " active" : ""}`}
                             onClick={handleShuffleToggle}
                         >
-                            <IconShuffle />
+                            <IconShuffle fill="#e4e4e4" />
                         </div>
                         <span className="divider"></span>
                         <div className="icon" onClick={handlePlayPreviousTrack}>
-                            <IconSkipPrevious />
+                            <IconSkipPrevious fill="#e4e4e4" />
                         </div>
                         <div
-                            className={`icon${isPaused ? " active" : ""}`}
+                            className={`icon play-pause${
+                                isPaused ? " active" : ""
+                            }`}
                             onClick={handlePause}
                         >
-                            {isPaused ? <IconPlay /> : <IconPause />}
+                            {isPaused ? (
+                                <IconPlay fill={colors[colorIndex]} />
+                            ) : (
+                                <IconPause fill={colors[colorIndex]} />
+                            )}
                         </div>
                         <div className="icon" onClick={handlePlayNextTrack}>
-                            <IconSkipNext />
+                            <IconSkipNext fill="#e4e4e4" />
                         </div>
                         <span className="divider"></span>
                         <div
                             className={`icon${doesRepeat ? " active" : ""}`}
                             onClick={handleRepeatToggle}
                         >
-                            <IconReplay />
+                            <IconReplay fill="#e4e4e4" />
                         </div>
                     </div>
                 )}
