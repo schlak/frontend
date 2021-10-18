@@ -7,7 +7,7 @@ import { playTrack } from "../../store/actionCreators";
 
 import Icon from "../Icon";
 
-function Track({ index, size }) {
+function Track({ index, trackNumber, size }) {
     const dispatch = useDispatch();
 
     // Track and session data from store
@@ -17,6 +17,8 @@ function Track({ index, size }) {
     const playingDidError = useSelector(
         (state) => state.session.playing.didError
     );
+    const colors = useSelector((state) => state.color.colors);
+    const colorIndex = useSelector((state) => state.color.current);
 
     // Is this track currently playing?
     const isTrackPlaying = track.id === playingId;
@@ -54,7 +56,10 @@ function Track({ index, size }) {
                 {track.metadata.title}
                 <div className="artist">{track.metadata.artist}</div>
             </div>
-            <div className="track-col length">
+            <div
+                className="track-col length"
+                style={{ color: colors[colorIndex] }}
+            >
                 {moment.utc(track.metadata.duration * 1000).format("mm:ss")}
             </div>
         </div>

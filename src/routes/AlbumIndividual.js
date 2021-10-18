@@ -196,7 +196,11 @@ function AlbumIndividual() {
                                 {!isLoading &&
                                     album.tracks.map((track, key) => {
                                         return (
-                                            <Track index={track} key={key} />
+                                            <Track
+                                                index={track}
+                                                trackNumber={key + 1}
+                                                key={key}
+                                            />
                                         );
                                     })}
                             </div>
