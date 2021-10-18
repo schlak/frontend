@@ -7,11 +7,10 @@ import sha1 from "crypto-js/sha1";
 
 import { playingTrackIsPaused } from "../store/actionCreators";
 
-import Icon from "./Icon";
 import Image from "./Image";
 
-import { ReactComponent as LogoPlay } from "../icons/play.svg";
-import { ReactComponent as LogoPause } from "../icons/pause.svg";
+import { ReactComponent as IconPlay } from "../icons/play.svg";
+import { ReactComponent as IconPause } from "../icons/pause.svg";
 
 function FloatingAlbumCover() {
     const dispatch = useDispatch();
@@ -68,9 +67,9 @@ function FloatingAlbumCover() {
             />
             <div className="icon" onClick={handlePause}>
                 {isPaused ? (
-                    <LogoPlay fill={colors[colorIndex]} />
+                    <IconPlay fill={colors[colorIndex]} />
                 ) : (
-                    <LogoPause fill={colors[colorIndex]} />
+                    <IconPause fill={colors[colorIndex]} />
                 )}
             </div>
         </animated.div>

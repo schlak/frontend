@@ -2,7 +2,6 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { isSafari, isMobileSafari } from "react-device-detect";
 
 import { playTrack } from "../../store/actionCreators";
 

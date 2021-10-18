@@ -1,11 +1,11 @@
 import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { isSafari, isMobileSafari } from "react-device-detect";
 
 import { playTrack } from "../../store/actionCreators";
 
-import Icon from "../Icon";
+import { ReactComponent as IconPlay } from "../../icons/play.svg";
+import { ReactComponent as IconPause } from "../../icons/pause.svg";
 
 function Track({ index, trackNumber, size }) {
     const dispatch = useDispatch();
@@ -47,9 +47,9 @@ function Track({ index, trackNumber, size }) {
         >
             <div className="track-col play-state">
                 {isTrackPlaying && !isTrackPaused && !didError ? (
-                    <Icon name="pause" />
+                    <IconPause />
                 ) : (
-                    <Icon name="play" />
+                    <IconPlay />
                 )}
             </div>
             <div className="track-col name">

@@ -5,8 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { filterToggleTag, filterResetTags } from "../../store/actionCreators";
 
-import Icon from "../Icon";
 import Tag from "./Tag";
+
+import { ReactComponent as IconClose } from "../../icons/close.svg";
+import { ReactComponent as IconMinus } from "../../icons/minus.svg";
+import { ReactComponent as IconPlus } from "../../icons/plus.svg";
 
 function Tags() {
     const dispatch = useDispatch();
@@ -62,7 +65,7 @@ function Tags() {
                 <Tag
                     tag={
                         <>
-                            <Icon name="close" />
+                            <IconClose />
                             Reset tags
                         </>
                     }
@@ -76,7 +79,7 @@ function Tags() {
                     tag={
                         tagsRendered === tags.length ? (
                             <>
-                                <Icon name="minus" />
+                                <IconMinus />
                                 Hide{" "}
                                 <strong>
                                     {Math.abs(6 - tagsRendered)}
@@ -85,7 +88,7 @@ function Tags() {
                             </>
                         ) : (
                             <>
-                                <Icon name="plus" />
+                                <IconPlus />
                                 Show{" "}
                                 <strong>
                                     {tags.length - tagsRendered}

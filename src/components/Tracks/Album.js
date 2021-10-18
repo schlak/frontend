@@ -7,8 +7,8 @@ import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
 
 import Image from "../Image";
 
-import { ReactComponent as LogoPlay } from "../../icons/play.svg";
-import { ReactComponent as LogoPause } from "../../icons/pause.svg";
+import { ReactComponent as IconPlay } from "../../icons/play.svg";
+import { ReactComponent as IconPause } from "../../icons/pause.svg";
 
 function Album({ album }) {
     const dispatch = useDispatch();
@@ -82,7 +82,7 @@ function Album({ album }) {
                     <div className="album-action" onClick={handleActionButton}>
                         <div className="album-action-button">
                             {!isAlbumPlaying || isPaused ? (
-                                <LogoPlay
+                                <IconPlay
                                     fill={
                                         isAlbumPlaying && isPaused
                                             ? colors[colorIndex]
@@ -90,7 +90,7 @@ function Album({ album }) {
                                     }
                                 />
                             ) : (
-                                <LogoPause fill={colors[colorIndex]} />
+                                <IconPause fill={colors[colorIndex]} />
                             )}
                         </div>
                     </div>

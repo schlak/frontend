@@ -9,6 +9,10 @@ import Icon from "../components/Icon";
 import Image from "../components/Image";
 import Track from "../components/Tracks/Track";
 
+import { ReactComponent as IconLogoGoogle } from "../icons/logo-google.svg";
+import { ReactComponent as IconLogoYoutube } from "../icons/logo-youtube.svg";
+import { ReactComponent as IconLogoDiscogs } from "../icons/logo-discogs-vinyl.svg";
+
 function AlbumIndividual() {
     const dispatch = useDispatch();
 
@@ -139,10 +143,9 @@ function AlbumIndividual() {
                                         target="_blank"
                                         // title="Search Google for this track"
                                     >
-                                        <Icon
-                                            name="logo-google"
-                                            isRounded="true"
-                                        />
+                                        <div>
+                                            <IconLogoGoogle />
+                                        </div>
                                     </a>
                                 </div>
                                 <div className="album-links-link">
@@ -157,10 +160,9 @@ function AlbumIndividual() {
                                         target="_blank"
                                         // title="Search YouTube for this track"
                                     >
-                                        <Icon
-                                            name="logo-youtube"
-                                            isRounded="true"
-                                        />
+                                        <div>
+                                            <IconLogoYoutube />
+                                        </div>
                                     </a>
                                 </div>
                                 <div className="album-links-link">
@@ -175,10 +177,9 @@ function AlbumIndividual() {
                                         target="_blank"
                                         // title="Search Discogs for this track"
                                     >
-                                        <Icon
-                                            name="logo-discogs-vinyl"
-                                            isRounded="true"
-                                        />
+                                        <div>
+                                            <IconLogoDiscogs />
+                                        </div>
                                     </a>
                                 </div>
                             </div>

@@ -13,10 +13,19 @@ import {
     muteVolume,
 } from "../../store/actionCreators";
 
-import Icon from "../Icon";
 import Image from "../Image";
 import Slider from "../Slider";
 import AudioPositionElement from "./AudioPositionElement";
+
+import { ReactComponent as IconShuffle } from "../../icons/shuffle.svg";
+import { ReactComponent as IconSkipPrevious } from "../../icons/skip-previous.svg";
+import { ReactComponent as IconSkipNext } from "../../icons/skip-next.svg";
+import { ReactComponent as IconReplay } from "../../icons/replay.svg";
+import { ReactComponent as IconPlay } from "../../icons/play.svg";
+import { ReactComponent as IconPause } from "../../icons/pause.svg";
+import { ReactComponent as IconVolumeHigh } from "../../icons/volume-high.svg";
+import { ReactComponent as IconVolumeMedium } from "../../icons/volume-medium.svg";
+import { ReactComponent as IconVolumeMute } from "../../icons/volume-mute.svg";
 
 function AudioControlBar(props) {
     const dispatch = useDispatch();
@@ -120,31 +129,27 @@ function AudioControlBar(props) {
                             className={`icon${doesShuffle ? " active" : ""}`}
                             onClick={handleShuffleToggle}
                         >
-                            <Icon name="shuffle" isRounded="true" />
+                            <IconShuffle />
                         </div>
                         <span className="divider"></span>
                         <div className="icon" onClick={handlePlayPreviousTrack}>
-                            <Icon name="skip-previous" isRounded="true" />
+                            <IconSkipPrevious />
                         </div>
                         <div
                             className={`icon${isPaused ? " active" : ""}`}
                             onClick={handlePause}
                         >
-                            {isPaused ? (
-                                <Icon name="play" isRounded="true" />
-                            ) : (
-                                <Icon name="pause" isRounded="true" />
-                            )}
+                            {isPaused ? <IconPlay /> : <IconPause />}
                         </div>
                         <div className="icon" onClick={handlePlayNextTrack}>
-                            <Icon name="skip-next" isRounded="true" />
+                            <IconSkipNext />
                         </div>
                         <span className="divider"></span>
                         <div
                             className={`icon${doesRepeat ? " active" : ""}`}
                             onClick={handleRepeatToggle}
                         >
-                            <Icon name="replay" isRounded="true" />
+                            <IconReplay />
                         </div>
                     </div>
                 )}
@@ -158,14 +163,11 @@ function AudioControlBar(props) {
                                 onClick={handleVolumeMuteToggle}
                             >
                                 {volume >= 50 && !isMute ? (
-                                    <Icon name="volume-high" isRounded="true" />
+                                    <IconVolumeHigh />
                                 ) : volume > 0 && !isMute ? (
-                                    <Icon
-                                        name="volume-medium"
-                                        isRounded="true"
-                                    />
+                                    <IconVolumeMedium />
                                 ) : (
-                                    <Icon name="volume-mute" isRounded="true" />
+                                    <IconVolumeMute />
                                 )}
                             </div>
                             <div className="volume-slider">
