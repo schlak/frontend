@@ -12,7 +12,7 @@ function PopularTracks(props) {
     // Find the top 5 most listened to tracks
     useEffect(() => {
         let stats = [];
-        let numberOfTracks = 6;
+        let numberOfTracks = 15;
 
         for (const i in tracks) {
             const timesPlayed = tracks[i].stats.timesPlayed;
@@ -23,8 +23,12 @@ function PopularTracks(props) {
 
         stats = orderBy(stats, [1], ["desc", "asc"]);
 
-        if (window.innerWidth > 1800) {
+        if (window.innerWidth < 1000) {
             numberOfTracks = 8;
+        } else if (window.innerWidth < 1400) {
+            numberOfTracks = 9;
+        } else if (window.innerWidth < 1800) {
+            numberOfTracks = 12;
         }
 
         setTracksToRender(stats.slice(0, numberOfTracks));
