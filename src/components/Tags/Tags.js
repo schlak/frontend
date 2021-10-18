@@ -94,6 +94,9 @@ function Tags() {
                             </>
                         )
                     }
+                    className={`${
+                        tagsRendered === tags.length ? "greyed-out" : ""
+                    }`}
                     handleOnClick={handleToggleTagsRendered}
                 />
             )}
