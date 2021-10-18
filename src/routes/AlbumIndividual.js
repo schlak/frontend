@@ -70,7 +70,7 @@ function AlbumIndividual() {
     };
 
     const handleScroll = (e) => {
-        if (isLoading) return false;
+        if (isLoading || window.innerWidth < 1200) return false;
 
         if (window.scrollY > 100 && album.tracks.length > 7) {
             console.log($albumCover.current);
