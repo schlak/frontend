@@ -20,6 +20,7 @@ import {
     COLOR_NEXT,
     UPDATE_USER_SEARCH,
     FILTER_TOGGLE_TAG,
+    FILTER_RESET_TAGS,
     SOCKET_CONNECTED_USERS,
     SOCKET_GLOBAL_PLAYING,
 } from "./actionTypes";
@@ -305,6 +306,13 @@ export const filterToggleTag = (tag) => (dispatch, getState) => {
             filteredData: tracksFiltered,
         },
     });
+};
+
+/*
+ * Reset all selected tags
+ */
+export const filterResetTags = () => (dispatch) => {
+    dispatch({ type: FILTER_RESET_TAGS });
 };
 
 /*

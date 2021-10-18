@@ -19,8 +19,24 @@
         align-items: center;
         height: 28px;
 
+        &.tag-reset {
+            cursor: default;
+            opacity: 0.3;
+        }
+        &.tag-reset.active {
+            cursor: pointer;
+            opacity: 1;
+        }
+
         &:hover {
             background-color: $background-shade-40;
+
+            &.tag-reset {
+                background-color: $background-shade-10;
+            }
+            &.tag-reset.active {
+                background-color: $background-shade-40;
+            }
         }
 
         &.selected {
@@ -33,6 +49,10 @@
             height: 15px;
             margin-right: 4px;
             vertical-align: middle;
+
+            path {
+                fill: $background-shade-80;
+            }
         }
 
         strong {
