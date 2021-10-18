@@ -66,7 +66,7 @@ function FloatingAlbumCover() {
             <div
                 className="icon"
                 onClick={handlePause}
-                style={{ backgroundColor: colors[colorIndex] }}
+                // style={{ backgroundColor: colors[colorIndex] }}
             >
                 {isPaused ? <Icon name="play" /> : <Icon name="pause" />}
             </div>

@@ -137,8 +137,8 @@
         opacity: 1;
         cursor: pointer;
         @include flex-center();
-        background-color: #fff;
         border-radius: 100%;
+        background-color: $background-shade-5;
         @include transition(background-color, 280ms, ease);
 
         .album-action-button {
@@ -149,7 +149,7 @@
                 height: 25px;
 
                 path {
-                    fill: #222;
+                    fill: #fff;
                 }
             }
         }

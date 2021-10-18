@@ -80,7 +80,7 @@ function Album({ album }) {
                     <div
                         className="album-action"
                         onClick={handleActionButton}
-                        style={{ backgroundColor: colors[colorIndex] }}
+                        // style={{ backgroundColor: colors[colorIndex] }}
                     >
                         <div className="album-action-button">
                             {!isAlbumPlaying || isPaused ? (
