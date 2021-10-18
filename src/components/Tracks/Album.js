@@ -1,8 +1,7 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
 
@@ -11,7 +10,6 @@ import Image from "../Image";
 
 function Album({ album }) {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const playingIndex = useSelector((state) => state.session.playing.index);
     const isPaused = useSelector((state) => state.session.playing.isPaused);
@@ -50,14 +48,10 @@ function Album({ album }) {
 
         if (!isAlbumPlaying) {
             // Play first track in album
-            dispatch(
-                playTrack(album.tracks[0])
-            );
+            dispatch(playTrack(album.tracks[0]));
         } else {
             // Pause track
-            dispatch(
-                playingTrackIsPaused(!isPaused)
-            );
+            dispatch(playingTrackIsPaused(!isPaused));
         }
     };
 
@@ -68,7 +62,10 @@ function Album({ album }) {
     classList += didError ? " error" : "";
 
     return (
-        <Link to={album ? `/albums/${album.id}` : `#`} onClick={handleAlbumClick}>
+        <Link
+            to={album ? `/albums/${album.id}` : `#`}
+            onClick={handleAlbumClick}
+        >
             <div className={`album${classList}`}>
                 <div className="album-cover">
                     <Image
@@ -79,11 +76,11 @@ function Album({ album }) {
                     />
                     <div className="album-action" onClick={handleActionButton}>
                         <div className="album-action-button">
-                            {
-                                !isAlbumPlaying || isPaused ?
-                                <Icon name="play" isRounded={true} /> :
+                            {!isAlbumPlaying || isPaused ? (
+                                <Icon name="play" isRounded={true} />
+                            ) : (
                                 <Icon name="pause" isRounded={true} />
-                            }
+                            )}
                         </div>
                     </div>
                 </div>
