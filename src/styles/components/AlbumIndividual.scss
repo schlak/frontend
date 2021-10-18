@@ -8,14 +8,18 @@
                 height: 600px;
 
                 @media (max-width: 1400px) {
-                    width: 400px;
-                    height: 400px;
+                    width: 500px;
+                    height: 500px;
                 }
             }
 
             .album-side {
                 flex-grow: 1;
                 padding: 0px 80px;
+
+                @media (max-width: 1400px) {
+                    padding: 0px 50px;
+                }
             }
 
             .album-metadata {
