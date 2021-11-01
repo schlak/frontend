@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -230,11 +230,12 @@ function AlbumIndividual() {
                             <div className="track-container">
                                 {isLoading &&
                                     [...Array(8)].map((x, key) => (
-                                        <div className="track" key={key}>
-                                            <p>
-                                                <Skeleton width={"80%"} />
-                                            </p>
-                                        </div>
+                                        <Skeleton
+                                            width={"80%"}
+                                            height={"60px"}
+                                            enableAnimation={false}
+                                            key={key}
+                                        />
                                     ))}
 
                                 {!isLoading &&
