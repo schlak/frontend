@@ -198,7 +198,7 @@
         border-bottom: none;
     }
 
-    &:hover {
+    &:hover:not(.react-loading-skeleton) {
         background-color: $background-shade-10 !important;
     }
 

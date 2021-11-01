@@ -28,8 +28,8 @@ function Album({ album }) {
 
     // Assume loading state
     let isLoading = true;
-    let albumName = <Skeleton />;
-    let albumArtist = <Skeleton />;
+    let albumName = <Skeleton width={"88%"} />;
+    let albumArtist = <Skeleton width={"60%"} />;
     let albumCoverId = "example";
 
     // Album exists

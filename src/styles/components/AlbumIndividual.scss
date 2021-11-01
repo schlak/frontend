@@ -48,7 +48,7 @@
     .album-cover {
         width: 400px;
         height: 400px;
-        background: #f5f5f5;
+        background: $background-shade-5;
         @include user-select(none);
         // @include transition(all, 280ms, ease);
         cursor: pointer;
@@ -58,7 +58,8 @@
             height: 80vw;
         }
 
-        img {
+        img,
+        span {
             display: block;
             width: 100%;
             height: 100%;
