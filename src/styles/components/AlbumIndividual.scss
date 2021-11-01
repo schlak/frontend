@@ -18,6 +18,7 @@
 
             .album-side {
                 flex-grow: 1;
+                flex-basis: min-content;
                 padding: 0px 80px;
 
                 @media (max-width: 1400px) {
@@ -74,7 +75,7 @@
         p {
             color: $text-color;
             text-transform: capitalize;
-            @include text-overflow-ellipsis();
+            // @include text-overflow-ellipsis();
         }
 
         h2 {
