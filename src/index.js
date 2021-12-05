@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import musicApp from "./store/reducer";
 import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import bugcatch from "@bug-catch/browser";
+import { init as bugcatchInit } from "@bug-catch/browser";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -19,7 +19,7 @@ console.log(`Music Library [Version ${appVersion}]`);
 // Bugcatch init
 // logs all errors
 if (process.env.REACT_APP_BUGCATCH_ENABLE) {
-    bugcatch.init({
+    bugcatchInit({
         base_url: `${process.env.REACT_APP_API}/bugcatch`,
         release: appVersion,
     });
