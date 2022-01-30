@@ -102,18 +102,40 @@ export const filterTracks = (
             if (!trackFound) return filtered;
         }
 
+        // If no filter applyed: add all all tracks
+        if (filter.tags.length === 0) {
+            filtered.push(track);
+            return filtered;
+        }
+
         const genre = track?.metadata?.genre;
         const year = track?.metadata?.year;
         const decade = Math.floor(year / 10) * 10;
 
-        // If no filter applyed: add all all tracks
-        // Or if track tag matches filter in RegExp
-        if (
-            filter.tags.length === 0 ||
-            (filter.tags.length > 0 &&
-                (regexTags.test(genre) || regexTags.test(decade)))
-        ) {
-            filtered.push(track);
+        // If track tag matches filter in RegExp
+        if (filter.tags.length > 0) {
+            const matchedGenre = regexTags.test(genre);
+            const matchedDecade = regexTags.test(decade);
+
+            if (matchedGenre || matchedDecade) {
+                const isDecadeInTags = filter.tags
+                    .join("|")
+                    .match(/[12][0-9]{3}/gi);
+
+                if (isDecadeInTags && isDecadeInTags?.length > 0) {
+                    // Add track if:
+                    // 1. both the genre & decade match (e.g. Latin track in the 1950s)
+                    // 2. only decades are selected, no genre(s)
+                    if (
+                        (matchedGenre && matchedDecade) ||
+                        isDecadeInTags.length === filter.tags.length
+                    )
+                        filtered.push(track);
+                } else {
+                    // If only genre(s) selected, add track
+                    filtered.push(track);
+                }
+            }
         }
 
         return filtered;
