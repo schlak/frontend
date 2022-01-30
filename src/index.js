@@ -10,7 +10,7 @@ import { createLogger } from "redux-logger";
 import { init as bugcatchInit } from "@bug-catch/browser";
 
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./serviceWorkerRegistration";
 
 // Log version number
 const appVersion = process.env.REACT_APP_VERSION || "> 0.0.0";
