@@ -1,6 +1,6 @@
 {
     "name": "music-library-player",
-    "version": "2.7.9",
+    "version": "2.8.10",
     "private": true,
     "dependencies": {
         "@bug-catch/browser": "^3.0.1",
