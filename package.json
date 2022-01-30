@@ -1,6 +1,6 @@
 {
     "name": "music-library-player",
-    "version": "2.6.8",
+    "version": "2.7.9",
     "private": true,
     "dependencies": {
         "@bug-catch/browser": "^3.0.1",
@@ -31,9 +31,7 @@
     "devDependencies": {
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^9.3.2",
-        "@testing-library/user-event": "^7.1.2",
-        "gulp": "^3.9.1",
-        "gulp-prettier": "^3.0.0"
+        "@testing-library/user-event": "^7.1.2"
     },
     "scripts": {
         "start": "cross-env REACT_APP_VERSION=$npm_package_version react-scripts start",
