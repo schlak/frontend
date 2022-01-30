@@ -102,11 +102,16 @@ export const filterTracks = (
             if (!trackFound) return filtered;
         }
 
+        const genre = track?.metadata?.genre;
+        const year = track?.metadata?.year;
+        const decade = Math.floor(year / 10) * 10;
+
         // If no filter applyed: add all all tracks
         // Or if track tag matches filter in RegExp
         if (
             filter.tags.length === 0 ||
-            (filter.tags.length > 0 && regexTags.test(track.metadata.genre))
+            (filter.tags.length > 0 &&
+                (regexTags.test(genre) || regexTags.test(decade)))
         ) {
             filtered.push(track);
         }

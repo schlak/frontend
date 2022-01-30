@@ -32,11 +32,18 @@ function Tags() {
         setTags(
             tracks
                 .reduce(function (filtered, track, key) {
-                    const genre = track.metadata.genre.toLowerCase();
+                    const genre = track?.metadata?.genre.toLowerCase();
+                    const year = track?.metadata?.year;
+                    const decade = Math.floor(year / 10) * 10;
 
                     // Only add unique genre tags
-                    if (!filtered.includes(genre)) {
+                    if (genre && !filtered.includes(genre)) {
                         filtered.push(genre);
+                    }
+
+                    // Only add unique decade tags
+                    if (decade && !filtered.includes(decade)) {
+                        filtered.push(decade);
                     }
 
                     return filtered;
