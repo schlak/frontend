@@ -42,7 +42,11 @@ function Tags() {
                     }
 
                     // Only add unique decade tags
-                    if (decade && !filtered.includes(decade)) {
+                    if (
+                        decade &&
+                        decade.toString().length === 4 &&
+                        !filtered.includes(decade)
+                    ) {
                         filtered.push(decade);
                     }
 
