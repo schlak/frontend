@@ -245,4 +245,4 @@ function createHTMLMediaHook(tag) {
     };
 }
 
-export const useAudio = createHTMLMediaHook < HTMLAudioElement > "audio";
+export const useAudio = createHTMLMediaHook("audio");
