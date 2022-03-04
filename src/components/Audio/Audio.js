@@ -12,7 +12,7 @@ import {
     pipToggle,
 } from "../../store/actionCreators";
 
-import Sound from "react-sound";
+import Sound from "./Sound";
 
 const canvas = document.createElement("canvas");
 canvas.width = canvas.height = 512;
@@ -43,7 +43,7 @@ function Audio() {
         dispatch(
             sessionUpdatePlayingStatus({
                 duration: audio.duration,
-                position: audio.position,
+                position: audio.time,
             })
         );
     };
@@ -64,23 +64,7 @@ function Audio() {
     };
 
     const handleDidError = (error) => {
-        // Attempt to re-play
-        const audioElement =
-            window.soundManager.sounds[window.soundManager.soundIDs[0]]._a;
-        const promise = audioElement.play();
-
-        if (promise !== undefined) {
-            promise
-                .catch((error) => {
-                    dispatch(playingTrackDidError());
-                    dispatch(playingTrackIsPaused(true));
-                })
-                .then(() => {
-                    dispatch(playingTrackIsPaused(false));
-                });
-        } else {
-            dispatch(playingTrackDidError());
-        }
+        dispatch(playingTrackDidError());
     };
 
     const handlePictureInPicture = async () => {
@@ -237,15 +221,13 @@ function Audio() {
         <>
             {typeof track.id === "string" && (
                 <Sound
-                    url={`${process.env.REACT_APP_API}/tracks/${track.id}/audio`}
-                    playStatus={
-                        isPaused ? Sound.status.PAUSED : Sound.status.PLAYING
-                    }
+                    track={track}
+                    isPaused={isPaused}
                     loop={doesRepeat}
                     volume={isMute ? 0 : volume}
+                    onError={handleDidError}
                     onPlaying={handlePlaying}
                     onFinishedPlaying={handlePlayNextTrack}
-                    onError={handleDidError}
                 />
             )}
         </>
