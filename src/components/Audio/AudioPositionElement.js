@@ -40,6 +40,7 @@ function AudioPositionElement() {
                     style={{ width: "100%", padding: "10px" }}
                     value={statusCompletedPercentage}
                     isFaded={false}
+                    transition={true}
                     onChange={handleHitbox}
                 />
             </div>
