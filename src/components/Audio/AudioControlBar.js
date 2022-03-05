@@ -11,21 +11,21 @@ import {
     repeatToggle,
     changeVolume,
     muteVolume,
-} from "../../store/actionCreators";
+} from "store/actionCreators";
 
 import Image from "../Image";
 import Slider from "../Slider";
 import AudioPositionElement from "./AudioPositionElement";
 
-import { ReactComponent as IconShuffle } from "../../icons/shuffle.svg";
-import { ReactComponent as IconSkipPrevious } from "../../icons/skip-previous.svg";
-import { ReactComponent as IconSkipNext } from "../../icons/skip-next.svg";
-import { ReactComponent as IconReplay } from "../../icons/replay.svg";
-import { ReactComponent as IconPlay } from "../../icons/play.svg";
-import { ReactComponent as IconPause } from "../../icons/pause.svg";
-import { ReactComponent as IconVolumeHigh } from "../../icons/volume-high.svg";
-import { ReactComponent as IconVolumeMedium } from "../../icons/volume-medium.svg";
-import { ReactComponent as IconVolumeMute } from "../../icons/volume-mute.svg";
+import { ReactComponent as IconShuffle } from "icons/shuffle.svg";
+import { ReactComponent as IconSkipPrevious } from "icons/skip-previous.svg";
+import { ReactComponent as IconSkipNext } from "icons/skip-next.svg";
+import { ReactComponent as IconReplay } from "icons/replay.svg";
+import { ReactComponent as IconPlay } from "icons/play.svg";
+import { ReactComponent as IconPause } from "icons/pause.svg";
+import { ReactComponent as IconVolumeHigh } from "icons/volume-high.svg";
+import { ReactComponent as IconVolumeMedium } from "icons/volume-medium.svg";
+import { ReactComponent as IconVolumeMute } from "icons/volume-mute.svg";
 
 function AudioControlBar(props) {
     const dispatch = useDispatch();

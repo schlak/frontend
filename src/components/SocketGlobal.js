@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
     socketConnectedUserCount,
-    socketGlobalPlaying
-} from "../store/actionCreators";
+    socketGlobalPlaying,
+} from "store/actionCreators";
 
 function SocketGlobal() {
     const dispatch = useDispatch();
@@ -27,11 +27,11 @@ function SocketGlobal() {
     // Send currently playing track
     useEffect(() => {
         socket.emit("play_track", {
-           track: playingIndex
+            track: playingIndex,
         });
     }, [socket, playingIndex]);
 
-    return (<></>);
+    return <></>;
 }
 
 export default SocketGlobal;

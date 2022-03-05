@@ -9,6 +9,7 @@ import {
     SESSION_TRACK_ERROR,
     SESSION_PLAYING_TOGGLE,
     SESSION_PLAYING_UPDATE_STATUS,
+    SESSION_PLAYING_AUDIO_REF,
     SESSION_VOLUME,
     SESSION_VOLUME_MUTE,
     SESSION_SHUFFLE_TOGGLE,
@@ -58,6 +59,7 @@ const initialState = {
             showPip: false, // picture-in-picture
         },
         playing: {
+            audioRef: {},
             didError: false,
             isPaused: true,
             status: {
@@ -201,6 +203,18 @@ function musicApp(state = initialState, action) {
                             ...state.session.playing.status,
                             ...action.payload,
                         },
+                    },
+                },
+            };
+
+        case SESSION_PLAYING_AUDIO_REF:
+            return {
+                ...state,
+                session: {
+                    ...state.session,
+                    playing: {
+                        ...state.session.playing,
+                        audioRef: action.payload,
                     },
                 },
             };

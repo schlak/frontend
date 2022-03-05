@@ -5,7 +5,7 @@ import {
     filterTracks,
     groupTracksIntoAlbums,
     nRowsOfAlbums,
-} from "../../utils/sortTracks";
+} from "utils/sortTracks";
 
 import Album from "../Tracks/Album";
 

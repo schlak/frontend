@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playTrack, playingTrackIsPaused } from "../../store/actionCreators";
+import { playTrack, playingTrackIsPaused } from "store/actionCreators";
 
 import Image from "../Image";
 
-import { ReactComponent as IconPlay } from "../../icons/play.svg";
-import { ReactComponent as IconPause } from "../../icons/pause.svg";
+import { ReactComponent as IconPlay } from "icons/play.svg";
+import { ReactComponent as IconPause } from "icons/pause.svg";
 
 function Album({ album }) {
     const dispatch = useDispatch();

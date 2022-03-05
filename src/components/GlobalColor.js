@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useInterval } from "../hooks/useInterval";
 
-import { colorNext } from "../store/actionCreators";
+import { useInterval } from "hooks/useInterval";
+import { colorNext } from "store/actionCreators";
 
 function GlobalColor() {
     const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
-import { updateUserSearch } from "../store/actionCreators";
+import { updateUserSearch } from "store/actionCreators";
 
 function SearchBar() {
     const dispatch = useDispatch();

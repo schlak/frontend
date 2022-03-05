@@ -1,7 +1,7 @@
 import React from "react";
 
-import AlbumList from "../components/TrackList/AlbumList";
-import Tags from "../components/Tags/Tags";
+import AlbumList from "components/TrackList/AlbumList";
+import Tags from "components/Tags/Tags";
 
 function Albums() {
     return (

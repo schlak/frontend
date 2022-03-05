@@ -10,7 +10,7 @@ import {
     changeVolume,
     muteVolume,
     pipToggle,
-} from "../../store/actionCreators";
+} from "store/actionCreators";
 
 import Sound from "./Sound";
 

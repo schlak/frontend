@@ -41,12 +41,19 @@ function Slider(props) {
 
     useEffect(() => {
         if (props.onChange) props.onChange(valuePercentage);
-    }, [valuePercentage]);
+    }, [value]);
+
+    useEffect(() => {
+        setValuePercentage(props.value ? props.value : 0);
+    }, [props.value]);
 
     return (
         <div
             ref={$el}
-            className={`slider${props.isFaded ? " is-faded" : ""}`}
+            style={props.style}
+            className={`slider${props.isFaded ? " is-faded" : ""}${
+                props.transition ? " transition" : ""
+            }`}
             onMouseMove={handleDrag}
             onMouseDown={(e) => {
                 handleStart(e);
@@ -65,7 +72,7 @@ function Slider(props) {
                     }}
                 ></span>
                 <span
-                    className="slider-active"
+                    className={`slider-active`}
                     style={{ width: `${valuePercentage}%` }}
                 ></span>
                 <span className="slider-background"></span>

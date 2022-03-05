@@ -39,6 +39,13 @@
         background-color: $background-shade-80;
     }
 
+    &.transition {
+        .slider-button,
+        .slider-active {
+            @include transition(all, 100ms, ease);
+        }
+    }
+
     &.is-faded {
         .slider-button {
             background-color: darken($background-shade-60, 40%);
