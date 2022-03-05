@@ -49,11 +49,11 @@
 
     .audio-position-selection-hitbox {
         cursor: pointer;
-        top: -4px;
+        top: -12px;
         height: 8px;
         width: 100%;
         z-index: 1000;
-        background-color: red;
+        background-color: transparent;
     }
 
     .track {
