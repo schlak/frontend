@@ -1,9 +1,9 @@
 import React from "react";
 
-import ActiveUsers from "../components/ActiveUsers";
-import PopularTracks from "../components/PopularTracks";
-import RandomSelection from "../components/RandomSelection";
-import RecentlyListenedTracks from "../components/RecentlyListenedTracks";
+import ActiveUsers from "components/ActiveUsers";
+import PopularTracks from "components/PopularTracks";
+import RandomSelection from "components/RandomSelection";
+import RecentlyListenedTracks from "components/RecentlyListenedTracks";
 
 function Home() {
     return (

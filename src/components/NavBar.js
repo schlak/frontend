@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import SearchBar from "./SearchBar";
 
-import { ReactComponent as IconLogo } from "../icons/logo.svg";
+import { ReactComponent as IconLogo } from "icons/logo.svg";
 
 function NavBar() {
     const colors = useSelector((state) => state.color.colors);

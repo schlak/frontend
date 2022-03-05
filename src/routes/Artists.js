@@ -1,6 +1,6 @@
 import React from "react";
 
-import Tags from "../components/Tags/Tags";
+import Tags from "components/Tags/Tags";
 
 function Artists() {
     return (

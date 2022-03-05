@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playTrack } from "../../store/actionCreators";
+import { playTrack } from "store/actionCreators";
 
 import Image from "../Image";
 

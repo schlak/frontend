@@ -1,9 +1,9 @@
-import { api } from "../utils/api";
+import { api } from "utils/api";
 import {
     filterTracks,
     doesTrackExist,
     groupTracksIntoAlbums,
-} from "../utils/sortTracks";
+} from "utils/sortTracks";
 import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,

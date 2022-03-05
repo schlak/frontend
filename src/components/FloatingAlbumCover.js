@@ -5,12 +5,12 @@ import { useSpring, animated } from "react-spring";
 import { isMobile } from "react-device-detect";
 import sha1 from "crypto-js/sha1";
 
-import { playingTrackIsPaused } from "../store/actionCreators";
+import { playingTrackIsPaused } from "store/actionCreators";
 
 import Image from "./Image";
 
-import { ReactComponent as IconPlay } from "../icons/play.svg";
-import { ReactComponent as IconPause } from "../icons/pause.svg";
+import { ReactComponent as IconPlay } from "icons/play.svg";
+import { ReactComponent as IconPause } from "icons/pause.svg";
 
 function FloatingAlbumCover() {
     const dispatch = useDispatch();

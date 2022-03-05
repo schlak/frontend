@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { useSpring, animated } from "react-spring";
 
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { filterToggleTag, filterResetTags } from "../../store/actionCreators";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { filterToggleTag, filterResetTags } from "store/actionCreators";
 
 import Tag from "./Tag";
 
-import { ReactComponent as IconClose } from "../../icons/close.svg";
-import { ReactComponent as IconMinus } from "../../icons/minus.svg";
-import { ReactComponent as IconPlus } from "../../icons/plus.svg";
+import { ReactComponent as IconClose } from "icons/close.svg";
+import { ReactComponent as IconMinus } from "icons/minus.svg";
+import { ReactComponent as IconPlus } from "icons/plus.svg";
 
 function Tags() {
     const dispatch = useDispatch();

@@ -2,10 +2,10 @@ import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playTrack } from "../../store/actionCreators";
+import { playTrack } from "store/actionCreators";
 
-import { ReactComponent as IconPlay } from "../../icons/play.svg";
-import { ReactComponent as IconPause } from "../../icons/pause.svg";
+import { ReactComponent as IconPlay } from "icons/play.svg";
+import { ReactComponent as IconPause } from "icons/pause.svg";
 
 function Track({ index, trackNumber, size }) {
     const dispatch = useDispatch();

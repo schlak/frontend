@@ -3,14 +3,14 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { playTrack, playingTrackIsPaused } from "../store/actionCreators";
+import { playTrack, playingTrackIsPaused } from "store/actionCreators";
 
-import Image from "../components/Image";
-import Track from "../components/Tracks/Track";
+import Image from "components/Image";
+import Track from "components/Tracks/Track";
 
-import { ReactComponent as IconLogoGoogle } from "../icons/logo-google.svg";
-import { ReactComponent as IconLogoYoutube } from "../icons/logo-youtube.svg";
-import { ReactComponent as IconLogoDiscogs } from "../icons/logo-discogs-vinyl.svg";
+import { ReactComponent as IconLogoGoogle } from "icons/logo-google.svg";
+import { ReactComponent as IconLogoYoutube } from "icons/logo-youtube.svg";
+import { ReactComponent as IconLogoDiscogs } from "icons/logo-discogs-vinyl.svg";
 
 function AlbumIndividual() {
     const dispatch = useDispatch();
