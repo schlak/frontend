@@ -37,13 +37,23 @@
         }
     }
 
-    .audio-position-element {
+    .audio-position-element,
+    .audio-position-selection-hitbox {
         position: absolute;
         top: -2px;
         left: 0;
         height: 2px;
         background-color: $background-shade-80;
         @include transition(all, 80ms, ease);
+    }
+
+    .audio-position-selection-hitbox {
+        cursor: pointer;
+        top: -4px;
+        height: 8px;
+        width: 100%;
+        z-index: 1000;
+        background-color: red;
     }
 
     .track {
