@@ -12,6 +12,7 @@ import {
     SESSION_TRACK_ERROR,
     SESSION_PLAYING_TOGGLE,
     SESSION_PLAYING_UPDATE_STATUS,
+    SESSION_PLAYING_AUDIO_REF,
     SESSION_VOLUME,
     SESSION_VOLUME_MUTE,
     SESSION_SHUFFLE_TOGGLE,
@@ -219,6 +220,13 @@ export const playingTrackDidError = () => (dispatch) => {
  */
 export const sessionUpdatePlayingStatus = (status) => (dispatch) => {
     dispatch({ type: SESSION_PLAYING_UPDATE_STATUS, payload: status });
+};
+
+/*
+ * Update html audio reference
+ */
+export const sessionUpdateAudioRef = (audioRef) => (dispatch) => {
+    dispatch({ type: SESSION_PLAYING_AUDIO_REF, payload: audioRef });
 };
 
 /*

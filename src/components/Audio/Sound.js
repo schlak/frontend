@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { useAudio } from "hooks/useAudio";
 import { useDebouncedCallback } from "hooks/useDebounce";
+import { sessionUpdateAudioRef } from "store/actionCreators";
 
 function Sound({
     track,
@@ -12,6 +14,7 @@ function Sound({
     onFinishedPlaying,
     onError,
 }) {
+    const dispatch = useDispatch();
     const trackUrl = `${process.env.REACT_APP_API}/tracks/${track.id}/audio`;
 
     const [audio, state, controls, ref] = useAudio({
@@ -48,6 +51,7 @@ function Sound({
 
     useEffect(() => {
         if (ref && ref.current) {
+            dispatch(sessionUpdateAudioRef(ref));
             ref.current.addEventListener("ended", onFinishedPlaying, false);
             ref.current.addEventListener("error", onError, false);
 
