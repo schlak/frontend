@@ -14,7 +14,8 @@ import * as serviceWorker from "./serviceWorkerRegistration";
 
 // Log version number
 const appVersion = process.env.REACT_APP_VERSION || "> 0.0.0";
-console.log(`Music Library [Version ${appVersion}]`);
+const gitCommitHash = process.env.REACT_APP_GIT_COMMIT || "unknown";
+console.log(`Music Library [Version ${appVersion} (${gitCommitHash})]`);
 
 // Bugcatch init
 // logs all errors
