@@ -27,7 +27,12 @@ function AudioPositionElement() {
     }
 
     const handleHitbox = (value) => {
-        if (!audioRef?.current) return false;
+        if (
+            !audioRef?.current ||
+            !audioRef?.current?.duration ||
+            (!value && value !== 0)
+        )
+            return false;
 
         const newPosition = (audioRef.current.duration / 100) * value;
         audioRef.current.currentTime = newPosition;
