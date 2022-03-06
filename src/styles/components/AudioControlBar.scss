@@ -45,6 +45,7 @@
         height: 2px;
         background-color: $background-shade-80;
         @include transition(all, 80ms, ease);
+        @include disable-touch-highlight();
     }
 
     .audio-position-selection-hitbox {
@@ -97,6 +98,7 @@
             cursor: pointer;
             border-radius: 100%;
             @include flex-center();
+            @include disable-touch-highlight();
 
             svg {
                 width: 22px;

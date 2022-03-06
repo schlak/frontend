@@ -6,6 +6,11 @@
     transition: $which $duration $curve;
 }
 
+@mixin disable-touch-highlight() {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+
 @mixin grayscaleMixin($ammountPercent, $ammountNumber) {
     //filter: gray; /* IE */
     -webkit-filter: grayscale($ammountNumber); /* Old WebKit */

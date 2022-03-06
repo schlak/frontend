@@ -1,6 +1,7 @@
 .slider {
     width: 150px;
     padding: 20px 0;
+    @include disable-touch-highlight();
 
     .slider-container {
         position: relative;

@@ -12,6 +12,7 @@ html {
     font-family: "Tahoma", "Raleway", "Roboto", sans-serif;
     background-color: $background-color;
     color: $text-color;
+    @include disable-touch-highlight();
 }
 
 strong {
