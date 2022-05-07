@@ -8,6 +8,7 @@ import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,
     FETCH_TRACKS_FAILURE,
+    QUEUE_REMOVE,
     QUEUE_PUSH,
     QUEUE_NEW,
     SESSION_PLAY_TRACK,
@@ -47,6 +48,13 @@ export const fetchTracks = () => (dispatch) => {
         .catch((error) => {
             dispatch({ type: FETCH_TRACKS_FAILURE, payload: error });
         });
+};
+
+/*
+ * Remove a track from the Queue
+ */
+export const queueRemove = (trackIndex) => (dispatch) => {
+    dispatch({ type: QUEUE_REMOVE, payload: trackIndex });
 };
 
 /*
