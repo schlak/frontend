@@ -8,6 +8,9 @@ import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,
     FETCH_TRACKS_FAILURE,
+    QUEUE_REMOVE,
+    QUEUE_PUSH,
+    QUEUE_NEW,
     SESSION_PLAY_TRACK,
     SESSION_TRACK_ERROR,
     SESSION_PLAYING_TOGGLE,
@@ -48,6 +51,20 @@ export const fetchTracks = () => (dispatch) => {
 };
 
 /*
+ * Remove a track from the Queue
+ */
+export const queueRemove = (trackIndex) => (dispatch) => {
+    dispatch({ type: QUEUE_REMOVE, payload: trackIndex });
+};
+
+/*
+ * Queue a track for future playback
+ */
+export const queuePush = (trackIndex) => (dispatch) => {
+    dispatch({ type: QUEUE_PUSH, payload: trackIndex });
+};
+
+/*
  * Play a new track (adds to current session)
  */
 export const playTrack = (trackIndex) => (dispatch) => {
@@ -84,6 +101,14 @@ export const playRandomTrack = () => (dispatch, getState) => {
 export const playNextTrack = (trackIndex) => (dispatch, getState) => {
     const state = getState();
     let newIndex = 0;
+
+    // Check if there is a queue (serve queue first)
+    if (state.music.tracks.queue.length > 0) {
+        const newQueue = [...state.music.tracks.queue];
+        newIndex = newQueue.shift();
+        dispatch({ type: QUEUE_NEW, payload: newQueue });
+        return dispatch({ type: SESSION_PLAY_TRACK, payload: newIndex });
+    }
 
     // If a track is currently playing
     if (typeof newIndex === "number") {

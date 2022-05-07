@@ -5,6 +5,9 @@ import {
     FETCH_TRACKS_START,
     FETCH_TRACKS_SUCCESS,
     FETCH_TRACKS_FAILURE,
+    QUEUE_REMOVE,
+    QUEUE_PUSH,
+    QUEUE_NEW,
     SESSION_PLAY_TRACK,
     SESSION_TRACK_ERROR,
     SESSION_PLAYING_TOGGLE,
@@ -47,6 +50,7 @@ const initialState = {
                 tags: [],
                 search: "",
             },
+            queue: [],
             albumsData: [],
             filteredData: [],
             data: [],
@@ -129,6 +133,47 @@ function musicApp(state = initialState, action) {
                         ...state.music.tracks,
                         didError: true,
                         isFetching: false,
+                    },
+                },
+            };
+
+        case QUEUE_REMOVE:
+            return {
+                ...state,
+                music: {
+                    ...state.music,
+                    tracks: {
+                        ...state.music.tracks,
+                        queue: [
+                            ...state.music.tracks.queue.filter(
+                                // Remove the track from the queue
+                                (track) => track !== action.payload
+                            ),
+                        ],
+                    },
+                },
+            };
+
+        case QUEUE_PUSH:
+            return {
+                ...state,
+                music: {
+                    ...state.music,
+                    tracks: {
+                        ...state.music.tracks,
+                        queue: [...state.music.tracks.queue, action.payload],
+                    },
+                },
+            };
+
+        case QUEUE_NEW:
+            return {
+                ...state,
+                music: {
+                    ...state.music,
+                    tracks: {
+                        ...state.music.tracks,
+                        queue: [...action.payload],
                     },
                 },
             };
