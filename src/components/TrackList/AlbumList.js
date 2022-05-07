@@ -64,7 +64,7 @@ function AlbumList() {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    });
+    }, []);
 
     return (
         <div className="track-container grid grid-albums">
