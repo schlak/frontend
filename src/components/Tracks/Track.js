@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playTrack } from "store/actionCreators";
+import { playTrack, queuePush } from "store/actionCreators";
 
 import { ReactComponent as IconPlay } from "icons/play.svg";
 import { ReactComponent as IconPause } from "icons/pause.svg";
@@ -32,6 +32,11 @@ function Track({ index, trackNumber, size }) {
         dispatch(playTrack(index));
     };
 
+    const addTrackToQueue = (e) => {
+        e.preventDefault();
+        dispatch(queuePush(index));
+    };
+
     // Dynamic class list
     let classList = "";
     classList += size ? ` ${size}` : "";
@@ -44,6 +49,7 @@ function Track({ index, trackNumber, size }) {
             id={track.id}
             className={`track${classList}`}
             onClick={playInSession}
+            onContextMenu={addTrackToQueue}
         >
             <div className="track-col play-state">
                 {isTrackPlaying && !isTrackPaused && !didError ? (
