@@ -38,6 +38,7 @@ function Track({ index, trackNumber, size }) {
     // Toggle track in queue
     const handleTrackQueue = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         if (queuePosition === -1) {
             dispatch(queuePush(index));
         } else {
