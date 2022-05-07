@@ -74,7 +74,13 @@ function Track({ index, trackNumber, size }) {
                 className="track-col length"
                 style={{ color: colors[colorIndex] }}
             >
-                {moment.utc(track.metadata.duration * 1000).format("mm:ss")}
+                {moment.utc(track.metadata.duration * 1000).format("mm:ss")}{" "}
+            </div>
+            <div
+                className="track-col queue-state"
+                style={{ color: colors[colorIndex] }}
+            >
+                {queuePosition >= 0 && queuePosition + 1}
             </div>
         </div>
     );

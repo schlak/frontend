@@ -184,6 +184,7 @@
 }
 
 .track-container .track {
+    position: relative;
     @include flex();
     align-items: center;
     height: 60px;
@@ -261,6 +262,12 @@
         font-size: 1.2em;
         padding-right: 5px;
         opacity: 0.9;
+    }
+
+    .queue-state {
+        position: absolute;
+        top: 5px;
+        right: 5px;
     }
 
     &.compact {
