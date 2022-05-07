@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playTrack } from "store/actionCreators";
+import { playTrack, queuePush, queueRemove } from "store/actionCreators";
 
 import Image from "../Image";
 
@@ -16,6 +16,9 @@ function TrackBig({ index, size }) {
     const playingIndex = useSelector((state) => state.session.playing.index);
     const playingDidError = useSelector(
         (state) => state.session.playing.didError
+    );
+    const queuePosition = useSelector((state) =>
+        state.music.tracks.queue.indexOf(index)
     );
 
     // Is this track currently playing?
@@ -47,6 +50,16 @@ function TrackBig({ index, size }) {
         dispatch(playTrack(index));
     };
 
+    // Toggle track in queue
+    const handleTrackQueue = (e) => {
+        e.preventDefault();
+        if (queuePosition === -1) {
+            dispatch(queuePush(index));
+        } else {
+            dispatch(queueRemove(index));
+        }
+    };
+
     // Dynamic class list
     let classList = "";
     classList += size ? ` ${size}` : "";
@@ -55,7 +68,11 @@ function TrackBig({ index, size }) {
     classList += didError ? " error" : "";
 
     return (
-        <div className={`track${classList}`} onClick={playInSession}>
+        <div
+            className={`track${classList}`}
+            onClick={playInSession}
+            onContextMenu={handleTrackQueue}
+        >
             <div className="track-col image">
                 <Image
                     src={`${process.env.REACT_APP_API}/tracks/${albumCoverId}/cover/50`}
@@ -69,6 +86,9 @@ function TrackBig({ index, size }) {
                 <div className="artist">{trackArtist}</div>
             </div>
             <div className="track-col length">{trackDuration}</div>
+            <div className="track-col queue-state">
+                {queuePosition >= 0 && queuePosition + 1}
+            </div>
         </div>
     );
 }
