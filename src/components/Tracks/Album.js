@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import { isMobile } from "react-device-detect";
 import { useSelector, useDispatch } from "react-redux";
 
 import { playTrack, playingTrackIsPaused } from "store/actionCreators";
@@ -79,7 +80,11 @@ function Album({ album }) {
                         alt="album-cover"
                         draggable="false"
                     />
-                    <div className="album-action" onClick={handleActionButton}>
+                    <div
+                        className="album-action"
+                        onClick={handleActionButton}
+                        style={{ opacity: isMobile && 1 }}
+                    >
                         <div className="album-action-button">
                             {!isAlbumPlaying || isPaused ? (
                                 <IconPlay
