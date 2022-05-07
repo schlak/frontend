@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
-import { playTrack, queuePush } from "store/actionCreators";
+import { playTrack, queuePush, queueRemove } from "store/actionCreators";
 
 import { ReactComponent as IconPlay } from "icons/play.svg";
 import { ReactComponent as IconPause } from "icons/pause.svg";
@@ -17,6 +17,9 @@ function Track({ index, trackNumber, size }) {
     const playingDidError = useSelector(
         (state) => state.session.playing.didError
     );
+    const queuePosition = useSelector((state) =>
+        state.music.tracks.queue.indexOf(index)
+    );
     const colors = useSelector((state) => state.color.colors);
     const colorIndex = useSelector((state) => state.color.current);
 
@@ -27,14 +30,19 @@ function Track({ index, trackNumber, size }) {
     const didPlayingTrackError = playingDidError;
     const didError = isTrackPlaying && didPlayingTrackError;
 
-    // Play track in session
+    // Play this track
     const playInSession = (e) => {
         dispatch(playTrack(index));
     };
 
-    const addTrackToQueue = (e) => {
+    // Toggle track in queue
+    const handleTrackQueue = (e) => {
         e.preventDefault();
-        dispatch(queuePush(index));
+        if (queuePosition === -1) {
+            dispatch(queuePush(index));
+        } else {
+            dispatch(queueRemove(index));
+        }
     };
 
     // Dynamic class list
@@ -49,7 +57,7 @@ function Track({ index, trackNumber, size }) {
             id={track.id}
             className={`track${classList}`}
             onClick={playInSession}
-            onContextMenu={addTrackToQueue}
+            onContextMenu={handleTrackQueue}
         >
             <div className="track-col play-state">
                 {isTrackPlaying && !isTrackPaused && !didError ? (
