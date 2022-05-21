@@ -19,6 +19,9 @@ async function bootstrap() {
     const env = [
         ["REACT_APP_VERSION", appVersion],
         ["REACT_APP_GIT_COMMIT", gitCommitHashShort],
+        ["REACT_APP_HOST", process.env.REACT_APP_HOST],
+        ["REACT_APP_API", process.env.REACT_APP_API],
+        ["REACT_APP_HTTP", process.env.REACT_APP_HTTP],
     ];
 
     core.bootstrap(env, script, path);
