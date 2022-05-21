@@ -3,6 +3,7 @@ import {
     filterTracks,
     doesTrackExist,
     groupTracksIntoAlbums,
+    groupTracksIntoPlaylists,
 } from "utils/sortTracks";
 import {
     FETCH_TRACKS_START,
@@ -40,9 +41,10 @@ export const fetchTracks = () => (dispatch) => {
         .then((res) => {
             // console.log("Tracks:", res.data);
             const albums = groupTracksIntoAlbums(res.data, res.data);
+            const playlistCollection = groupTracksIntoPlaylists(res.data, res.data);
             dispatch({
                 type: FETCH_TRACKS_SUCCESS,
-                payload: [res.data, albums],
+                payload: [res.data, albums, playlistCollection],
             });
         })
         .catch((error) => {

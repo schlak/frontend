@@ -52,6 +52,37 @@ export const groupTracksIntoAlbums = (tracksStore, tracksToGroup) => {
     return albums;
 };
 
+
+/*
+ * Group tracks into playlists
+ *
+ * @param {tracksStore}    tracks store object
+ * @param {tracksToGroup}  tracks to group object
+ * @return                 array of albums with keys to each track in store
+ */
+export const groupTracksIntoPlaylists = (tracksStore, tracksToGroup) => {
+    const playlistCollection = [];
+//    playlistCollection.push({album_artist :"Test",year : "2000", album: "Jonas Testet" , tracks: []})
+    // Loop each track
+    // populate albums array
+    tracksToGroup.forEach((track) => {
+
+        // Find proper index of track in tracksStore
+        const storeIndex = tracksStore.findIndex(
+            (storeTrack) => storeTrack.id === track.id
+        );
+
+        track.metadata.playlistCollection.forEach(assignedPlaylists => {
+            if (playlistCollection.filter(playlist => playlist.name === assignedPlaylists).length === 0)
+                playlistCollection.push({ name: assignedPlaylists, tracks: [] })
+
+            playlistCollection.filter(playlist => playlist.name === assignedPlaylists).forEach(playlist => playlist.tracks.push(storeIndex))
+        });
+    });
+
+    return playlistCollection;
+};
+
 /*
  * Fuzzy-search for a track in tracks array
  *

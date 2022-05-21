@@ -5,9 +5,9 @@ import { useTrail, animated } from "react-spring";
 function NavLinks() {
     const links = [];
     if (window.innerWidth > 600) {
-        links.push("home", "albums", "tracks", "playlists");
+        links.push("albums", "tracks", "playlists", "practise");
     } else {
-        links.push("home", "albums", "playlists");
+        links.push("album", "tracks", "playlists");
     }
 
     const [activeLink, setActiveLink] = useState("home");

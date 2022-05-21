@@ -16,6 +16,7 @@ import {
 import Image from "../Image";
 import Slider from "../Slider";
 import AudioPositionElement from "./AudioPositionElement";
+import AudioElapsedElement from "./AudioElapsedElement";
 
 import { ReactComponent as IconShuffle } from "icons/shuffle.svg";
 import { ReactComponent as IconSkipPrevious } from "icons/skip-previous.svg";
@@ -159,6 +160,10 @@ function AudioControlBar(props) {
                             onClick={handleRepeatToggle}
                         >
                             <IconReplay fill="#e4e4e4" />
+                        </div>
+                        <span className="divider"></span>
+                        <div className="icon">
+                            <AudioElapsedElement fill="#e4e4e4" />
                         </div>
                     </div>
                 )}

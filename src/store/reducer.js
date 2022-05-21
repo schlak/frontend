@@ -120,6 +120,7 @@ function musicApp(state = initialState, action) {
                         isFetching: false,
                         albumsData: action.payload[1],
                         data: action.payload[0],
+                        playlistCollection: action.payload[2]
                     },
                 },
             };
